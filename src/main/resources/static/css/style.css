@@ -12,8 +12,13 @@ body {
     font-family: Roboto, sans-serif;
 }
 
+#bg-canvas {
+    position: fixed;
+    left: 0;
+    top: 0;
+}
+
 .full {
-  background: url(https://upload.wikimedia.org/wikipedia/commons/2/22/The_Ohio_State_University_June_2013_28_%28The_Oval%29.jpg) no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -35,6 +40,7 @@ body {
 }
 
 .navbar {
-    font-size: 24px;
+    font-size: 22px;
     font-weight: 300;
+    opacity: 0.75;
 }
