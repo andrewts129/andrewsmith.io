@@ -1,0 +1,54 @@
+body, html {
+    height: 100%;
+    background-color: black;
+}
+
+.dark {
+    opacity: 0;
+}
+
+#bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    /* The image used */
+    background-image: url("nightvisions.jpg");
+
+    /* Full height */
+    height: 100%;
+    width: 100%;
+
+    /* Center and scale the image nicely */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+
+    -webkit-transition: opacity 30s; /* Safari */
+    transition: opacity 30s;
+}
+
+#dan {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 5;
+    /* The image used */
+    background-image: url("danreynolds.jpg");
+
+    /* Full height */
+    height: 100%;
+    width: 100%;
+
+    /* Center and scale the image nicely */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+
+    -webkit-transition: opacity 40s; /* Safari */
+    transition: opacity 40s;
+}
+
+.notdark {
+    opacity: 0.15;
+}
