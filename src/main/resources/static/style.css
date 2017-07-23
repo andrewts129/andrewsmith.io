@@ -3,52 +3,111 @@ body, html {
     background-color: black;
 }
 
+#enter {
+    position: absolute;
+    z-index: 5;
+    color: white;
+    left: 0;
+    line-height: 200px;
+    margin: auto;
+    margin-top: -100px;
+    top: 50%;
+    width: 100%;
+    text-align: center;
+    font-size: 148px;
+    font-family: 'Open Sans Condensed', sans-serif;
+    background-color: Transparent;
+    outline: none;
+    border: none;
+}
+
+#sound-on {
+    position: absolute;
+    z-index: 5;
+    color: white;
+    left: 0;
+    line-height: 200px;
+    margin: auto;
+    margin-top: -100px;
+    top: 70%;
+    width: 100%;
+    text-align: center;
+    font-size: 24px;
+    font-family: 'Open Sans Condensed', sans-serif;
+    background-color: Transparent;
+    outline: none;
+    border: none;
+}
+
+#shrug {
+    position: absolute;
+    color: white;
+    z-index: 4;
+    left: 0;
+    line-height: 200px;
+    margin: auto;
+    margin-top: -100px;
+    top: 50%;
+    width: 100%;
+    text-align: center;
+    font-size: 168px;
+    font-family: 'Open Sans Condensed', sans-serif;
+    background-color: Transparent;
+    outline: none;
+    border: none;
+}
+
+.hide-text {
+    -webkit-transition: opacity 8s; /* Safari */
+    transition: opacity 8s;
+
+    opacity: 0;
+}
+
+.full-size-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    /* Full height */
+    height: 100%;
+    width: 100%;
+
+    /* Center and scale the image nicely */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+
+    opacity: 0;
+}
+
+#night-visions {
+    /* The image used */
+    background-image: url("nightvisions.jpg");
+    z-index: 1;
+}
+
+#dan {
+    /* The image used */
+    background-image: url("danreynolds.jpg");
+    z-index: 2;
+}
+
+.full-bright {
+    -webkit-transition: opacity 30s; /* Safari */
+    transition: opacity 30s;
+
+    opacity: 1;
+}
+
+.mid-bright {
+    -webkit-transition: opacity 40s; /* Safari */
+    transition: opacity 40s;
+
+    opacity: 0.15;
+}
+
 .dark {
     opacity: 0;
 }
 
-#bg {
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: 1;
-    /* The image used */
-    background-image: url("nightvisions.jpg");
-
-    /* Full height */
-    height: 100%;
-    width: 100%;
-
-    /* Center and scale the image nicely */
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-
-    -webkit-transition: opacity 30s; /* Safari */
-    transition: opacity 30s;
-}
-
-#dan {
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: 5;
-    /* The image used */
-    background-image: url("danreynolds.jpg");
-
-    /* Full height */
-    height: 100%;
-    width: 100%;
-
-    /* Center and scale the image nicely */
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-
-    -webkit-transition: opacity 40s; /* Safari */
-    transition: opacity 40s;
-}
-
-.notdark {
-    opacity: 0.15;
-}
