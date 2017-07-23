@@ -40,8 +40,11 @@ $(document).ready(function () {
 
 function clicky() {
     var audio = document.getElementById("sound");
+    audio.volume = 0.01;
+    audio.play();
 
     setTimeout(function () {
+        audio.pause();
         audio.controls = true;
         audio.volume = 0.01;
         audio.play();
