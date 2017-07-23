@@ -42,9 +42,9 @@ function clicky() {
     var audio = document.getElementById("sound");
     audio.volume = 0.01;
     audio.play();
+    audio.pause();
 
     setTimeout(function () {
-        audio.pause();
         audio.controls = true;
         audio.volume = 0.01;
         audio.play();
@@ -57,5 +57,5 @@ function clicky() {
                 setTimeout(increaseVolume, 1000);
             }
         }
-    }, 5000);
+    }, 6000);
 }
