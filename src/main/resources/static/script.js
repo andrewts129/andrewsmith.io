@@ -11,6 +11,7 @@ $(document).ready(function () {
         var bg = $("#night-visions");
         var dan = $("#dan");
         var shrug = $("#shrug");
+        var audio = $("#sound").get(0);
 
         function beginFade() {
             setTimeout(function(){
@@ -20,17 +21,17 @@ $(document).ready(function () {
                 document.title = "The Imagine Dragons Appreciation Society";
             }, 8000);
 
-            var sound = new Audio("radioactive.mp3");
-            sound.volume = 0.01;
-            sound.play();
+            audio.controls = true;
+            audio.volume = 0.01;
+            audio.play();
             setTimeout(increaseVolume, 1000);
             setTimeout(danReynolds, 28000);
             setTimeout(fadeout, 161000);
 
             function increaseVolume() {
-                sound.volume = sound.volume + 0.025;
+                audio.volume = audio.volume + 0.025;
 
-                if (sound.volume < 0.97) {
+                if (audio.volume < 0.97) {
                     setTimeout(increaseVolume, 1000);
                 }
             }
