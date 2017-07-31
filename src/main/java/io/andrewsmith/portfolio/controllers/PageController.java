@@ -8,6 +8,6 @@ public class PageController {
 
     @RequestMapping(value = "/")
     public String homePage() {
-        return "build/index.html";
+        return "public/index.html";
     }
 }
