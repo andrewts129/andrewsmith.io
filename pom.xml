@@ -63,8 +63,8 @@
                             <goal>install-node-and-npm</goal>
                         </goals>
                         <configuration>
-                            <nodeVersion>v4.2.1</nodeVersion>
-                            <npmVersion>3.5.3</npmVersion>
+                            <nodeVersion>v8.2.1</nodeVersion>
+                            <npmVersion>5.3.0</npmVersion>
                         </configuration>
                     </execution>
                     <execution>
@@ -83,19 +83,18 @@
                             <goal>npm</goal>
                         </goals>
                         <configuration>
-                            <arguments>build</arguments>
+                            <arguments>run build</arguments>
                         </configuration>
                     </execution>
                 </executions>
 
                 <configuration>
-                    <nodeVersion>v7.2.0</nodeVersion>
+                    <nodeVersion>v8.2.1</nodeVersion>
                     <installDirectory>.mvn</installDirectory>
-                    <workingDirectory>src</workingDirectory>
+                    <workingDirectory>src/main/resources/static/</workingDirectory>
                 </configuration>
 
             </plugin>
-
 
             <plugin>
                 <artifactId>maven-resources-plugin</artifactId>
@@ -111,7 +110,7 @@
                             <outputDirectory>${basedir}/target/classes</outputDirectory>
                             <resources>
                                 <resource>
-                                    <directory>src/main/app/build/</directory>
+                                    <directory>src/main/resources/static/build/</directory>
                                     <filtering>true</filtering>
                                 </resource>
                             </resources>
