@@ -1,4 +1,6 @@
 import React from "react"
+import {Card} from "Content"
+import ReactDOM from "react-dom"
 
 export class NavBar extends React.Component {
     render() {
@@ -16,7 +18,7 @@ class Button extends React.Component {
     handleClick(buttonText) {
         switch (buttonText) {
             case "Projects":
-                alert("WIP");
+                ReactDOM.render(<Card/>, document.getElementById("main-content"));
                 break;
             default:
                 //Do nothing
@@ -33,7 +35,7 @@ class Button extends React.Component {
                 return "https://github.com/andrewts129";
                 break;
             case "Contact":
-                return "mailto:andrewts129@gmail.com";
+                return "mailto:smith.11216@osu.edu";
                 break;
             default:
                 break;

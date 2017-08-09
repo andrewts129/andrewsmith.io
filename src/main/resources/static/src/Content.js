@@ -1,8 +1,9 @@
 import React from "react"
+import ReactDOM from "react-dom"
 
 export class Content extends React.Component {
     createCard(cardType) {
-        alert("Creating card: " + cardType);
+        ReactDOM.render(Card, this);
     }
 
     render() {
@@ -12,7 +13,7 @@ export class Content extends React.Component {
     }
 }
 
-class Card extends React.Component {
+export class Card extends React.Component {
     render() {
         return (
             <div className="card">fuck</div>

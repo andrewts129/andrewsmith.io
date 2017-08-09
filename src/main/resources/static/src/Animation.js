@@ -3,7 +3,7 @@ import React from "react"
 export class Animation extends React.Component {
     render() {
         return (
-            <canvas id="main-canvas"></canvas>
+            <canvas id="main-canvas">Sorry, this animation is not supported on this browser</canvas>
         );
     }
 
@@ -13,12 +13,12 @@ export class Animation extends React.Component {
 }
 
 function bgAnimation() {
-    var canvas = document.getElementById("main-canvas");
-    var context = canvas.getContext("2d");
+    let canvas = document.getElementById("main-canvas");
+    let context = canvas.getContext("2d");
 
-    var circles = [];
+    let circles = [];
 
-    var dt = 10;
+    let dt = 10;
 
     function resizeCanvas() {
         context.canvas.width = window.innerWidth;
@@ -47,13 +47,13 @@ function bgAnimation() {
 
     function updateAll() {
         if (Math.random() > 0.90) {
-            var newCircle = new Circle(canvas.width * Math.random(), canvas.height * Math.random(), 30 * Math.random());
+            let newCircle = new Circle(canvas.width * Math.random(), canvas.height * Math.random(), 30 * Math.random());
             circles.push(newCircle);
         }
 
         context.clearRect(0, 0, canvas.width, canvas.height);
 
-        for (var i = 0; i < circles.length; i++) {
+        for (let i = 0; i < circles.length; i++) {
             circles[i].update();
 
             if (circles[i].radius < 0.001) {
