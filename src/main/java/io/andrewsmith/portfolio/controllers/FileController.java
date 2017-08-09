@@ -15,7 +15,7 @@ public class FileController {
 
     @RequestMapping("/resume")
     public ResponseEntity<InputStreamResource> getResume() throws IOException {
-        ClassPathResource resumePdfFile = new ClassPathResource("AndrewSmithResume.pdf");
+        ClassPathResource resumePdfFile = new ClassPathResource("files/AndrewSmithResume.pdf");
 
         HttpHeaders headers = new HttpHeaders();
         headers.add("Cache-Control", "no-cache, no-store, must-revalidate");

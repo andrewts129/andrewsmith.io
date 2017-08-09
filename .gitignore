@@ -27,3 +27,6 @@ nbdist/
 src/main/resources/static/node_modules/
 src/main/resources/static/npm-debug.log
 /src/main/resources/static/build/
+
+mvnmw.cmd
+mvnw
