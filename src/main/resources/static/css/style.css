@@ -43,7 +43,10 @@ body {
     font-size: 2.5em;
     color: inherit;
 
-    overflow-y: auto;
+    /*
+    Fixes overflow issue on IE11
+     */
+    min-width: 0;
 
     text-align: center;
 }
