@@ -5,6 +5,7 @@ import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.HttpClientBuilder;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.http.HttpHeaders;
@@ -17,6 +18,10 @@ import java.io.IOException;
 
 @RestController
 public class FileController {
+
+    // Loads the access token needed to access my private GitHub repo
+    @Value("${GITHUB_ACCESS_TOKEN}")
+    private String GITHUB_ACCESS_TOKEN;
 
     @RequestMapping(value = "/resume", produces = "application/pdf")
     public ResponseEntity<InputStreamResource> getResume() throws IOException {
@@ -33,8 +38,7 @@ public class FileController {
         String urlToResume = "https://raw.githubusercontent.com/andrewts129/resume/master/AndrewSmithResume.pdf";
         HttpGet get = new HttpGet(urlToResume);
 
-        // Loads the access token needed to access my private GitHub repo
-        get.addHeader("Authorization", "token " + System.getenv("GITHUB_ACCESS_TOKEN"));
+        get.addHeader("Authorization", "token " + GITHUB_ACCESS_TOKEN);
 
         HttpResponse response = client.execute(get);
         HttpEntity entity = response.getEntity();

@@ -30,4 +30,4 @@ src/main/resources/static/npm-debug.log
 
 mvnw.cmd
 mvnw
-/src/main/resources/keys.ini
+/src/main/resources/application-local.properties
