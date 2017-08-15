@@ -10,4 +10,9 @@ public class PageController {
     public String homePage() {
         return "index.html";
     }
+
+    @RequestMapping(value = "/biggest-one-hit-wonders", produces = "text/html")
+    public String oneHitWondersPage() {
+        return "one-hit-wonders.html";
+    }
 }
