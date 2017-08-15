@@ -5,7 +5,6 @@ import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.HttpClientBuilder;
-import org.ini4j.Ini;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.http.HttpHeaders;
@@ -35,9 +34,7 @@ public class FileController {
         HttpGet get = new HttpGet(urlToResume);
 
         // Loads the access token needed to access my private GitHub repo
-        Ini keysIni = new Ini(new ClassPathResource("keys.ini").getInputStream());
-        String gitHubAccessToken = keysIni.get("Github", "ACCESS_TOKEN");
-        get.addHeader("Authorization", "token " + gitHubAccessToken);
+        get.addHeader("Authorization", "token " + System.getenv("GITHUB_ACCESS_TOKEN"));
 
         HttpResponse response = client.execute(get);
         HttpEntity entity = response.getEntity();
