@@ -1,0 +1,32 @@
+#main-content {
+
+    /* Moves everything up a bit, so it's not perfectly centered vertically (I almost feel bad) */
+    padding-bottom: 8%;
+}
+
+p {
+    /* The default font is a bit too small for this usage */
+    font-size: 1.8rem;
+}
+
+.horz-list {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    color: inherit;
+
+    min-width: 35%;
+
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.8rem;
+
+    list-style-type: none;
+
+    padding: 0 0;
+}
+
+.horz-list-content a {
+    color: inherit;
+    text-decoration: none;
+}

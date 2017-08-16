@@ -11,8 +11,8 @@ public class PageController {
         return "index.html";
     }
 
-    @RequestMapping(value = "/biggest-one-hit-wonders", produces = "text/html")
+    @RequestMapping(value = "/one-hit-wonders", produces = "text/html")
     public String oneHitWondersPage() {
-        return "one-hit-wonders.html";
+        return "OneHitWonders.html";
     }
 }

@@ -1,4 +1,4 @@
-var canvas = document.getElementById("main-canvas");
+var canvas = document.getElementById("full-page-canvas");
 var context = canvas.getContext("2d");
 
 context.canvas.width = window.innerWidth;
