@@ -60,6 +60,12 @@ a {
     text-align: center;
 }
 
+.horz-line {
+    width: 100%;
+    border-top: solid 1px #bb0000;
+    border-bottom: solid 1px #bb0000;
+}
+
 /* Container for a full screen page with no scrolling */
 #full-page-container {
     position: fixed;
@@ -109,4 +115,8 @@ a {
 /* Colors text to be scarlet */
 .scarlet {
     color: #bb0000;
+}
+
+.link-no-underline {
+    text-decoration: none;
 }
