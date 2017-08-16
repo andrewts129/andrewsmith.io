@@ -8,8 +8,8 @@
     <rule>
         <name>Domain Name Check</name>
         <condition name="host" operator="notequal">(www.andrewsmith.io|localhost)</condition>
-        <from>(.*)</from>
-        <to type="redirect">http://www.andrewsmith.io/$1</to>
+        <from>(.*)\/(.*)</from>
+        <to type="redirect">http://www.andrewsmith.io/$2</to>
     </rule>
 
     <!--If no file extension is specified, add .html, unless accessing the resume file-->
