@@ -120,3 +120,8 @@ a {
 .link-no-underline {
     text-decoration: none;
 }
+
+.small-text {
+    font-size: 1em;
+    color: #888888;
+}
