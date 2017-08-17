@@ -1,0 +1,17 @@
+module.exports = function(grunt) {
+    grunt.initConfig({
+        uglify: {
+            core: {
+                files: [{
+                    expand: true,
+                    cwd: 'src/main/resources',
+                    src: 'static/js/*.js',
+                    dest: "target/classes",
+                    ext: '.js'
+                }]
+            }
+        }
+    });
+    grunt.loadNpmTasks('grunt-contrib-uglify');
+    grunt.registerTask('default', ['uglify']);
+};
