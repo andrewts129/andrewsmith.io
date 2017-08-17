@@ -112,6 +112,11 @@ a {
     width: 65%;
 }
 
+/* Fix for overflow issue with IE11*/
+#main-content p {
+    max-width: 1000px;
+}
+
 /* Colors text to be scarlet */
 .scarlet {
     color: #bb0000;
