@@ -46,7 +46,7 @@ for (var i = 0; i < 15; i++) {
 // This method calls itself again when it's done, so it runs forever basically
 updateAll();
 
-// Generates a random decimal number between a and b. 
+// Generates a random decimal number between a and b.
 function randNumBetween(a, b) {
     return Math.random() * (b - a) + a
 }
