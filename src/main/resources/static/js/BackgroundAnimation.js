@@ -8,11 +8,11 @@ context.canvas.height = window.innerHeight;
 // If 0, they bounce off the edges of the screen
 var collisionPadding = 300;
 
-const width = window.innerWidth;
-const height = window.innerHeight;
+var width = window.innerWidth;
+var height = window.innerHeight;
 
-const dt = 1;   // Number of milliseconds between each drawing/physics calculations
-const G = 0.0001;   // Big G, gravitational constant
+var dt = 1;   // Number of milliseconds between each drawing/physics calculations
+var G = 0.0001;   // Big G, gravitational constant
 
 // This is the object that the balls gravitate around
 var blackHole = {
@@ -22,12 +22,12 @@ var blackHole = {
 };
 
 // If the balls go faster than the max speed, their velocity gets multiplied by the below number to slow them down
-const maxSpeed = 10;
-const tooFastDampening = 0.2;
+var maxSpeed = 10;
+var tooFastDampening = 0.2;
 
 // Balls' velocity gets multiplied by this when bouncing off something to prevent speeds from getting too crazy
 // It looks good too
-const bounceDampening = 0.6;
+var bounceDampening = 0.6;
 
 // Creating the balls
 var allBalls = [];
