@@ -1,7 +1,3 @@
-h1 {
-    margin-bottom: 0;
-}
-
 .vert-list {
     display: flex;
     flex-direction: column;
@@ -14,7 +10,7 @@ h1 {
     padding-bottom: 3%;
 }
 
-/* IE 11 fix */
+/* IE 11 overflow fix */
 .vert-list-content p {
     max-width: 1000px;
 }

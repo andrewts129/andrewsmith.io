@@ -4,6 +4,10 @@
     padding-bottom: 5%;
 }
 
+h1 {
+    margin-bottom: 10px;
+}
+
 p {
     /* The default font is a bit too small for this usage */
     font-size: 1.8rem;
