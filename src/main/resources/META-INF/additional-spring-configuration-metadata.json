@@ -1,8 +1,0 @@
-{
-  "properties": [
-    {
-      "name": "GITHUB_ACCESS_TOKEN",
-      "type": "java.lang.String",
-      "description": "Personal Access token for interacting with my Github."
-  }
-] }

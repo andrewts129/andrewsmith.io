@@ -42,7 +42,7 @@ function getDecade(year) {
 }
 
 // Loads in the data from R as an array of objects
-$.getJSON("data/OneHitWonders.json", function (response) {
+$.getJSON("assets/data/OneHitWonders.json", function (response) {
     var dataset = response;
 
     var fontSize = 16;
