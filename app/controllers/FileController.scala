@@ -1,18 +1,13 @@
 package controllers
 
-import java.io.{ByteArrayInputStream, File}
-import java.net.URL
 import javax.inject._
 
-import akka.util.{ByteString, Helpers}
-import play.api._
+import akka.util.ByteString
 import play.api.http.HttpEntity
-import play.api.libs.ws.{WSClient, WSRequest}
+import play.api.libs.ws.WSClient
 import play.api.mvc._
 
 import scala.concurrent.ExecutionContext.Implicits.global
-import scala.concurrent.Future
-import scala.io.Source
 import scalaj.http.{Http, HttpRequest, HttpResponse}
 
 @Singleton
