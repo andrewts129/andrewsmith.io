@@ -6,6 +6,7 @@
 GET      /                           controllers.Assets.at(path="/public", file="html/index.html")
 GET      /projects                   controllers.Assets.at(path="/public", file="html/projects.html")
 GET      /one-hit-wonders            controllers.Assets.at(path="/public", file="html/one-hit-wonders.html")
+GET      /whispering-pablo           controllers.Assets.at(path="/public", file="html/whispering-pablo.html")
 
 GET      /resume                     controllers.FileController.getResume()
 

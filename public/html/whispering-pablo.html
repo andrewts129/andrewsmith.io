@@ -2,9 +2,23 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>$Title$</title>
+    <title>Whispering Pablo</title>
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:300,200|Raleway:300" rel="stylesheet">
+    <link rel="icon" type="image/png" href="assets/images/favicon.png">
+    <link rel="stylesheet" href="assets/css/main-style.css"/>
 </head>
 <body>
-$END$
+    <div id="tall-page-container">
+        <div id="main-content">
+            <h1>Whispering Pablo</h1>
+            <hr class="horz-line">
+            <p>Enter a message to submit: </p>
+            <input type="text" id="inputText">
+            <button onclick="submitMessage()">Submit</button>
+            <p>The last message submitted was: </p>
+            <p id="output"></p>
+        </div>
+    </div>
 </body>
+<script src="assets/js/WhisperingPablo.js"></script>
 </html>
