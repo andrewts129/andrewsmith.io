@@ -1,3 +1,21 @@
+window.onload = function() {
+    updateWhisperCount();
+    setInterval(updateWhisperCount, 3000);
+};
+
+function updateWhisperCount() {
+    var url = "https://whispering-pablo.herokuapp.com/api/numsubmissions";
+
+    window.fetch(url, {
+        method: "get"
+    }).then(function (response) {
+        return response.json();
+    }).then(function (json) {
+        document.getElementById("num-whispers").innerText = json.number;
+        document.getElementById("output-label").innerText = "The last message submitted was: ";
+    });
+}
+
 function submitMessage() {
     var inputTextField = document.getElementById("inputText");
     var input = inputTextField.value;
@@ -13,4 +31,5 @@ function submitMessage() {
         document.getElementById("output").innerText = json.response.message;
     });
 
+    updateWhisperCount();
 }
