@@ -1,7 +1,8 @@
 #input-text-field {
     font-family: Roboto, sans-serif;
+    font-weight: 300;
     font-size: 1.4rem;
-    color: #222222;
+    color: #282828;
     margin-bottom: 1.2rem; /* Get that submit button off my ass*/
 }
 
