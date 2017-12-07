@@ -1,0 +1,19 @@
+#input-text-field {
+    font-family: Roboto, sans-serif;
+    font-size: 1.4rem;
+    color: #222222;
+    margin-bottom: 1.2rem; /* Get that submit button off my ass*/
+}
+
+button {
+    font-family: Roboto, sans-serif;
+    font-weight: 300;
+    font-size: 1.6rem;
+    padding: 10px 30px;
+    background-color: #bb0000;
+    color: white;
+    border: none;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+}

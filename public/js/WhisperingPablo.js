@@ -17,7 +17,7 @@ function updateWhisperCount() {
 }
 
 function submitMessage() {
-    var inputTextField = document.getElementById("inputText");
+    var inputTextField = document.getElementById("input-text-field");
     var input = inputTextField.value;
     inputTextField.value = "";
 

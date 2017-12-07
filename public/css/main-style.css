@@ -7,7 +7,7 @@ body {
 }
 
 h1, h2, h3, h4, h5, h6 {
-    font-family: 'Raleway', sans-serif;
+    font-family: 'Roboto+Slab', sans-serif;
     font-weight: 300;
     color: #111111;
 
@@ -46,7 +46,7 @@ h6 {
 }
 
 p {
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Roboto', sans-serif;
     font-weight: 300;
     font-size: 1.4rem;
     color: #222222;
@@ -55,7 +55,7 @@ p {
 }
 
 a {
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Roboto', sans-serif;
     font-weight: 300;
     font-size: 1.4rem;
     color: #222222;

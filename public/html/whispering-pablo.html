@@ -3,9 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <title>Whispering Pablo</title>
-    <link href="https://fonts.googleapis.com/css?family=Montserrat:300,200|Raleway:300" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400|Roboto+Slab:300">
     <link rel="icon" type="image/png" href="assets/images/favicon.png">
     <link rel="stylesheet" href="assets/css/main-style.css"/>
+    <link rel="stylesheet" href="assets/css/whispering-pablo.css"/>
 </head>
 <body>
     <div id="tall-page-container">
@@ -13,7 +14,8 @@
             <h1>Whispering Pablo</h1>
             <hr class="horz-line">
             <p>Enter a message to submit: </p>
-            <span><input type="text" id="inputText"> <button onclick="submitMessage()">Submit</button></span>
+            <input type="text" id="input-text-field" maxlength="500">
+            <button onclick="submitMessage()">Submit</button>
             <p id="output-label">Connecting to Whispering Pablo, please wait...</p>
             <h2 id="output"></h2>
             <p>Number of whispers: <span id="num-whispers"></span></p>
