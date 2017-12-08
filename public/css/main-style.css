@@ -63,6 +63,11 @@ a {
     text-align: center;
 }
 
+::selection {
+    color: white;
+    background-color: #bb0000;
+}
+
 .horz-line {
     width: 100%;
     border-top: solid 1px #bb0000;
