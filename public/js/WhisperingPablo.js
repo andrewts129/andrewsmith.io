@@ -19,17 +19,35 @@ function updateWhisperCount() {
 function submitMessage() {
     var inputTextField = document.getElementById("input-text-field");
     var input = inputTextField.value;
-    inputTextField.value = "";
 
-    var url = "https://whispering-pablo.herokuapp.com/api/postmessage?request=" + input;
+    if (isValidSubmission(input)) {
+        inputTextField.value = "";
 
-    window.fetch(url, {
-        method: "post"
-    }).then(function (response) {
-        return response.json();
-    }).then(function (json) {
-        document.getElementById("output").innerText = json.response.message;
-    });
+        var url = "https://whispering-pablo.herokuapp.com/api/postmessage?request=" + input;
+
+        window.fetch(url, {
+            method: "post"
+        }).then(function (response) {
+            return response.json();
+        }).then(function (json) {
+            document.getElementById("output").innerText = json.response.message;
+        });
+    }
 
     updateWhisperCount();
+}
+
+function isValidSubmission(text) {
+    function stringIsAllSpaces(text) {
+        for (var i = 0; i < text.length; i++) {
+            var c = text.charAt(i);
+            if (c !== " ") {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    return text.length > 0 && !stringIsAllSpaces(text);
 }
