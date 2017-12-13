@@ -32,11 +32,8 @@ function submitMessage() {
 
         window.fetch(url, {
             method: "post"
-        }).then(function (response) {
-            return response.json();
-        }).then(function (json) {
-            document.getElementById("output").innerText = json.response.message;
-        });
+        })
+
     }
 
     updateWhisperCount();
@@ -54,18 +51,19 @@ function updateFeed() {
         }
 
         for (var i = 0; i < feedJson.length; i++) {
-            var creationTime = Date.parse(feedJson[i].creation_time);
-            var deletionTime = Date.parse(feedJson[i].deletion_time);
+            // GMT is needed to ensure Date.parse doesn't try and mess with timezones
+            var creationTime = Date.parse(feedJson[i].creation_time + " GMT");
+            var deletionTime = Date.parse(feedJson[i].deletion_time + " GMT");
 
             var now = Math.floor((new Date()).getTime());
-            var opacity =  1 - (now - creationTime) / (deletionTime - creationTime);
+            var opacity = 1 - ((now - creationTime) / (deletionTime - creationTime));
 
             if (opacity > 1) {
                 // should never happen assume the laws of time stay sane
                 opacity = 1;
             }
             // will also probably never happen, but still don't attempt to render negative opacity
-            else if (opacity > 0) {
+            if (opacity > 0) {
                 var feedElement = document.createElement("div");
                 feedElement.className = "feed-element";
 
