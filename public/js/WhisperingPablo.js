@@ -52,11 +52,15 @@ function updateFeed() {
 
         for (var i = 0; i < feedJson.length; i++) {
             // GMT is needed to ensure Date.parse doesn't try and mess with timezones
-            var creationTime = Date.parse(feedJson[i].creation_time + " GMT");
-            var deletionTime = Date.parse(feedJson[i].deletion_time + " GMT");
+            var creationTime = Date.parse(feedJson[i].creation_time );
+            var deletionTime = Date.parse(feedJson[i].deletion_time );
 
-            var now = Math.floor((new Date()).getTime());
+            //https://stackoverflow.com/questions/32252565/javascript-parse-utc-date
+            var current = new Date();
+            var now = Math.floor(new Date(current.getTime() + current.getTimezoneOffset() * 60000).getTime());
             var opacity = 1 - ((now - creationTime) / (deletionTime - creationTime));
+
+            console.log(opacity);
 
             if (opacity > 1) {
                 // should never happen assume the laws of time stay sane
@@ -80,6 +84,7 @@ function updateFeed() {
 
                 feedHolder.appendChild(feedElement);
 
+                console.log(feedElement);
             }
         }
     }
