@@ -16,7 +16,7 @@ function updateWhisperCount() {
         return response.json();
     }).then(function (json) {
         document.getElementById("num-whispers").innerText = json.number;
-        document.getElementById("connecting-label").innerText = "";
+        document.getElementById("connecting-label").innerText = "Messages expire after an hour";
     });
 
 }
@@ -66,13 +66,17 @@ function updateFeed() {
             if (opacity > 0) {
                 var feedElement = document.createElement("div");
                 feedElement.className = "feed-element";
+                feedElement.style.opacity = opacity;
 
-                var feedElementText = document.createElement("h4");
+                var feedElementText = document.createElement("p");
                 feedElementText.className = "feed-element-text";
                 feedElementText.innerText = feedJson[i].message;
-                feedElementText.style.opacity = opacity;
 
                 feedElement.appendChild(feedElementText);
+
+                var feedElementDivider = document.createElement("hr");
+                feedElementDivider.className = "feed-divider";
+                feedElement.appendChild(feedElementDivider);
 
                 feedHolder.appendChild(feedElement);
 
