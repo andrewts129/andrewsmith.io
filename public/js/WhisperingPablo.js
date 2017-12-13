@@ -60,28 +60,21 @@ function updateFeed() {
             var now = Math.floor(new Date(current.getTime() + current.getTimezoneOffset() * 60000).getTime());
             var opacity = 1 - ((now - creationTime) / (deletionTime - creationTime));
 
-            if (opacity > 1) {
-                // should never happen assume the laws of time stay sane
-                opacity = 1;
-            }
-            // will also probably never happen, but still don't attempt to render negative opacity
-            if (opacity > 0) {
-                var feedElement = document.createElement("div");
-                feedElement.className = "feed-element";
-                feedElement.style.opacity = opacity;
+            var feedElement = document.createElement("div");
+            feedElement.className = "feed-element";
+            feedElement.style.opacity = opacity;
 
-                var feedElementText = document.createElement("p");
-                feedElementText.className = "feed-element-text";
-                feedElementText.innerText = feedJson[i].message;
+            var feedElementText = document.createElement("p");
+            feedElementText.className = "feed-element-text";
+            feedElementText.innerText = feedJson[i].message;
 
-                feedElement.appendChild(feedElementText);
+            feedElement.appendChild(feedElementText);
 
-                var feedElementDivider = document.createElement("hr");
-                feedElementDivider.className = "feed-divider";
-                feedElement.appendChild(feedElementDivider);
+            var feedElementDivider = document.createElement("hr");
+            feedElementDivider.className = "feed-divider";
+            feedElement.appendChild(feedElementDivider);
 
-                feedHolder.appendChild(feedElement);
-            }
+            feedHolder.appendChild(feedElement);
         }
     }
 
