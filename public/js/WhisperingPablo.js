@@ -60,8 +60,6 @@ function updateFeed() {
             var now = Math.floor(new Date(current.getTime() + current.getTimezoneOffset() * 60000).getTime());
             var opacity = 1 - ((now - creationTime) / (deletionTime - creationTime));
 
-            console.log(opacity);
-
             if (opacity > 1) {
                 // should never happen assume the laws of time stay sane
                 opacity = 1;
@@ -83,8 +81,6 @@ function updateFeed() {
                 feedElement.appendChild(feedElementDivider);
 
                 feedHolder.appendChild(feedElement);
-
-                console.log(feedElement);
             }
         }
     }
