@@ -1,0 +1,44 @@
+@import "master-style";
+
+#main-content {
+    // Moves everything up a bit, so it's not perfectly centered vertically (I almost feel bad)
+    padding-bottom: 5%;
+}
+
+#my-name {
+    margin-bottom: 35px;
+}
+
+#subtitle {
+  // The default font is a bit too small for this usage
+  font-size: 1.8rem;
+
+  margin-bottom: 35px;
+}
+
+.horz-list {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    color: inherit;
+
+    min-width: 20rem;
+    font-family: $text-font;
+    font-size: 1.8rem;
+
+    list-style-type: none;
+
+    .separator {
+      color: $accent-color;
+    }
+
+    li {
+      margin-left: 0.2rem;
+      margin-right: 0.2rem;
+
+      a {
+        text-decoration: none;
+      }
+    }
+}

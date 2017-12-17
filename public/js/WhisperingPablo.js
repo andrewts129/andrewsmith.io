@@ -42,13 +42,10 @@ function submitMessage() {
 
 function updateFeed() {
     function renderFeed(feedJson) {
-        var feedHolder = document.getElementById("feed");
+        var feedHolder = document.getElementById("feed-holder");
 
-        // Clears children
-        // https://stackoverflow.com/questions/3955229/remove-all-child-elements-of-a-dom-node-in-javascript
-        while (feedHolder.lastChild) {
-            feedHolder.removeChild(feedHolder.lastChild);
-        }
+        var feed = document.createElement("div");
+        feed.id = "feed";
 
         for (var i = 0; i < feedJson.length; i++) {
             // GMT is needed to ensure Date.parse doesn't try and mess with timezones
@@ -70,12 +67,23 @@ function updateFeed() {
 
             feedElement.appendChild(feedElementText);
 
-            var feedElementDivider = document.createElement("hr");
-            feedElementDivider.className = "feed-divider";
-            feedElement.appendChild(feedElementDivider);
+            // Don't add a divider to the last message
+            if (i < feedJson.length - 1) {
+                var feedElementDivider = document.createElement("hr");
+                feedElementDivider.className = "feed-divider";
+                feedElement.appendChild(feedElementDivider);
+            }
 
-            feedHolder.appendChild(feedElement);
+            feed.appendChild(feedElement);
         }
+
+        // Clears the feed-holder div
+        if (feedHolder.childElementCount > 0) {
+            feedHolder.removeChild(feedHolder.lastChild);
+        }
+
+        // Adds the new feed
+        feedHolder.appendChild(feed);
     }
 
     var url = "https://whispering-pablo.herokuapp.com/api/get/feed";
@@ -87,13 +95,6 @@ function updateFeed() {
     }).then(function (json) {
         renderFeed(json);
     });
-}
-
-// So that the count increments immediately upon hitting submit. Does not change anything server-side
-function incrementWhisperCount() {
-    var numWhispersElement = document.getElementById("num-whispers");
-    var currentCount = numWhispersElement.innerText;
-    numWhispersElement.innerText = parseInt(currentCount, 10) + 1;
 }
 
 function isValidSubmission(text) {
