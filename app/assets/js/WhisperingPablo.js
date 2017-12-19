@@ -28,7 +28,7 @@ function submitMessage() {
     if (isValidSubmission(input)) {
         inputTextField.value = "";
 
-        var url = "https://whispering-pablo.herokuapp.com/api/post/submit?message=" + input;
+        var url = "https://whispering-pablo.herokuapp.com/api/post/submit?message=" + encodeURIComponent(input);
 
         window.fetch(url, {
             method: "post"
