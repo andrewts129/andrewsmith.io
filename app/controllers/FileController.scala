@@ -12,23 +12,22 @@ import scalaj.http.{Http, HttpRequest, HttpResponse}
 
 @Singleton
 class FileController @Inject()(cc: ControllerComponents, ws: WSClient) extends AbstractController(cc) {
+    def getResume() = Action {
+        def downloadResume(): Array[Byte] = {
+            val url: String = "https://raw.githubusercontent.com/andrewts129/resume/master/AndrewSmithResume.pdf"
+            val authToken: String = sys.env("GITHUB_ACCESS_TOKEN")
 
-  def getResume() = Action {
-    def downloadResume(): Array[Byte] = {
-      val url: String = "https://raw.githubusercontent.com/andrewts129/resume/master/AndrewSmithResume.pdf"
-      val authToken: String = sys.env("GITHUB_ACCESS_TOKEN")
+            val request: HttpRequest = Http(url).header("Authorization", "token " + authToken)
+            val response: HttpResponse[Array[Byte]] = request.asBytes
 
-      val request: HttpRequest = Http(url).header("Authorization", "token " + authToken)
-      val response: HttpResponse[Array[Byte]] = request.asBytes
+            response.body
+        }
 
-      response.body
+        val resumeBytes: Array[Byte] = downloadResume()
+
+        Result(
+            header = ResponseHeader(200, Map.empty),
+            body = HttpEntity.Strict(ByteString(resumeBytes), Some("application/pdf"))
+        )
     }
-
-    val resumeBytes: Array[Byte] = downloadResume()
-
-    Result(
-      header = ResponseHeader(200, Map.empty),
-      body = HttpEntity.Strict(ByteString(resumeBytes), Some("application/pdf"))
-    )
-  }
 }
