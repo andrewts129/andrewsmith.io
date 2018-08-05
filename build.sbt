@@ -3,7 +3,7 @@ organization := "io.andrewsmith"
 
 version := "1.0-SNAPSHOT"
 
-lazy val root = (project in file(".")).enablePlugins(PlayScala, SbtWeb)
+lazy val root = (project in file(".")).enablePlugins(PlayScala, SbtWeb, JavaAppPackaging)
 
 scalaVersion := "2.12.3"
 
