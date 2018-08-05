@@ -1,1 +1,1 @@
-setTimeout(function () {window.location.replace("http://www.andrewsmith.io/resume-pdf")}, 250);
+setTimeout(function () {window.location.replace("http://www.andrewsmith.io/AndrewSmithResume")}, 250);
