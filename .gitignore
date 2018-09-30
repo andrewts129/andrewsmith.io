@@ -33,3 +33,4 @@ mvnw
 /src/main/resources/application-local.properties
 .env
 runlocal.sh
+logs/
