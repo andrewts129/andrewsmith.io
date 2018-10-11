@@ -34,3 +34,4 @@ mvnw
 .env
 runlocal.sh
 logs/
+svc/
