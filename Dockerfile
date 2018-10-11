@@ -30,5 +30,5 @@ RUN \
 WORKDIR /root
 COPY . /root
 
-EXPOSE 8000
-CMD sbt "run 8000"
+EXPOSE $PORT
+CMD sbt "run $PORT"
