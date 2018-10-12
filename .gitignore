@@ -32,6 +32,7 @@ mvnw.cmd
 mvnw
 /src/main/resources/application-local.properties
 .env
-runlocal.sh
+run.sh
+build.sh
 logs/
 svc/

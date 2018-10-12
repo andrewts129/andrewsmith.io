@@ -27,8 +27,13 @@ RUN \
   sbt sbtVersion
 
 # Define working directory
-WORKDIR /root
 COPY . /root
+WORKDIR /root
 
+RUN sbt dist
+RUN set -x && unzip -d svc target/universal/*-1.0-SNAPSHOT.zip && mv svc/*/* svc/ && rm svc/bin/*.bat && mv svc/bin/* svc/bin/start
+
+# Does not do anything on Heroku; only for local testing
 EXPOSE $PORT
-CMD sbt "run $PORT"
+
+CMD svc/bin/start -Dhttp.port=$PORT -Dplay.http.secret.key=$SECRET
