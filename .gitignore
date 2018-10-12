@@ -34,5 +34,6 @@ mvnw
 .env
 run.sh
 build.sh
+deploy.sh
 logs/
 svc/
