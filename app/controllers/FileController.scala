@@ -12,9 +12,9 @@ import scalaj.http.{Http, HttpRequest, HttpResponse}
 
 @Singleton
 class FileController @Inject()(cc: ControllerComponents, ws: WSClient) extends AbstractController(cc) {
-    def getResume() = Action {
-        def downloadResume(): Array[Byte] = {
-            val url: String = "https://raw.githubusercontent.com/andrewts129/resume/master/AndrewSmithResume.pdf"
+    def getResume(b: Option[String]) = Action {
+        def downloadResume(branch: String): Array[Byte] = {
+            val url: String = "https://raw.githubusercontent.com/andrewts129/resume/" + branch + "/AndrewSmithResume.pdf"
             val authToken: String = sys.env("GITHUB_ACCESS_TOKEN")
 
             val request: HttpRequest = Http(url).header("Authorization", "token " + authToken)
@@ -23,7 +23,8 @@ class FileController @Inject()(cc: ControllerComponents, ws: WSClient) extends A
             response.body
         }
 
-        val resumeBytes: Array[Byte] = downloadResume()
+        val branches: Map[String, String] = Map("0" -> "master", "1" -> "trump").withDefaultValue("master")
+        val resumeBytes: Array[Byte] = downloadResume(branches(b.getOrElse("0")))
 
         Result(
             header = ResponseHeader(200, Map.empty),

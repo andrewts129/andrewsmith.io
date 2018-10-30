@@ -8,7 +8,7 @@ GET      /projects                   controllers.Assets.at(path="/public", file=
 GET      /one-hit-wonders            controllers.Assets.at(path="/public", file="html/one-hit-wonders.html")
 GET      /whispering-pablo           controllers.Assets.at(path="/public", file="html/whispering-pablo.html")
 GET      /resume                     controllers.Assets.at(path="/public", file="html/resume.html")
-GET      /AndrewSmithResume          controllers.FileController.getResume()
+GET      /AndrewSmithResume          controllers.FileController.getResume(b: Option[String])
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.versioned(path="/public", file: Asset)
