@@ -17,6 +17,7 @@ function updateWhisperCount() {
     }).then(function (json) {
         document.getElementById("num-whispers").innerText = json.number;
         document.getElementById("connecting-label").innerText = "Messages expire after an hour";
+        document.getElementById("connecting-sublabel").innerText = "";
     });
 
 }
