@@ -15,6 +15,10 @@ libraryDependencies +=  "org.scalaj" %% "scalaj-http" % "2.4.1"
 
 pipelineStages in Assets:= Seq(uglify)
 
+javaOptions += "-Xmx128m"
+javaOptions += "-XX:+UnlockExperimentalVMOptions"
+javaOptions += "-XX:+UseCGroupMemoryLimitForHeap"
+
 // Adds additional packages into Twirl
 //TwirlKeys.templateImports += "io.andrewsmith.controllers._"
 

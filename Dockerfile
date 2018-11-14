@@ -6,6 +6,7 @@ FROM openjdk:8u181
 # Env variables
 ENV SCALA_VERSION 2.12.7
 ENV SBT_VERSION 1.2.4
+#ENV JAVA_OPTS "-XX:+UnlockExperimentalVMOptions -XX:+UseCGroupMemoryLimitForHeap"
 
 # Scala expects this file
 RUN touch /usr/lib/jvm/java-8-openjdk-amd64/release
@@ -36,4 +37,4 @@ RUN set -x && unzip -d svc target/universal/*-1.0-SNAPSHOT.zip && mv svc/*/* svc
 # Does not do anything on Heroku; only for local testing
 EXPOSE $PORT
 
-CMD svc/bin/start -Dhttp.port=$PORT -Dplay.http.secret.key=$SECRET
+CMD svc/bin/start -Dhttp.port=$PORT -Dplay.http.secret.key=$SECRET -J-Xmx128m -J-XX:+UnlockExperimentalVMOptions -J-XX:+UseCGroupMemoryLimitForHeap
