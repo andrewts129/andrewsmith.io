@@ -24,7 +24,7 @@ class FileController @Inject()(cc: ControllerComponents, ws: WSClient) extends A
         }
 
         val branches: Map[String, String] = Map("0" -> "master", "1" -> "trump").withDefaultValue("master")
-        val resumeBytes: Array[Byte] = downloadResume(branches(b.getOrElse("0")))
+        val resumeBytes: Array[Byte] = downloadResume(branches(b.getOrElse("1")))
 
         Result(
             header = ResponseHeader(200, Map.empty),
