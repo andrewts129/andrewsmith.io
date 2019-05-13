@@ -4,9 +4,9 @@ organization := "io.andrewsmith"
 version := "1.0-SNAPSHOT"
 maintainer := "andrew@andrewsmith.io"
 
-lazy val root = (project in file(".")).enablePlugins(PlayScala, SbtWeb, JavaAppPackaging, DockerPlugin)
+lazy val root = (project in file(".")).enablePlugins(PlayScala, SbtWeb, JavaAppPackaging)
 
-scalaVersion := "2.12.7"
+scalaVersion := "2.12.8"
 
 libraryDependencies += guice
 //libraryDependencies += "org.scalatestplus.play" %% "scalatestplus-play" % "3.1.2" % Test
