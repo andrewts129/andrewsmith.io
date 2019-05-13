@@ -8,7 +8,7 @@ window.onload = function () {
 };
 
 function updateWhisperCount() {
-    var url = "https://whispering-pablo.herokuapp.com/api/get/numsubmissions";
+    let url = "https://whispering-pablo.herokuapp.com/api/get/numsubmissions";
 
     window.fetch(url, {
         method: "get"
@@ -23,13 +23,13 @@ function updateWhisperCount() {
 }
 
 function submitMessage() {
-    var inputTextField = document.getElementById("input-text-field");
-    var input = inputTextField.value;
+    let inputTextField = document.getElementById("input-text-field");
+    let input = inputTextField.value;
 
     if (isValidSubmission(input)) {
         inputTextField.value = "";
 
-        var url = "https://whispering-pablo.herokuapp.com/api/post/submit?message=" + encodeURIComponent(input);
+        let url = "https://whispering-pablo.herokuapp.com/api/post/submit?message=" + encodeURIComponent(input);
 
         window.fetch(url, {
             method: "post"
@@ -43,26 +43,26 @@ function submitMessage() {
 
 function updateFeed() {
     function renderFeed(feedJson) {
-        var feedHolder = document.getElementById("feed-holder");
+        let feedHolder = document.getElementById("feed-holder");
 
-        var feed = document.createElement("div");
+        let feed = document.createElement("div");
         feed.id = "feed";
 
-        for (var i = 0; i < feedJson.length; i++) {
+        for (let i = 0; i < feedJson.length; i++) {
             // GMT is needed to ensure Date.parse doesn't try and mess with timezones
-            var creationTime = Date.parse(feedJson[i].creation_time);
-            var deletionTime = Date.parse(feedJson[i].deletion_time);
+            let creationTime = Date.parse(feedJson[i].creation_time);
+            let deletionTime = Date.parse(feedJson[i].deletion_time);
 
             //https://stackoverflow.com/questions/32252565/javascript-parse-utc-date
-            var current = new Date();
-            var now = Math.floor(new Date(current.getTime() + current.getTimezoneOffset() * 60000).getTime());
-            var opacity = 1 - ((now - creationTime) / (deletionTime - creationTime));
+            let current = new Date();
+            let now = Math.floor(new Date(current.getTime() + current.getTimezoneOffset() * 60000).getTime());
+            let opacity = 1 - ((now - creationTime) / (deletionTime - creationTime));
 
-            var feedElement = document.createElement("div");
+            let feedElement = document.createElement("div");
             feedElement.className = "feed-element";
             feedElement.style.opacity = opacity;
 
-            var feedElementText = document.createElement("p");
+            let feedElementText = document.createElement("p");
             feedElementText.className = "feed-element-text";
             feedElementText.innerText = feedJson[i].message;
 
@@ -70,7 +70,7 @@ function updateFeed() {
 
             // Don't add a divider to the last message
             if (i < feedJson.length - 1) {
-                var feedElementDivider = document.createElement("hr");
+                let feedElementDivider = document.createElement("hr");
                 feedElementDivider.className = "feed-divider";
                 feedElement.appendChild(feedElementDivider);
             }
@@ -87,7 +87,7 @@ function updateFeed() {
         feedHolder.appendChild(feed);
     }
 
-    var url = "https://whispering-pablo.herokuapp.com/api/get/feed";
+    const url = "https://whispering-pablo.herokuapp.com/api/get/feed";
 
     window.fetch(url, {
         method: "get"
@@ -100,8 +100,8 @@ function updateFeed() {
 
 function isValidSubmission(text) {
     function stringIsAllSpaces(text) {
-        for (var i = 0; i < text.length; i++) {
-            var c = text.charAt(i);
+        for (let i = 0; i < text.length; i++) {
+            let c = text.charAt(i);
             if (c !== " ") {
                 return false;
             }

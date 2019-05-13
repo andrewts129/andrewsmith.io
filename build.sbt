@@ -13,7 +13,7 @@ libraryDependencies += guice
 libraryDependencies += ws
 libraryDependencies +=  "org.scalaj" %% "scalaj-http" % "2.4.1"
 
-pipelineStages in Assets:= Seq(uglify)
+pipelineStages in Assets:= Seq()
 
 javaOptions += "-Xmx128m"
 javaOptions += "-XX:+UnlockExperimentalVMOptions"
