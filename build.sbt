@@ -1,7 +1,7 @@
 name := """AndrewSmithDotIo"""
 organization := "io.andrewsmith"
 
-version := "1.0-SNAPSHOT"
+version := "1.1"
 maintainer := "andrew@andrewsmith.io"
 
 lazy val root = (project in file(".")).enablePlugins(PlayScala, SbtWeb, JavaAppPackaging)

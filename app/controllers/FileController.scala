@@ -12,7 +12,7 @@ import scalaj.http.{Http, HttpRequest, HttpResponse}
 
 @Singleton
 class FileController @Inject()(cc: ControllerComponents, ws: WSClient) extends AbstractController(cc) {
-    def getResume(b: Option[String]) = Action {
+    def getResume(b: Option[String]): Action[AnyContent] = Action {
         def downloadResume(branch: String): Array[Byte] = {
             val url: String = "https://raw.githubusercontent.com/andrewts129/resume/" + branch + "/AndrewSmithResume.pdf"
             val authToken: String = sys.env("GITHUB_ACCESS_TOKEN")
