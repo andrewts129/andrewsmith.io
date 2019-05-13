@@ -112,4 +112,3 @@ function isValidSubmission(text) {
 
     return text.length > 0 && text.length <= 500 && !stringIsAllSpaces(text);
 }
-
