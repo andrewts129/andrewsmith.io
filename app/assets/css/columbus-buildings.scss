@@ -1,0 +1,54 @@
+@import "master-style";
+
+#map {
+    height: 900px;
+}
+
+#legend {
+    position: absolute;
+    top: 850px;
+    left: 10px;
+    height: 40px;
+    width: 250px;
+    z-index: 10000;
+    text-align: center;
+    background: white;
+    display: flex;
+}
+
+$legend-colors: #e41a1c, #f24d0e, #ff7f00, #FFBF1A, #ffff33, #A6D73F, #4daf4a, #429781, #377eb8;
+#legend-gradient {
+    float: left;
+    width: 100%;
+    height: 10px;
+    background: linear-gradient(to right,
+            nth($legend-colors, 1) 0%,
+            nth($legend-colors, 1) 11%,
+            nth($legend-colors, 2) 11%,
+            nth($legend-colors, 2) 22%,
+            nth($legend-colors, 3) 22%,
+            nth($legend-colors, 3) 33%,
+            nth($legend-colors, 4) 33%,
+            nth($legend-colors, 4) 44%,
+            nth($legend-colors, 5) 44%,
+            nth($legend-colors, 5) 55%,
+            nth($legend-colors, 6) 55%,
+            nth($legend-colors, 6) 66%,
+            nth($legend-colors, 7) 66%,
+            nth($legend-colors, 7) 77%,
+            nth($legend-colors, 8) 77%,
+            nth($legend-colors, 8) 88%,
+            nth($legend-colors, 9) 88%,
+            nth($legend-colors, 9) 100%);
+}
+
+#legend-labels {
+    font-family: $text-font;
+    font-size: 14px;
+    margin: auto;
+    text-align: center;
+    width: 100%;
+    display: inline-flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+}

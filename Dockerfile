@@ -1,3 +1,4 @@
+# syntax=docker/dockerfile:experimental
 # Based on https://github.com/hseeberger/scala-sbt
 
 # Pull base image
