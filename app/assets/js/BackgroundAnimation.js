@@ -75,7 +75,7 @@ function Ball(x, y, radius, color) {
     var self = this;
 
     this.radius = radius;
-    this.mass = (4/3) * Math.PI * Math.pow(self.radius, 3) / 1000;  // Divide by 1000 bc the balls were way too heavy
+    this.mass = (4 / 3) * Math.PI * Math.pow(self.radius, 3) / 1000;  // Divide by 1000 bc the balls were way too heavy
     this.color = color;
 
     this.x = x;
@@ -159,7 +159,7 @@ function Ball(x, y, radius, color) {
         }
     }
 
-    this.update = function() {
+    this.update = function () {
         updateForce();
         updateAcceleration();
         updateVelocity();

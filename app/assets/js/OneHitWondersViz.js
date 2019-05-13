@@ -20,23 +20,17 @@ function getColorForDecade(decade) {
 function getDecade(year) {
     if (year < 1960) {
         return "50s";
-    }
-    else if (year < 1970) {
+    } else if (year < 1970) {
         return "60s";
-    }
-    else if (year < 1980) {
+    } else if (year < 1980) {
         return "70s";
-    }
-    else if (year < 1990) {
+    } else if (year < 1990) {
         return "80s";
-    }
-    else if (year < 2000) {
+    } else if (year < 2000) {
         return "90s";
-    }
-    else if (year < 2010) {
+    } else if (year < 2010) {
         return "00s";
-    }
-    else {
+    } else {
         return "'10s";
     }
 }
@@ -98,7 +92,7 @@ $.getJSON("assets/data/OneHitWonders.json", function (response) {
         .attr("class", "song")
         .attr("x", 0)
         .attr("y", function (d, i) {
-            return i * (barHeight + barPadding) + (barHeight / 25 ) + fontSize + (barHeight / 10) + fontSize;
+            return i * (barHeight + barPadding) + (barHeight / 25) + fontSize + (barHeight / 10) + fontSize;
         })
         .attr("fill", "#444444")
         .attr("text-anchor", "end")
@@ -148,8 +142,7 @@ $.getJSON("assets/data/OneHitWonders.json", function (response) {
             // For whatever reason the first data point is too far to the right
             if (i === 0) {
                 return maxTextLength - 7 + d.sdRatioScore * lengthMultiplier;
-            }
-            else {
+            } else {
                 return maxTextLength - 2 + d.sdRatioScore * lengthMultiplier;
             }
         })
@@ -160,8 +153,7 @@ $.getJSON("assets/data/OneHitWonders.json", function (response) {
             // White doesn't show well on yellow
             if (getColorForDecade(getDecade(d.year)) === "#ffff33") {
                 return "#222222"
-            }
-            else {
+            } else {
                 return "#ffffff"
             }
         })

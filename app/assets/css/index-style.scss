@@ -10,10 +10,10 @@
 }
 
 #subtitle {
-  // The default font is a bit too small for this usage
-  font-size: 1.8rem;
+    // The default font is a bit too small for this usage
+    font-size: 1.8rem;
 
-  margin-bottom: 35px;
+    margin-bottom: 35px;
 }
 
 .horz-list {
@@ -30,15 +30,15 @@
     list-style-type: none;
 
     .separator {
-      color: $accent-color;
+        color: $accent-color;
     }
 
     li {
-      margin-left: 0.2rem;
-      margin-right: 0.2rem;
+        margin-left: 0.2rem;
+        margin-right: 0.2rem;
 
-      a {
-        text-decoration: none;
-      }
+        a {
+            text-decoration: none;
+        }
     }
 }

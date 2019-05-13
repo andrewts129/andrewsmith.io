@@ -1,4 +1,4 @@
-window.onload = function() {
+window.onload = function () {
     // The intervals are chosen so that they will rarely occur at the same time. This probably does not matter at all
     updateWhisperCount();
     setInterval(updateWhisperCount, 2237);
@@ -50,8 +50,8 @@ function updateFeed() {
 
         for (var i = 0; i < feedJson.length; i++) {
             // GMT is needed to ensure Date.parse doesn't try and mess with timezones
-            var creationTime = Date.parse(feedJson[i].creation_time );
-            var deletionTime = Date.parse(feedJson[i].deletion_time );
+            var creationTime = Date.parse(feedJson[i].creation_time);
+            var deletionTime = Date.parse(feedJson[i].deletion_time);
 
             //https://stackoverflow.com/questions/32252565/javascript-parse-utc-date
             var current = new Date();

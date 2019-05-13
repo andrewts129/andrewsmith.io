@@ -1,27 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Whispering Pablo</title>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:200,300,400">
-    <link rel="icon" type="image/png" href="@routes.Assets.at("images/favicon.png")">
-    <link rel="stylesheet" href="@routes.Assets.at("css/whispering-pablo.css")"/>
-</head>
-<body>
-    <div id="tall-page-container">
-        <div id="main-content">
-            <h1 id="title">Whispering Pablo</h1>
-            <hr class="horz-line">
-            <p>Enter a message to submit: </p>
-            <input type="text" id="input-text-field" maxlength="500">
-            <button id="submit-button" onclick="submitMessage()">Submit</button>
-            <p id="connecting-label">Connecting to Whispering Pablo, please wait...</p>
-            <p id="connecting-sublabel" class="small-text">(This can take some time; you get what you pay for with free hosting...)</p>
-            <div id="feed-holder"></div>
-            <p>Number of whispers: <span id="num-whispers"></span></p>
+    <head>
+        <meta charset="UTF-8">
+        <title>Whispering Pablo</title>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:200,300,400">
+        <link rel="icon" type="image/png" href="@routes.Assets.at("images/favicon.png")">
+        <link rel="stylesheet" href="@routes.Assets.at("css/whispering-pablo.css")"/>
+    </head>
+    <body>
+        <div id="tall-page-container">
+            <div id="main-content">
+                <h1 id="title">Whispering Pablo</h1>
+                <hr class="horz-line">
+                <p>Enter a message to submit: </p>
+                <input type="text" id="input-text-field" maxlength="500">
+                <button id="submit-button" onclick="submitMessage()">Submit</button>
+                <p id="connecting-label">Connecting to Whispering Pablo, please wait...</p>
+                <p id="connecting-sublabel" class="small-text">(This can take some time; you get what you pay for with free hosting...)</p>
+                <div id="feed-holder"></div>
+                <p>Number of whispers: <span id="num-whispers"></span></p>
+            </div>
         </div>
-    </div>
-</body>
-<script src="@routes.Assets.at("js/WhisperingPablo.js")"></script>
-@common.googleAnalytics()
+    </body>
+    <script src="@routes.Assets.at("js/WhisperingPablo.js")"></script>
+    @common.googleAnalytics()
 </html>
