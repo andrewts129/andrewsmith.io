@@ -5,7 +5,7 @@ FROM openjdk:8u181
 
 # Env variables
 ENV SCALA_VERSION 2.12.8
-ENV SBT_VERSION 1.2.4
+ENV SBT_VERSION 1.2.8
 ENV PROJECT_VERSION 1.1
 #ENV JAVA_OPTS "-XX:+UnlockExperimentalVMOptions -XX:+UseCGroupMemoryLimitForHeap"
 
