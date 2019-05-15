@@ -1,7 +1,7 @@
 window.onload = function() {
-    var tileServerURL = "https://columbus-building-tileserver.herokuapp.com";
+    const tileServerURL = "https://columbus-building-tileserver.herokuapp.com";
 
-    var map = new mapboxgl.Map({
+    let map = new mapboxgl.Map({
         container: 'map',
         center: [-82.9988, 39.9612],
         zoom: 12,
@@ -25,12 +25,12 @@ window.onload = function() {
             tiles:[tileServerURL + "/data/columbus/{z}/{x}/{y}.pbf"]
         });
 
-        var min_year = 1800;
-        var max_year = 2019;
-        var colors = ["#e41a1c", "#ff7f00", "#ffff33", "#4daf4a", "#377eb8"];
+        const min_year = 1800;
+        const max_year = 2019;
+        const colors = ["#e41a1c", "#ff7f00", "#ffff33", "#4daf4a", "#377eb8"];
 
-        var unavailable_year = 0;
-        var unavailable_color = "#eaeae5";
+        const unavailable_year = 0;
+        const unavailable_color = "#eaeae5";
 
         map.addLayer({
             id: "buildings",
