@@ -1,11 +1,10 @@
-# Based on https://github.com/hseeberger/scala-sbt
-
-FROM node:12-alpine AS builder
+# Preprocesses static assets. Right now this only minifies JS files
+FROM node:12-alpine AS front-end-processor
 COPY . /
-RUN npm install grunt grunt-contrib-uglify-es --save-dev && npm install -g grunt-cli && grunt && ls -al -R
+RUN npm install grunt grunt-contrib-uglify-es --save-dev && npm install -g grunt-cli && grunt
 
-# Pull base image
-FROM openjdk:8u181
+# Creates an executable binary of the project using sbt. Based on https://github.com/hseeberger/scala-sbt
+FROM openjdk:8u212 AS packager
 
 # Env variables
 ENV SCALA_VERSION 2.12.8
@@ -34,11 +33,18 @@ RUN \
 
 # Define working directory
 COPY . /root
-COPY --from=builder /app/assets /root/app/assets
+COPY --from=front-end-processor /app/assets /root/app/assets
 WORKDIR /root
 
 RUN sbt dist
 RUN set -x && unzip -d svc target/universal/*-$PROJECT_VERSION.zip && mv svc/*/* svc/ && rm svc/bin/*.bat && mv svc/bin/* svc/bin/start
+
+# Lightweight image to execute the binary created above
+FROM openjdk:8u212-jre-alpine
+
+# Play Framework seems to require bash
+RUN apk add --no-cache bash
+COPY --from=packager /root/svc/. svc/
 
 # Does not do anything on Heroku; only for local testing
 EXPOSE $PORT
