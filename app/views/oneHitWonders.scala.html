@@ -1,11 +1,12 @@
+@(prod: Boolean)
 <!DOCTYPE html>
 <html lang="en">
     <head>
         <meta charset="UTF-8">
         <title>Who Were The Biggest One Hit Wonders?</title>
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300">
-        <link rel="icon" type="image/png" href="@routes.Assets.at("images/favicon.png")">
-        <link rel="stylesheet" href="@routes.Assets.at("css/one-hit-wonders.css")"/>
+        <link rel="icon" type="image/png" href="@routes.Assets.versioned("images/favicon.png")">
+        <link rel="stylesheet" href="@routes.Assets.versioned("css/one-hit-wonders.css")"/>
     </head>
     <body>
         <div id="tall-page-container">
@@ -27,6 +28,6 @@
     </body>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.10.0/d3.min.js"></script>
-    <script type="text/javascript" src="@routes.Assets.at("js/OneHitWondersViz.js")"></script>
-    @common.googleAnalytics()
+    <script type="text/javascript" src="@routes.Assets.versioned("js/OneHitWondersViz.js")"></script>
+    @common.googleAnalytics(prod)
 </html>

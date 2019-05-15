@@ -1,11 +1,12 @@
+@(prod: Boolean)
 <!DOCTYPE html>
 <html lang="en">
     <head>
         <meta charset="UTF-8">
         <title>Columbus Building Age Map</title>
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:200,300,400">
-        <link rel="icon" type="image/png" href="@routes.Assets.at("images/favicon.png")">
-        <link rel="stylesheet" href="@routes.Assets.at("css/columbus-buildings.css")"/>
+        <link rel="icon" type="image/png" href="@routes.Assets.versioned("images/favicon.png")">
+        <link rel="stylesheet" href="@routes.Assets.versioned("css/columbus-buildings.css")"/>
         <link href="https://api.mapbox.com/mapbox-gl-js/v0.35.1/mapbox-gl.css" rel="stylesheet" />
     </head>
     <body>
@@ -29,6 +30,6 @@
         </div>
     </body>
     <script src="https://api.mapbox.com/mapbox-gl-js/v0.35.1/mapbox-gl.js"></script>
-    <script type="text/javascript" src="@routes.Assets.at("js/ColumbusBuildings.js")"></script>
-    @common.googleAnalytics()
+    <script type="text/javascript" src="@routes.Assets.versioned("js/ColumbusBuildings.js")"></script>
+    @common.googleAnalytics(prod)
 </html>

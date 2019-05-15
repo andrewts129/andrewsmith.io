@@ -1,11 +1,12 @@
+@(prod: Boolean)
 <!DOCTYPE html>
 <html lang="en">
     <head>
         <meta charset="UTF-8">
         <title>My Projects</title>
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300">
-        <link rel="icon" type="image/png" href="@routes.Assets.at("images/favicon.png")">
-        <link rel="stylesheet" href="@routes.Assets.at("css/projects-style.css")"/>
+        <link rel="icon" type="image/png" href="@routes.Assets.versioned("images/favicon.png")">
+        <link rel="stylesheet" href="@routes.Assets.versioned("css/projects-style.css")"/>
     </head>
     <body>
         <div id="tall-page-container">
@@ -60,6 +61,8 @@
             </div>
         </div>
     </body>
-    <script src="@routes.Assets.at("js/WakePablo.js")"></script>
-    @common.googleAnalytics()
+    @if(prod) {
+        <script src="@routes.Assets.versioned("js/WakePablo.js")"></script>
+    }
+    @common.googleAnalytics(prod)
 </html>
