@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>My Projects</title>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300">
+        <link rel="icon" type="image/png" href="@routes.Assets.at("images/favicon.png")">
+        <link rel="stylesheet" href="@routes.Assets.at("css/projects-style.css")"/>
+    </head>
+    <body>
+        <div id="tall-page-container">
+            <div id="main-content">
+                <h1 id="title">Projects</h1>
+                <hr class="horz-line">
+                <ul class="vert-list">
+                    <li>
+                        <h2>@@DonaldTrumBot</h2>
+                        <p>
+                        A Twitter bot written in Python that uses Markov chains to create (mostly-nonsensical) tweets resembling
+                            those of Donald Trump. The account can be found <a href="https://twitter.com/DonaldTrumBot">here</a>
+                            and the source code is hosted on <a href="https://github.com/andrewts129/donald-trump-bot">GitHub</a>
+                            .
+                    </p>
+                    </li>
+                    <li>
+                        <h2>Whispering Pablo</h2>
+                        <p>
+                        A "social network" demo with a live feed of messages that are submitted anonymously and
+                            vanish after one hour. Under the hood, it's a RESTful web service built with Scala, the Play
+                            Framework, and a PostgreSQL database hosted on Heroku. The actual site can be found
+                            <a href="@routes.PageController.whisperingPablo">here</a> and the source code is hosted on
+                            <a href="https://github.com/andrewts129/whispering-pablo">GitHub</a>.
+                        </p>
+                        <p>"Shitty Yik-Yak 2.0" - Matt Cohen</p>
+                    </li>
+                    <li>
+                        <h2>This Website</h2>
+                        <p>I use this site as a way to learn about various web development languages, frameworks, and tools.
+                            Right now, the back end is written in Scala using the Play Framework, the front end is written
+                            using plain JavaScript, HTML, and SASS, and it's hosted in a Docker container running on the
+                            cloud platform Heroku. The source code can be found on
+                            <a href="https://github.com/andrewts129/andrew-smith-dot-io">GitHub</a>.
+                        </p>
+                    </li>
+                    <li>
+                        <h2>Biggest One Hit Wonders Analysis</h2>
+                        <p>
+                        An attempt to quantify and rank the biggest one hit wonders, where a "big" one hit wonder is
+                            considered to be an artist who found a lot of success with one song,
+                            and very little otherwise.
+                        </p>
+                        <p>Data was collected, cleaned, and analyzed in R while D3.js was used
+                            for the <a href="@routes.PageController.oneHitWonders">visualization</a>.
+                            The source code for both the R script and the visualization can be found on <a href="https://github.com/andrewts129/one-hit-wonders">GitHub</a>
+                            .
+                    </p>
+                        <p class="small-text">(Note: this is still a WIP)</p>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </body>
+    <script src="@routes.Assets.at("js/WakePablo.js")"></script>
+    @common.googleAnalytics()
+</html>

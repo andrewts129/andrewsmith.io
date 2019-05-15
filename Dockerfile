@@ -5,8 +5,9 @@
 FROM openjdk:8u181
 
 # Env variables
-ENV SCALA_VERSION 2.12.7
+ENV SCALA_VERSION 2.12.8
 ENV SBT_VERSION 1.2.4
+ENV PROJECT_VERSION 1.1
 #ENV JAVA_OPTS "-XX:+UnlockExperimentalVMOptions -XX:+UseCGroupMemoryLimitForHeap"
 
 # Scala expects this file
@@ -33,7 +34,7 @@ COPY . /root
 WORKDIR /root
 
 RUN sbt dist
-RUN set -x && unzip -d svc target/universal/*-1.0-SNAPSHOT.zip && mv svc/*/* svc/ && rm svc/bin/*.bat && mv svc/bin/* svc/bin/start
+RUN set -x && unzip -d svc target/universal/*-$PROJECT_VERSION.zip && mv svc/*/* svc/ && rm svc/bin/*.bat && mv svc/bin/* svc/bin/start
 
 # Does not do anything on Heroku; only for local testing
 EXPOSE $PORT

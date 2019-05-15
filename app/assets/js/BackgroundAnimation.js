@@ -1,42 +1,42 @@
-var canvas = document.getElementById("full-page-canvas");
-var context = canvas.getContext("2d");
+const canvas = document.getElementById("full-page-canvas");
+const context = canvas.getContext("2d");
 
 context.canvas.width = window.innerWidth;
 context.canvas.height = window.innerHeight;
 
 // How far off the screen the balls need to go before bouncing off the edges
 // If 0, they bounce off the edges of the screen
-var collisionPadding = 300;
+const collisionPadding = 300;
 
-var width = window.innerWidth;
-var height = window.innerHeight;
+const width = window.innerWidth;
+const height = window.innerHeight;
 
-var dt = 1;   // Number of milliseconds between each drawing/physics calculations
-var G = 0.0001;   // Big G, gravitational constant
+const dt = 1;   // Number of milliseconds between each drawing/physics calculations
+const G = 0.0001;   // Big G, gravitational constant
 
 // This is the object that the balls gravitate around
-var blackHole = {
+const blackHole = {
     x: width / 2,
     y: height / 2,
     mass: 40000000
 };
 
 // If the balls go faster than the max speed, their velocity gets multiplied by the below number to slow them down
-var maxSpeed = 10;
-var tooFastDampening = 0.2;
+const maxSpeed = 10;
+const tooFastDampening = 0.2;
 
 // Balls' velocity gets multiplied by this when bouncing off something to prevent speeds from getting too crazy
 // It looks good too
-var bounceDampening = 0.6;
+const bounceDampening = 0.6;
 
 // Creating the balls
-var allBalls = [];
-for (var i = 0; i < 15; i++) {
-    var newBallX = randNumBetween(0, width);
-    var newBallY = randNumBetween(0, height);
+let allBalls = [];
+for (let i = 0; i < 15; i++) {
+    const newBallX = randNumBetween(0, width);
+    const newBallY = randNumBetween(0, height);
 
-    var newBallRadius = randNumBetween(5, 10);
-    var newBall = new Ball(newBallX, newBallY, newBallRadius, generateColor());
+    const newBallRadius = randNumBetween(5, 10);
+    let newBall = new Ball(newBallX, newBallY, newBallRadius, generateColor());
     newBall.v_x = randNumBetween(-3, 3);
     newBall.v_y = randNumBetween(-3, 3);
 
@@ -53,8 +53,8 @@ function randNumBetween(a, b) {
 
 // Generates a random rgba color that is mostly red and pretty transparent
 function generateColor() {
-    var redValue = Math.floor(randNumBetween(140, 220));
-    var opacity = randNumBetween(0.1, 0.5);
+    const redValue = Math.floor(randNumBetween(140, 220));
+    const opacity = randNumBetween(0.1, 0.5);
 
     return "rgba(" + redValue + ",0,0," + opacity + ")";
 }
@@ -63,8 +63,8 @@ function updateAll() {
     context.clearRect(0, 0, width, height);
 
     // Do the physics calculations for each ball and draw them
-    for (var i = 0; i < allBalls.length; i++) {
-        var ball = allBalls[i];
+    for (let i = 0; i < allBalls.length; i++) {
+        const ball = allBalls[i];
         ball.update();
     }
 
@@ -72,10 +72,10 @@ function updateAll() {
 }
 
 function Ball(x, y, radius, color) {
-    var self = this;
+    let self = this;
 
     this.radius = radius;
-    this.mass = (4/3) * Math.PI * Math.pow(self.radius, 3) / 1000;  // Divide by 1000 bc the balls were way too heavy
+    this.mass = (4 / 3) * Math.PI * Math.pow(self.radius, 3) / 1000;  // Divide by 1000 bc the balls were way too heavy
     this.color = color;
 
     this.x = x;
@@ -114,16 +114,16 @@ function Ball(x, y, radius, color) {
     }
 
     function updateForce() {
-        var distBetweenSq = Math.pow(blackHole.x - self.x, 2) + Math.pow(blackHole.y - self.y, 2);
+        let distBetweenSq = Math.pow(blackHole.x - self.x, 2) + Math.pow(blackHole.y - self.y, 2);
 
         // To prevent weird behavior when the ball gets really close to the center
         if (distBetweenSq > 5000) {
 
             // Magnitude of the gravitational force vector
-            var fMagnitude = G * self.mass * blackHole.mass / distBetweenSq;
+            let fMagnitude = G * self.mass * blackHole.mass / distBetweenSq;
 
             // Take that vector and point it towards the black hole
-            var unitVectorTowardsHole = {
+            let unitVectorTowardsHole = {
                 x: (blackHole.x - self.x) / Math.sqrt(distBetweenSq),
                 y: (blackHole.y - self.y) / Math.sqrt(distBetweenSq)
             };
@@ -159,7 +159,7 @@ function Ball(x, y, radius, color) {
         }
     }
 
-    this.update = function() {
+    this.update = function () {
         updateForce();
         updateAcceleration();
         updateVelocity();
