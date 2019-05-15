@@ -1,5 +1,9 @@
 # Based on https://github.com/hseeberger/scala-sbt
 
+FROM node:12-alpine AS builder
+COPY . /
+RUN npm install grunt grunt-contrib-uglify-es --save-dev && npm install -g grunt-cli && grunt && ls -al -R
+
 # Pull base image
 FROM openjdk:8u181
 
@@ -30,6 +34,7 @@ RUN \
 
 # Define working directory
 COPY . /root
+COPY --from=builder /app/assets /root/app/assets
 WORKDIR /root
 
 RUN sbt dist

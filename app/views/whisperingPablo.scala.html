@@ -5,8 +5,8 @@
         <meta charset="UTF-8">
         <title>Whispering Pablo</title>
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:200,300,400">
-        <link rel="icon" type="image/png" href="@routes.Assets.at("images/favicon.png")">
-        <link rel="stylesheet" href="@routes.Assets.at("css/whispering-pablo.css")"/>
+        <link rel="icon" type="image/png" href="@routes.Assets.versioned("images/favicon.png")">
+        <link rel="stylesheet" href="@routes.Assets.versioned("css/whispering-pablo.css")"/>
     </head>
     <body>
         <div id="tall-page-container">
@@ -23,6 +23,6 @@
             </div>
         </div>
     </body>
-    <script src="@routes.Assets.at("js/WhisperingPablo.js")"></script>
+    <script src="@routes.Assets.versioned("js/WhisperingPablo.js")"></script>
     @common.googleAnalytics(prod)
 </html>

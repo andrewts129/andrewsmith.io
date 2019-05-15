@@ -3,11 +3,11 @@
 <html lang="en">
     <head>
         <meta charset="UTF-8">
-        <link rel="icon" type="image/png" href="@routes.Assets.at("images/favicon.png")">
+        <link rel="icon" type="image/png" href="@routes.Assets.versioned("images/favicon.png")">
         <title>Resume</title>
     </head>
     @common.googleAnalytics(prod)
-    <script src="@routes.Assets.at("js/Resume.js")"></script>
+    <script src="@routes.Assets.versioned("js/Resume.js")"></script>
     <body>
         <a href="@routes.FileController.getResume(None)">Please click here if your browser does not redirect you</a>
     </body>
