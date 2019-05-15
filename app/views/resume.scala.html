@@ -1,3 +1,4 @@
+@(prod: Boolean)
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -5,7 +6,7 @@
         <link rel="icon" type="image/png" href="@routes.Assets.at("images/favicon.png")">
         <title>Resume</title>
     </head>
-    @common.googleAnalytics()
+    @common.googleAnalytics(prod)
     <script src="@routes.Assets.at("js/Resume.js")"></script>
     <body>
         <a href="@routes.FileController.getResume(None)">Please click here if your browser does not redirect you</a>

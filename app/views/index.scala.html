@@ -1,3 +1,4 @@
+@(prod: Boolean)
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -30,6 +31,8 @@
         </div>
     </body>
     <script src="@routes.Assets.at("js/BackgroundAnimation.js")"></script>
-    <script src="@routes.Assets.at("js/WakePablo.js")"></script>
-    @common.googleAnalytics()
+    @if(prod) {
+        <script src="@routes.Assets.at("js/WakePablo.js")"></script>
+    }
+    @common.googleAnalytics(prod)
 </html>
