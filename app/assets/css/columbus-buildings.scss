@@ -1,7 +1,28 @@
 @import "master-style";
 
+html, body {
+    height: 100%;
+    margin: 0
+}
+
+#map-page-container {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+}
+
+#title {
+    margin: 1rem 0;
+    text-align: left;
+}
+
 #map {
-    height: 900px;
+    width: 100%;
+    flex-grow: 1;
+    flex-shrink: 1;
+    flex-basis: auto;
 }
 
 #legend {
