@@ -25,6 +25,8 @@ window.onload = function() {
             tiles:[tileServerURL + "/data/columbus/{z}/{x}/{y}.pbf"]
         });
 
+        map.addControl(new mapboxgl.FullscreenControl());
+
         const min_year = 1800;
         const max_year = 2019;
         const colors = ["#e41a1c", "#ff7f00", "#ffff33", "#4daf4a", "#377eb8"];
