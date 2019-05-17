@@ -7,7 +7,7 @@
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:200,300,400">
         <link rel="icon" type="image/png" href="@routes.Assets.versioned("images/favicon.png")">
         <link rel="stylesheet" href="@routes.Assets.versioned("css/columbus-buildings.css")"/>
-        <link href="https://api.mapbox.com/mapbox-gl-js/v0.35.1/mapbox-gl.css" rel="stylesheet" />
+        <link href="https://api.mapbox.com/mapbox-gl-js/v0.54.0/mapbox-gl.css" rel="stylesheet" />
     </head>
     <body>
         <div id="map-page-container">
@@ -22,11 +22,15 @@
                         <span>1950</span>
                         <span>2000</span>
                     </span>
+                    <p id="legend-source">
+                        Source: <a href='https://www.franklincountyauditor.com/'>Franklin Country Auditor</a>
+                            and <a href='https://gismaps.osu.edu/OSUMaps/Default.html?'>The Ohio State University</a>
+                    </p>
                 </div>
             </div>
         </div>
     </body>
-    <script src="https://api.mapbox.com/mapbox-gl-js/v0.35.1/mapbox-gl.js"></script>
+    <script src="https://api.mapbox.com/mapbox-gl-js/v0.54.0/mapbox-gl.js"></script>
     <script type="text/javascript" src="@routes.Assets.versioned("js/ColumbusBuildings.js")"></script>
     @common.googleAnalytics(prod)
 </html>

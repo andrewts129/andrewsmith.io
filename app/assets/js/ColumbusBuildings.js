@@ -8,7 +8,7 @@ window.onload = function() {
         minZoom: 12,
         maxZoom: 18,
         style: tileServerURL + "/styles/base/style.json",
-        antialias: true,
+        antialias: false,
     });
 
     map.on("load", function () {
