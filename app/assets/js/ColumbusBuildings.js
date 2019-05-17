@@ -30,7 +30,7 @@ window.onload = function() {
 
         const min_year = 1800;
         const max_year = 2019;
-        const colors = ["#e41a1c", "#ff7f00", "#ffff33", "#4daf4a", "#377eb8"];
+        const colors = ["#e41a1c", "#f24d0e", "#ff7f00", "#FFBF1A", "#ffff33", "#A6D73F", "#4daf4a", "#429781", "#377eb8"];
 
         const unavailable_year = 0;
         const unavailable_color = "#eaeae5";
