@@ -15,7 +15,7 @@ class FileController @Inject()(cc: ControllerComponents, ws: WSClient) extends A
     def resume(b: Option[String]): Action[AnyContent] = Action {
         def downloadResume(branch: String): Array[Byte] = {
             val url: String = "https://raw.githubusercontent.com/andrewts129/resume/" + branch + "/AndrewSmithResume.pdf"
-            val authToken: String = "4741b451efc74e01699291a39c37b6f325389ad1"
+            val authToken: String = sys.env("GITHUB_ACCESS_TOKEN")
 
             val request: HttpRequest = Http(url).header("Authorization", "token " + authToken)
             val response: HttpResponse[Array[Byte]] = request.asBytes
