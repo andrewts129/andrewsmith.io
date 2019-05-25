@@ -1,21 +1,18 @@
 # syntax=docker/dockerfile:experimental
 
 # Preprocesses static assets. Right now this only minifies JS files
-FROM node:12-alpine AS front-end-processor
+FROM node:12.3.1-alpine AS front-end-processor
 COPY . /
 RUN npm install grunt grunt-contrib-uglify-es --save-dev && npm install -g grunt-cli && grunt
 
 # Creates an executable binary of the project using sbt. Based on https://github.com/hseeberger/scala-sbt
-FROM openjdk:8u212 AS packager
+FROM openjdk:11.0.3-jdk-stretch AS packager
 
 # Env variables
 ENV SCALA_VERSION 2.12.8
 ENV SBT_VERSION 1.2.8
 ENV PROJECT_VERSION 1.1
 #ENV JAVA_OPTS "-XX:+UnlockExperimentalVMOptions -XX:+UseCGroupMemoryLimitForHeap"
-
-# Scala expects this file
-RUN touch /usr/lib/jvm/java-8-openjdk-amd64/release
 
 # Install Scala
 ## Piping curl directly in tar
@@ -31,7 +28,13 @@ RUN \
   rm sbt-$SBT_VERSION.deb && \
   apt-get update && \
   apt-get install sbt && \
-  sbt sbtVersion
+  sbt sbtVersion && \
+  mkdir project && \
+  echo "scalaVersion := \"${SCALA_VERSION}\"" > build.sbt && \
+  echo "sbt.version=${SBT_VERSION}" > project/build.properties && \
+  echo "case object Temp" > Temp.scala && \
+  sbt compile && \
+  rm -r project && rm build.sbt && rm Temp.scala && rm -r target
 
 # Define working directory
 COPY . /root
@@ -42,10 +45,9 @@ RUN sbt dist
 RUN set -x && unzip -d svc target/universal/*-$PROJECT_VERSION.zip && mv svc/*/* svc/ && rm svc/bin/*.bat && mv svc/bin/* svc/bin/start
 
 # Lightweight image to execute the binary created above
-FROM openjdk:8u212-jre-alpine
+FROM openjdk:11.0.3-jre-slim
 
 # Play Framework seems to require bash
-RUN apk add --no-cache bash
 COPY --from=packager /root/svc/. svc/
 
 # Does not do anything on Heroku; only for local testing
