@@ -53,4 +53,4 @@ COPY --from=packager /root/svc/. svc/
 # Does not do anything on Heroku; only for local testing
 EXPOSE $PORT
 
-CMD svc/bin/start -Dhttp.port=$PORT -Dplay.http.secret.key=$SECRET -J-Xmx128m -J-XX:+UnlockExperimentalVMOptions -J-XX:+UseCGroupMemoryLimitForHeap
+CMD svc/bin/start -Dhttp.port=$PORT -Dplay.http.secret.key=$SECRET -J-Xmx256m -J-XX:+UseContainerSupport
