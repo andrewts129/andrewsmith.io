@@ -2,8 +2,6 @@ package controllers
 
 import javax.inject._
 
-import akka.util.ByteString
-import play.api.http.HttpEntity
 import play.api.libs.ws.WSClient
 import play.api.mvc._
 
