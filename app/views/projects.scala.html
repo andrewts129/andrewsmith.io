@@ -59,6 +59,6 @@
     </body>
     @if(prod) {
         <script src="@routes.Assets.versioned("js/WakePablo.js")"></script>
+        @common.googleAnalytics()
     }
-    @common.googleAnalytics(prod)
 </html>

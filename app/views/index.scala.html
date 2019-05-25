@@ -32,7 +32,7 @@
     </body>
     <script src="@routes.Assets.versioned("js/BackgroundAnimation.js")"></script>
     @if(prod) {
+        @common.googleAnalytics()
         <script src="@routes.Assets.versioned("js/WakePablo.js")"></script>
     }
-    @common.googleAnalytics(prod)
 </html>

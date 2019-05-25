@@ -24,5 +24,7 @@
         </div>
     </body>
     <script src="@routes.Assets.versioned("js/WhisperingPablo.js")"></script>
-    @common.googleAnalytics(prod)
+    @if(prod) {
+        @common.googleAnalytics()
+    }
 </html>

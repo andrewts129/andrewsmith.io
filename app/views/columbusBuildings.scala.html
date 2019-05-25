@@ -36,5 +36,7 @@
     </body>
     <script src="https://api.mapbox.com/mapbox-gl-js/v0.54.0/mapbox-gl.js"></script>
     <script type="text/javascript" src="@routes.Assets.versioned("js/ColumbusBuildings.js")"></script>
-    @common.googleAnalytics(prod)
+    @if(prod) {
+        @common.googleAnalytics()
+    }
 </html>
