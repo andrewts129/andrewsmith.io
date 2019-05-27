@@ -34,7 +34,8 @@ window.onload = function() {
 
             const min_year = 1800;
             const max_year = 2019;
-            const colors = ["#e41a1c", "#f24d0e", "#ff7f00", "#FFBF1A", "#ffff33", "#A6D73F", "#4daf4a", "#429781", "#377eb8"];
+            const colors = ["#e41a1c", "#f24d0e", "#ff7f00", "#FFBF1A", "#ffff33", "#A6D73F", "#4daf4a", "#429781", "#377eb8", "#6866AE", "#984ea3"];
+            const stopYears = [1800, 1825, 1850, 1875, 1900, 1925, 1950, 1975, 2000, 2025, 2050];
 
             const unavailable_year = 0;
             const unavailable_color = "#eaeae5";
@@ -52,7 +53,7 @@ window.onload = function() {
                     "fill-color": {
                         "property": "year_built",
                         "stops": colors.map(function (color, index) {
-                            return [min_year + (index * (max_year - min_year) / (colors.length - 1)), color]
+                            return [stopYears[index], color]
                         })
                     }
                 }

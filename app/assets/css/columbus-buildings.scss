@@ -54,7 +54,7 @@ html, body {
     margin: 0 0 0.5rem 0;
 }
 
-$legend-colors: #e41a1c, #f24d0e, #ff7f00, #FFBF1A, #ffff33, #A6D73F, #4daf4a, #429781, #377eb8;
+$legend-colors: #e41a1c, #f24d0e, #ff7f00, #FFBF1A, #ffff33, #A6D73F, #4daf4a, #429781, #377eb8, #6866AE;
 #legend-gradient {
     float: left;
     width: 100%;
@@ -62,30 +62,32 @@ $legend-colors: #e41a1c, #f24d0e, #ff7f00, #FFBF1A, #ffff33, #A6D73F, #4daf4a, #
     height: 10px;
     background: linear-gradient(to right,
             nth($legend-colors, 1) 0%,
-            nth($legend-colors, 1) 11%,
-            nth($legend-colors, 2) 11%,
-            nth($legend-colors, 2) 22%,
-            nth($legend-colors, 3) 22%,
-            nth($legend-colors, 3) 33%,
-            nth($legend-colors, 4) 33%,
-            nth($legend-colors, 4) 44%,
-            nth($legend-colors, 5) 44%,
-            nth($legend-colors, 5) 55%,
-            nth($legend-colors, 6) 55%,
-            nth($legend-colors, 6) 66%,
-            nth($legend-colors, 7) 66%,
-            nth($legend-colors, 7) 77%,
-            nth($legend-colors, 8) 77%,
-            nth($legend-colors, 8) 88%,
-            nth($legend-colors, 9) 88%,
-            nth($legend-colors, 9) 100%);
+            nth($legend-colors, 1) 10%,
+            nth($legend-colors, 2) 10%,
+            nth($legend-colors, 2) 20%,
+            nth($legend-colors, 3) 20%,
+            nth($legend-colors, 3) 30%,
+            nth($legend-colors, 4) 30%,
+            nth($legend-colors, 4) 40%,
+            nth($legend-colors, 5) 40%,
+            nth($legend-colors, 5) 50%,
+            nth($legend-colors, 6) 50%,
+            nth($legend-colors, 6) 60%,
+            nth($legend-colors, 7) 60%,
+            nth($legend-colors, 7) 70%,
+            nth($legend-colors, 8) 70%,
+            nth($legend-colors, 8) 80%,
+            nth($legend-colors, 9) 80%,
+            nth($legend-colors, 9) 90%,
+            nth($legend-colors, 10) 90%,
+            nth($legend-colors, 10) 100%);
 }
 
 #legend-labels {
     font-family: $text-font;
     font-size: 14px;
     text-align: center;
-    width: 100%;
+    width: 92%;
     margin-top: 0.3rem;
     display: inline-flex;
     flex-wrap: nowrap;
