@@ -32,8 +32,6 @@ window.onload = function() {
 
             map.addControl(new mapboxgl.FullscreenControl());
 
-            const min_year = 1800;
-            const max_year = 2019;
             const colors = ["#e41a1c", "#f24d0e", "#ff7f00", "#FFBF1A", "#ffff33", "#A6D73F", "#4daf4a", "#429781", "#377eb8", "#6866AE", "#984ea3"];
             const stopYears = [1800, 1825, 1850, 1875, 1900, 1925, 1950, 1975, 2000, 2025, 2050];
 
@@ -64,7 +62,7 @@ window.onload = function() {
                 type: "fill",
                 source: "buildings",
                 "source-layer": "data",
-                filter: ["==", "year_built", 0],
+                filter: ["==", "year_built", unavailable_year],
                 paint: {
                     "fill-color": unavailable_color
                 }
