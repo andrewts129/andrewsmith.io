@@ -8,10 +8,14 @@ lazy val root = (project in file(".")).enablePlugins(PlayScala, SbtWeb, JavaAppP
 
 scalaVersion := "2.12.8"
 
-libraryDependencies += guice
-//libraryDependencies += "org.scalatestplus.play" %% "scalatestplus-play" % "3.1.2" % Test
-libraryDependencies += ws
-libraryDependencies +=  "org.scalaj" %% "scalaj-http" % "2.4.1"
+libraryDependencies ++= Seq(
+    guice,
+    ws,
+    "org.scalaj" %% "scalaj-http" % "2.4.1",
+    "com.typesafe.play" %% "play-slick" % "3.0.0",
+    "com.typesafe.play" %% "play-slick-evolutions" % "3.0.0",
+    "org.postgresql" % "postgresql" % "42.2.1"
+)
 
 pipelineStages in Assets:= Seq()
 

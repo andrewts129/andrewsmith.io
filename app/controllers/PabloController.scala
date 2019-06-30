@@ -1,15 +1,17 @@
 package controllers
 
+import java.sql.Timestamp
+
 import javax.inject.{Inject, Singleton}
-import play.api.Environment
-import play.api.Mode.Prod
+import models.PabloMessage
+import play.api.libs.json._
 import play.api.libs.ws.WSClient
 import play.api.mvc.{AbstractController, Action, AnyContent, ControllerComponents}
 
 @Singleton
 class PabloController @Inject()(cc: ControllerComponents, ws: WSClient) extends AbstractController(cc) {
     def getFeed: Action[AnyContent] = Action {
-        Ok("FEED")
+        Ok(Json.arr(PabloMessage(1, "fuck", new Timestamp(System.currentTimeMillis()))))
     }
 
     def getStats: Action[AnyContent] = Action {
