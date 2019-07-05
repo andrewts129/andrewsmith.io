@@ -8,7 +8,6 @@ object PabloStat {
 
     implicit object PabloStatFormat extends Format[PabloStat] {
 
-        // Not used, just put here so the code compiles. Otherwise useless
         override def reads(json: JsValue): JsResult[PabloStat] = {
             val key: JsLookupResult = json \ "key"
             val value: JsLookupResult = json \ "value"
