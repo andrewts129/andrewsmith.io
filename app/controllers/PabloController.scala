@@ -11,7 +11,7 @@ import play.api.mvc.{AbstractController, Action, AnyContent, ControllerComponent
 @Singleton
 class PabloController @Inject()(cc: ControllerComponents, ws: WSClient) extends AbstractController(cc) {
     def getFeed: Action[AnyContent] = Action {
-        Ok(Json.arr(PabloMessage(1, "fuck", new Timestamp(System.currentTimeMillis()))))
+        Ok("FEED")
     }
 
     def getStats: Action[AnyContent] = Action {

@@ -1,12 +1,34 @@
 package models
 
 import java.sql.Timestamp
+import java.util.Date
 
 import play.api.libs.json.{Format, JsError, JsLookupResult, JsResult, JsSuccess, JsValue, Json}
+import db.DbContext
+import io.getquill.{MappedEncoding, PostgresAsyncContext, SnakeCase}
+
+import scala.concurrent.ExecutionContext
 
 case class PabloMessage(id: Int, text: String, creationTime: Timestamp)
 
 object PabloMessage {
+
+    trait Decoders {
+        implicit val timestampDecoder = MappedEncoding[String, Timestamp](s => Timestamp.valueOf(s))
+    }
+
+    private val context = new PostgresAsyncContext(SnakeCase, "pablo.db") with Decoders
+
+    import context._
+
+    implicit val ec = ExecutionContext.global
+
+
+    private val pabloMessages = quote(querySchema[PabloMessage]("messages"))
+
+    def create(text: String) = null
+
+    def getAll = null
 
     implicit object PabloMessageFormat extends Format[PabloMessage] {
 
