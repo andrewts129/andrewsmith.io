@@ -23,10 +23,13 @@ object PabloMessage {
 
     implicit val ec = ExecutionContext.global
 
-
     private val pabloMessages = quote(querySchema[PabloMessage]("messages"))
 
-    def create(text: String) = null
+    def create(text: String) = {
+        context.run(
+            pabloMessages.insert(_.text -> lift(text)).returning(_.id)
+        )
+    }
 
     def getAll = null
 

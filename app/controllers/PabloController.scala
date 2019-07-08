@@ -8,10 +8,13 @@ import play.api.libs.json._
 import play.api.libs.ws.WSClient
 import play.api.mvc.{AbstractController, Action, AnyContent, ControllerComponents}
 
+import scala.concurrent.Future
+
 @Singleton
 class PabloController @Inject()(cc: ControllerComponents, ws: WSClient) extends AbstractController(cc) {
     def getFeed: Action[AnyContent] = Action {
-        Ok("FEED")
+        var x = PabloMessage.create("FUCK")
+        Ok("WE DID IT?")
     }
 
     def getStats: Action[AnyContent] = Action {
