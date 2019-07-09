@@ -1,37 +1,67 @@
 package models
 
-import java.sql.Timestamp
+import java.sql.{Connection, PreparedStatement, ResultSet, Timestamp}
 import java.util.Date
 
+import play.api.db.{Database, Databases}
 import play.api.libs.json.{Format, JsError, JsLookupResult, JsResult, JsSuccess, JsValue, Json}
-import db.DbContext
-import io.getquill.{MappedEncoding, PostgresAsyncContext, SnakeCase}
 
 import scala.concurrent.ExecutionContext
 
-case class PabloMessage(id: Int, text: String, creationTime: Timestamp)
+case class PabloMessage(id: Int, text: String, creation: Timestamp)
 
 object PabloMessage {
+    val db: Database = Databases(
+        driver = "org.postgresql.Driver",
+        url = "postgres://dev:123456@127.0.0.1:5432#/pabloDB"
+    )
 
-    trait Decoders {
-        implicit val timestampDecoder = MappedEncoding[String, Timestamp](s => Timestamp.valueOf(s))
+    def create(text: String): PabloMessage = {
+        var result: PabloMessage = null
+        val connection: Connection = db.getConnection()
+
+        try {
+            val statement: PreparedStatement = connection.prepareStatement(
+                "INSERT INTO messages (text) VALUES (?) RETURNING *;"
+            )
+            statement.setString(1, text)
+
+            val resultSet: ResultSet = statement.executeQuery()
+            resultSet.first()
+
+            result = PabloMessage(resultSet.getInt("id"), resultSet.getString("text"), resultSet.getTimestamp("creation"))
+        }
+        finally {
+            connection.close()
+        }
+
+        result
     }
 
-    private val context = new PostgresAsyncContext(SnakeCase, "pablo.db") with Decoders
+    def getAll: List[PabloMessage] = {
+        var feed: List[PabloMessage] = List()
 
-    import context._
+        val connection = db.getConnection()
 
-    implicit val ec = ExecutionContext.global
+        try {
+            val statement = connection.createStatement()
+            val resultSet: ResultSet = statement.executeQuery("SELECT * FROM messages ORDER BY creation;")
 
-    private val pabloMessages = quote(querySchema[PabloMessage]("messages"))
+            while (resultSet.next()) {
+                feed = PabloMessage(
+                    resultSet.getInt("id"),
+                    resultSet.getString("text"),
+                    resultSet.getTimestamp("creation_time")
+                ) :: feed
+            }
 
-    def create(text: String) = {
-        context.run(
-            pabloMessages.insert(_.text -> lift(text)).returning(_.id)
-        )
+        }
+        finally {
+            connection.close()
+        }
+
+        feed
     }
-
-    def getAll = null
 
     implicit object PabloMessageFormat extends Format[PabloMessage] {
 
@@ -51,7 +81,7 @@ object PabloMessage {
         }
 
         override def writes(message: PabloMessage): JsValue = {
-            Json.obj("id" -> message.id, "message" -> message.text, "creation_time" -> message.creationTime.toString)
+            Json.obj("id" -> message.id, "message" -> message.text, "creation_time" -> message.creation.toString)
         }
     }
 }

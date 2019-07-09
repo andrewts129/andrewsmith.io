@@ -5,7 +5,7 @@
 CREATE TABLE messages(
     id BIGSERIAL PRIMARY KEY,
     text TEXT NOT NULL CHECK ( char_length(text) <= 250 ),
-    createdAt TIMESTAMPTZ NOT NULL DEFAULT NOW()
+    creation TIMESTAMPTZ NOT NULL DEFAULT NOW()
 );
 
 CREATE TABLE stats(

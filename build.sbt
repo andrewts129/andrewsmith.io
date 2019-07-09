@@ -15,7 +15,6 @@ libraryDependencies ++= Seq(
     jdbc,
     "org.scalaj" %% "scalaj-http" % "2.4.1",
     "org.postgresql" % "postgresql" % "42.2.1",
-    "io.getquill" %% "quill-async-postgres" % "3.2.0"
 )
 
 pipelineStages in Assets:= Seq()

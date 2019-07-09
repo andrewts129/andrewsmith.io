@@ -13,15 +13,14 @@ import scala.concurrent.Future
 @Singleton
 class PabloController @Inject()(cc: ControllerComponents, ws: WSClient) extends AbstractController(cc) {
     def getFeed: Action[AnyContent] = Action {
-        var x = PabloMessage.create("FUCK")
-        Ok("WE DID IT?")
+        Ok(PabloMessage.getAll)
     }
 
     def getStats: Action[AnyContent] = Action {
         Ok("STATS")
     }
 
-    def submitMessage: Action[AnyContent] = Action {
-        Ok("MESSAGE")
+    def submitMessage(text: String): Action[AnyContent] = Action {
+        Created(PabloMessage.create(text))
     }
 }
