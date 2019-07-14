@@ -47,7 +47,6 @@ RUN set -x && unzip -d svc target/universal/*-$PROJECT_VERSION.zip && mv svc/*/*
 # Lightweight image to execute the binary created above
 FROM openjdk:11.0.3-jre-slim
 
-# Play Framework seems to require bash
 COPY --from=packager /root/svc/. svc/
 
 # Does not do anything on Heroku; only for local testing
