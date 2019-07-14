@@ -1,7 +1,10 @@
 package controllers
 
+import com.amazonaws.auth.EnvironmentVariableCredentialsProvider
+import com.amazonaws.services.s3.model.S3Object
+import com.amazonaws.services.s3.{AmazonS3, AmazonS3ClientBuilder}
+import com.amazonaws.util.IOUtils
 import javax.inject._
-
 import play.api.libs.ws.WSClient
 import play.api.mvc._
 
@@ -12,17 +15,17 @@ import scalaj.http.{Http, HttpRequest, HttpResponse}
 class FileController @Inject()(cc: ControllerComponents, ws: WSClient) extends AbstractController(cc) {
     def resume(b: Option[String]): Action[AnyContent] = Action {
         def downloadResume(branch: String): Array[Byte] = {
-            val url: String = "https://raw.githubusercontent.com/andrewts129/resume/" + branch + "/AndrewSmithResume.pdf"
-            val authToken: String = sys.env("GITHUB_ACCESS_TOKEN")
+            val client: AmazonS3 = AmazonS3ClientBuilder
+                .standard()
+                .withRegion("us-east-1")
+                .withCredentials(new EnvironmentVariableCredentialsProvider())
+                .build()
 
-            val request: HttpRequest = Http(url).header("Authorization", "token " + authToken)
-            val response: HttpResponse[Array[Byte]] = request.asBytes
-
-            response.body
+            val resumeObject: S3Object = client.getObject("andrewsmithresume", s"resume_b$branch.pdf")
+            IOUtils.toByteArray(resumeObject.getObjectContent)
         }
 
-        val branches: Map[String, String] = Map("0" -> "master", "1" -> "trump").withDefaultValue("trump")
-        val resumeBytes: Array[Byte] = downloadResume(branches(b.getOrElse("1")))
+        val resumeBytes: Array[Byte] = downloadResume(b.getOrElse("1"))
 
         Ok(resumeBytes).as("application/pdf")
     }
