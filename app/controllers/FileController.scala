@@ -25,7 +25,7 @@ class FileController @Inject()(cc: ControllerComponents, ws: WSClient) extends A
             IOUtils.toByteArray(resumeObject.getObjectContent)
         }
 
-        val resumeBytes: Array[Byte] = downloadResume(b.getOrElse("1"))
+        val resumeBytes: Array[Byte] = downloadResume(b.getOrElse("0"))
 
         Ok(resumeBytes).as("application/pdf")
     }
