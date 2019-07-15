@@ -12,7 +12,6 @@ FROM openjdk:11.0.3-jdk-stretch AS packager
 ENV SCALA_VERSION 2.12.8
 ENV SBT_VERSION 1.2.8
 ENV PROJECT_VERSION 1.1
-#ENV JAVA_OPTS "-XX:+UnlockExperimentalVMOptions -XX:+UseCGroupMemoryLimitForHeap"
 
 # Install Scala
 ## Piping curl directly in tar

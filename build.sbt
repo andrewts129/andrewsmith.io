@@ -8,20 +8,15 @@ lazy val root = (project in file(".")).enablePlugins(PlayScala, SbtWeb, JavaAppP
 
 scalaVersion := "2.12.8"
 
-libraryDependencies += guice
-//libraryDependencies += "org.scalatestplus.play" %% "scalatestplus-play" % "3.1.2" % Test
-libraryDependencies += ws
-libraryDependencies +=  "org.scalaj" %% "scalaj-http" % "2.4.1"
-libraryDependencies += "com.amazonaws" % "aws-java-sdk-s3" % "1.11.592"
+libraryDependencies ++= Seq(
+    guice,
+    ws,
+    "org.scalaj" %% "scalaj-http" % "2.4.1",
+    "com.amazonaws" % "aws-java-sdk-s3" % "1.11.592"
+)
 
 pipelineStages in Assets:= Seq()
 
 javaOptions += "-Xmx128m"
 javaOptions += "-XX:+UnlockExperimentalVMOptions"
 javaOptions += "-XX:+UseCGroupMemoryLimitForHeap"
-
-// Adds additional packages into Twirl
-//TwirlKeys.templateImports += "io.andrewsmith.controllers._"
-
-// Adds additional packages into conf/routes
-// play.sbt.routes.RoutesKeys.routesImport += "io.andrewsmith.binders._"
