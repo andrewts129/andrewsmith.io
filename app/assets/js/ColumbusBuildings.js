@@ -3,15 +3,13 @@ window.onload = function() {
         window.alert("Sorry, your browser doesn't support the map on this page")
     }
     else {
-        const tileServerURL = "https://columbus-building-tileserver.herokuapp.com";
-
         let map = new mapboxgl.Map({
             container: 'map',
             center: [-82.9988, 39.9612],
             zoom: 11,
             minZoom: 11,
             maxZoom: 16,
-            style: tileServerURL + "/styles/base/style.json",
+            style: window.location + "/style/base/style.json",
             antialias: true,
         });
 
@@ -19,7 +17,7 @@ window.onload = function() {
             map.addSource("buildings", {
                 id: "buildings",
                 type: "vector",
-                tiles:[window.location + "/tiles/buildings/{z}/{x}/{y}.pbf"],
+                tiles:[window.location + "/tile/buildings/{z}/{x}/{y}.pbf"],
                 minzoom: 11,
                 maxzoom: 15,
             });
@@ -27,7 +25,7 @@ window.onload = function() {
             map.addSource("columbus", {
                 id: "columbus",
                 type: "vector",
-                tiles:[window.location + "/tiles/columbus/{z}/{x}/{y}.pbf"]
+                tiles:[window.location + "/tile/columbus/{z}/{x}/{y}.pbf"]
             });
 
             map.addControl(new mapboxgl.FullscreenControl());
