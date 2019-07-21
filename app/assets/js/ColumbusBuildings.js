@@ -19,7 +19,7 @@ window.onload = function() {
             map.addSource("buildings", {
                 id: "buildings",
                 type: "vector",
-                tiles:[tileServerURL + "/data/buildings/{z}/{x}/{y}.pbf"],
+                tiles:[window.location + "/tiles/buildings/{z}/{x}/{y}.pbf"],
                 minzoom: 11,
                 maxzoom: 15,
             });
@@ -27,7 +27,7 @@ window.onload = function() {
             map.addSource("columbus", {
                 id: "columbus",
                 type: "vector",
-                tiles:[tileServerURL + "/data/columbus/{z}/{x}/{y}.pbf"]
+                tiles:[window.location + "/tiles/columbus/{z}/{x}/{y}.pbf"]
             });
 
             map.addControl(new mapboxgl.FullscreenControl());

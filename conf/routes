@@ -11,5 +11,7 @@ GET      /columbus-buildings         controllers.PageController.columbusBuilding
 GET      /resume                     controllers.PageController.resume
 GET      /AndrewSmithResume          controllers.FileController.resume(b: Option[String])
 
+GET      /columbus-buildings/tiles/:source/:z/:y/:x.pbf controllers.TileController.getTile(source: String, z: String, y: String, x: String)
+
 # Map static resources from the /public folder to the /assets URL path
 GET      /assets/*file                controllers.Assets.versioned(path="/public", file: Asset)
