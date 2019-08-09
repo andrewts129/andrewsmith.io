@@ -15,7 +15,7 @@ class TileController @Inject()(cc: ControllerComponents, ws: WSClient, cached: C
         Action {
             val url: String = s"$baseUrl/styles/$name/style.json"
             val response: HttpResponse[Array[Byte]] = Http(url).asBytes
-            Ok(response.body)
+            Ok(response.body).withHeaders("Cache-Control" -> "public, max-age=5000")
         }
     }
 
@@ -23,7 +23,7 @@ class TileController @Inject()(cc: ControllerComponents, ws: WSClient, cached: C
         Action {
             val url: String = s"$baseUrl/data/$source/$z/$y/$x.pbf"
             val response: HttpResponse[Array[Byte]] = Http(url).asBytes
-            Ok(response.body)
+            Ok(response.body).withHeaders("Cache-Control" -> "public, max-age=5000")
         }
     }
 }
