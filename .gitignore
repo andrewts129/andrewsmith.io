@@ -37,3 +37,4 @@ build.sh
 deploy.sh
 logs/
 svc/
+scripts/

@@ -1,7 +1,5 @@
 */target/
 logs/
 .idea/
-build.sh
-deploy.sh
-run.sh
+scripts/
 .env
