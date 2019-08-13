@@ -48,7 +48,5 @@ FROM openjdk:11.0.3-jre-slim
 
 COPY --from=packager /root/svc/. svc/
 
-# Does not do anything on Heroku; only for local testing
-EXPOSE $PORT
-
-CMD svc/bin/start -Dhttp.port=$PORT -Dplay.http.secret.key=$SECRET -J-Xmx256m -J-XX:+UseContainerSupport
+EXPOSE 8000
+CMD svc/bin/start -Dhttp.port=8000 -Dplay.http.secret.key=$SECRET -J-Xmx256m -J-XX:+UseContainerSupport
