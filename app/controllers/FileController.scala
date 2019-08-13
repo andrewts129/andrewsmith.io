@@ -9,6 +9,7 @@ import play.api.libs.ws.WSClient
 import play.api.mvc._
 
 import scala.concurrent.ExecutionContext.Implicits.global
+import scalaj.http.{Http, HttpRequest, HttpResponse}
 
 @Singleton
 class FileController @Inject()(cc: ControllerComponents, ws: WSClient) extends AbstractController(cc) {

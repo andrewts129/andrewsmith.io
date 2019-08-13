@@ -12,8 +12,7 @@ libraryDependencies ++= Seq(
     guice,
     ws,
     "org.scalaj" %% "scalaj-http" % "2.4.1",
-    "com.amazonaws" % "aws-java-sdk-s3" % "1.11.592",
-    caffeine
+    "com.amazonaws" % "aws-java-sdk-s3" % "1.11.592"
 )
 
 pipelineStages in Assets:= Seq()
