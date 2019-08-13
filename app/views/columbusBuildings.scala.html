@@ -1,4 +1,4 @@
-@(prod: Boolean)
+@(prod: Boolean, tileServerUrl: String)
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -52,6 +52,7 @@
     </body>
     <script src="https://api.mapbox.com/mapbox-gl-js/v1.0.0/mapbox-gl.js"></script>
     <script type="text/javascript" src="@routes.Assets.versioned("js/ColumbusBuildings.js")"></script>
+    <script type="text/javascript">render("@tileServerUrl")</script>
     @if(prod) {
         @common.googleAnalytics()
     }

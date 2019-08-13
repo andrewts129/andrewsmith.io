@@ -29,8 +29,9 @@ class PageController @Inject()(cc: ControllerComponents, ws: WSClient, env: Envi
     }
 
     def columbusBuildings: Action[AnyContent] = Action {
-        Ok(views.html.columbusBuildings(prod))
+        Ok(views.html.columbusBuildings(prod, tileServerUrl))
     }
 
     private def prod: Boolean = env.mode == Prod
+    private def tileServerUrl: String = sys.env.getOrElse("TILE_SERVER_URL", "https://columbus-building-tileserver.herokuapp.com")
 }

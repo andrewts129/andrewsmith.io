@@ -1,11 +1,9 @@
-window.onload = function() {
+function render(tileServerURL) {
     if (!mapboxgl.supported()) {
         window.alert("Sorry, your browser doesn't support the map on this page")
     }
     else {
-        const tileServerURL = "https://columbus-building-tileserver.herokuapp.com";
-
-        let map = new mapboxgl.Map({
+        const map = new mapboxgl.Map({
             container: 'map',
             center: [-82.9988, 39.9612],
             zoom: 12,
@@ -51,4 +49,4 @@ window.onload = function() {
             });
         })
     }
-};
+}
