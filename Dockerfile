@@ -49,4 +49,4 @@ FROM openjdk:11.0.3-jre-slim
 COPY --from=packager /root/svc/. svc/
 
 EXPOSE 8000
-CMD svc/bin/start -Dhttp.port=8000 -Dplay.http.secret.key=$SECRET -J-Xmx256m -J-XX:+UseContainerSupport
+CMD svc/bin/start -Dhttp.port=8000 -Dplay.http.secret.key=$SECRET -Dpidfile.path=/dev/null -J-Xmx256m -J-XX:+UseContainerSupport
