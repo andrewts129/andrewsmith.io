@@ -4,13 +4,8 @@ branches:
     - master
 services:
   - docker
-jobs:
-  include:
-    - stage: build
-      script:
-        - docker build -t andrewsmithdotio .
-    - stage: push
-      script:
-        - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-        - docker tag andrewsmithdotio andrewts129/andrewsmithdotio:latest
-        - docker push andrewts129/andrewsmithdotio:latest
+script:
+  - docker build -t andrewsmithdotio .
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+  - docker tag andrewsmithdotio andrewts129/andrewsmithdotio:latest
+  - docker push andrewts129/andrewsmithdotio:latest
