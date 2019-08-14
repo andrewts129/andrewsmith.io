@@ -1,0 +1,16 @@
+language: scala
+branches:
+  only:
+    - master
+services:
+  - docker
+jobs:
+  include:
+    - stage: build
+      script:
+        - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+        - docker build -t andrewsmithdotio .
+    - stage: push
+      script:
+        - docker tag andrewsmithdotio andrewts129/andrewsmithdotio:latest
+        - docker push andrewts129/andrewsmithdotio:latest
