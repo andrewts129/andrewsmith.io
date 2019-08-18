@@ -6,7 +6,7 @@ function render(tileServerURL) {
         const map = new mapboxgl.Map({
             container: 'map',
             center: [-82.9988, 39.9612],
-            zoom: 12,
+            zoom: 13,
             minZoom: 11,
             maxZoom: 16,
             style: tileServerURL + "/styles/base/style.json",
