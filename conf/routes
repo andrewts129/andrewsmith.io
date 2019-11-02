@@ -10,6 +10,7 @@ GET      /whispering-pablo           controllers.PageController.whisperingPablo
 GET      /columbus-buildings         controllers.PageController.columbusBuildings
 GET      /resume                     controllers.PageController.resume
 GET      /AndrewSmithResume          controllers.FileController.resume(b: Option[String])
+GET      /bogosort/current           controllers.BogoController.currentArray
 
 GET      /robots.txt                 controllers.Assets.at(path="/public", file="robots.txt")
 
