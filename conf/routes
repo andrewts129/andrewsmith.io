@@ -8,10 +8,11 @@ GET      /projects                   controllers.PageController.projects
 GET      /one-hit-wonders            controllers.PageController.oneHitWonders
 GET      /whispering-pablo           controllers.PageController.whisperingPablo
 GET      /columbus-buildings         controllers.PageController.columbusBuildings
-GET      /resume                     controllers.PageController.resume
-GET      /AndrewSmithResume          controllers.FileController.resume(b: Option[String])
+GET      /bogosort                   controllers.PageController.bogosort
 GET      /bogosort/current           controllers.BogoController.currentArray
 GET      /bogosort/num-completions   controllers.BogoController.numCompletions
+GET      /resume                     controllers.PageController.resume
+GET      /AndrewSmithResume          controllers.FileController.resume(b: Option[String])
 
 GET      /robots.txt                 controllers.Assets.at(path="/public", file="robots.txt")
 
