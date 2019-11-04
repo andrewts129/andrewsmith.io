@@ -2,25 +2,31 @@ package utils
 
 import scala.util.Random
 
-object Bogosorter {
-  var array: Seq[Int] = Random.shuffle((1 to 10).toVector)
+import scala.concurrent.ExecutionContext
 
-  @scala.annotation.tailrec
-  def sort[T](a: Seq[T])(implicit ev: T => Ordered[T]): Seq[T] = {
-    println(a)
-    if (isSorted(a)) {
-      a
+object Bogosorter {
+  var array: Seq[Int] = initArray
+  var numCompletions: Int = 0
+
+  def bogoStep(): Unit = {
+    if (isSorted(array)) {
+      numCompletions += 1
+      array = initArray
     } else {
-      sort(randomSwap(a))
+      array = randomSwap(array)
     }
   }
 
-  def randomSwap[T](a: Seq[T]): Seq[T] = {
+  private def initArray: Seq[Int] = {
+    Random.shuffle((1 to 10).toVector)
+  }
+
+  private def randomSwap[T](a: Seq[T]): Seq[T] = {
     swap(a, Random.nextInt(a.size), Random.nextInt(a.size))
   }
 
   @scala.annotation.tailrec
-  def isSorted[T](a: Seq[T])(implicit ev: T => Ordered[T]): Boolean = {
+  private def isSorted[T](a: Seq[T])(implicit ev: T => Ordered[T]): Boolean = {
     if (a.size < 2) {
       true
     } else {
@@ -31,5 +37,4 @@ object Bogosorter {
   private def swap[T](a: Seq[T], i: Int, j: Int): Seq[T] = {
     a.updated(i, a(j)).updated(j, a(i))
   }
-
 }
