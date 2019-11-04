@@ -11,6 +11,7 @@ GET      /columbus-buildings         controllers.PageController.columbusBuilding
 GET      /resume                     controllers.PageController.resume
 GET      /AndrewSmithResume          controllers.FileController.resume(b: Option[String])
 GET      /bogosort/current           controllers.BogoController.currentArray
+GET      /bogosort/num-completions   controllers.BogoController.numCompletions
 
 GET      /robots.txt                 controllers.Assets.at(path="/public", file="robots.txt")
 
