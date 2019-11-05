@@ -20,7 +20,7 @@ window.onload = async function () {
         .domain([d3.min(array), d3.max(array)])
         .range([height, 0]);
 
-    const svg = d3.select("body")
+    const svg = d3.select("#bogo-container")
         .append("svg")
         .attr("width", width + margin.left + margin.right)
         .attr("height", height + margin.top + margin.bottom)
