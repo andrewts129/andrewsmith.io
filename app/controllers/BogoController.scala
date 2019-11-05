@@ -8,11 +8,11 @@ import utils.Bogosorter
 
 @Singleton
 class BogoController @Inject()(cc: ControllerComponents, ws: WSClient) extends AbstractController(cc) {
-  def currentArray: Action[AnyContent] = Action {
-    Ok(Json.toJson(Bogosorter.array))
-  }
-
-  def numCompletions: Action[AnyContent] = Action {
-    Ok(Json.toJson(Bogosorter.numCompletions))
+  def data: Action[AnyContent] = Action {
+    Ok(Json.obj(
+      "array" -> Bogosorter.array,
+      "numCompletions" -> Bogosorter.numCompletions,
+      "lastCompletion" -> "todo")
+    )
   }
 }

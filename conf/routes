@@ -9,8 +9,7 @@ GET      /one-hit-wonders            controllers.PageController.oneHitWonders
 GET      /whispering-pablo           controllers.PageController.whisperingPablo
 GET      /columbus-buildings         controllers.PageController.columbusBuildings
 GET      /bogosort                   controllers.PageController.bogosort
-GET      /bogosort/current           controllers.BogoController.currentArray
-GET      /bogosort/num-completions   controllers.BogoController.numCompletions
+GET      /bogosort/data              controllers.BogoController.data
 GET      /resume                     controllers.PageController.resume
 GET      /AndrewSmithResume          controllers.FileController.resume(b: Option[String])
 
