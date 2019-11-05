@@ -1,0 +1,17 @@
+@(prod: Boolean)
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Bogosort</title>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:200,300,400">
+        <link rel="icon" type="image/png" href="@routes.Assets.versioned("images/favicon.png")">
+    </head>
+    <body>
+    </body>
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+    <script type="text/javascript" src="@routes.Assets.versioned("js/Bogosort.js")"></script>
+    @if(prod) {
+        @common.googleAnalytics()
+    }
+</html>
