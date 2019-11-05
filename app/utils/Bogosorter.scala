@@ -22,7 +22,9 @@ object Bogosorter {
   }
 
   private def randomSwap[T](a: Seq[T]): Seq[T] = {
-    swap(a, Random.nextInt(a.size), Random.nextInt(a.size))
+    val i = Random.nextInt(a.size)
+    val j = Random.nextInt(a.size - 1)
+    swap(a, i, if (i <= j) j + 1 else j)
   }
 
   @scala.annotation.tailrec
