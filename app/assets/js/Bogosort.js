@@ -27,19 +27,28 @@ window.onload = async function () {
         .append("g")
         .attr("translate", "translate(" + margin.left + ", " + margin.top + ")");
 
-    const update = async () => {
+
+    const redraw = async () => {
         array = await fetchCurrentArray();
+        const t = svg.transition().duration(500);
 
         svg.selectAll("rect")
-            .data(array)
-            .join("rect")
-            .attr("fill", "steelblue")
-            .attr("x", (d, i) => x(i))
+            .data(array, (d) => d)
+            .join(
+                (enter) =>
+                    enter.append("rect")
+                        .attr("fill", "steelblue")
+                        .attr("x", (d, i) => x(i))
+                ,
+                (update) => update.call(update => update.transition(t)
+                    .attr("x", (d, i) => x(i))
+                )
+            )
             .attr("y", (d) => y(d))
             .attr("width", x.bandwidth())
             .attr("height", (d) => y(0) - y(d));
     };
 
-    await update();
-    setInterval(update, 1000);
+    await redraw();
+    setInterval(redraw, 1000);
 };
