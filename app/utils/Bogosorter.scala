@@ -18,7 +18,7 @@ object Bogosorter {
   }
 
   private def initArray: Seq[Int] = {
-    Random.shuffle((1 to 15).toVector)
+    Random.shuffle((1 to 10).toVector)
   }
 
   private def randomSwap[T](a: Seq[T]): Seq[T] = {
