@@ -27,17 +27,19 @@ window.onload = async function () {
         .append("g")
         .attr("translate", "translate(" + margin.left + ", " + margin.top + ")");
 
-    svg.append("g")
-        .attr("fill", "steelblue")
-        .selectAll("rect")
-        .data(array)
-        .join("rect")
-        .attr("x", (d, i) => x(i))
-        .attr("y", (d) => y(d))
-        .attr("width", x.bandwidth())
-        .attr("height", (d) => y(0) - y(d));
-
-    setInterval(async function () {
+    const update = async () => {
         array = await fetchCurrentArray();
-    }, 1000);
+
+        svg.selectAll("rect")
+            .data(array)
+            .join("rect")
+            .attr("fill", "steelblue")
+            .attr("x", (d, i) => x(i))
+            .attr("y", (d) => y(d))
+            .attr("width", x.bandwidth())
+            .attr("height", (d) => y(0) - y(d));
+    };
+
+    await update();
+    setInterval(update, 1000);
 };
