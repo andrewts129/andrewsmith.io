@@ -1,16 +1,16 @@
 package utils
 
-import scala.util.Random
+import models.BogoStats
 
+import scala.util.Random
 import scala.concurrent.ExecutionContext
 
 object Bogosorter {
   var array: Seq[Int] = initArray
-  var numCompletions: Int = 0
 
   def bogoStep(): Unit = {
     if (isSorted(array)) {
-      numCompletions += 1
+      BogoStats.NumCompletions += 1
       array = initArray
     } else {
       array = randomSwap(array)
@@ -18,7 +18,7 @@ object Bogosorter {
   }
 
   private def initArray: Seq[Int] = {
-    Random.shuffle((1 to 10).toVector)
+    Random.shuffle((1 to 3).toVector)
   }
 
   private def randomSwap[T](a: Seq[T]): Seq[T] = {
