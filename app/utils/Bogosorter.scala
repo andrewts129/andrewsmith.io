@@ -9,8 +9,10 @@ import scala.concurrent.ExecutionContext
 object Bogosorter {
   var array: Seq[Int] = initArray
 
-  private val stats = swaydb.memory.Map[String, Int, Nothing, IO.ApiIO]().get
-  stats.put("numCompletions", 0).get
+  private val stats = swaydb.persistent.zero.Map[String, Int, Nothing, IO.ApiIO](dir = ".swaydb/bogostats").get
+  if (!stats.contains("numCompletions").get) {
+    stats.put("numCompletions", 0)
+  }
 
   def bogoStep(): Unit = {
     if (isSorted(array)) {
