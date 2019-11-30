@@ -12,7 +12,7 @@ object BogoStats {
     }
 
     def add(x: Int): Unit = {
-      stats.put("numCompletions", NumCompletions.get + 1)
+      stats.put("numCompletions", NumCompletions.get + x)
     }
   }
 }
