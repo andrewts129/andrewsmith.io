@@ -1,30 +1,20 @@
 package utils
 
-import scala.util.Random
-import swaydb._
-import swaydb.serializers.Default._
+import db.BogoStats
 
+import scala.util.Random
 import scala.concurrent.ExecutionContext
 
-object Bogosorter {
+object BogoSorter {
   var array: Seq[Int] = initArray
-
-  private val stats = swaydb.persistent.zero.Map[String, Int, Nothing, IO.ApiIO](dir = ".swaydb/bogostats").get
-  if (!stats.contains("numCompletions").get) {
-    stats.put("numCompletions", 0)
-  }
 
   def bogoStep(): Unit = {
     if (isSorted(array)) {
-      stats.put("numCompletions", stats.get("numCompletions").get.get + 1)
+      BogoStats.NumCompletions.add(1)
       array = initArray
     } else {
       array = randomSwap(array)
     }
-  }
-
-  def getNumCompletions: Int = {
-    stats.get("numCompletions").get.get
   }
 
   private def initArray: Seq[Int] = {
