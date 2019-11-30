@@ -12,7 +12,7 @@ class BogoController @Inject()(cc: ControllerComponents, ws: WSClient) extends A
     Ok(Json.obj(
       "array" -> Bogosorter.array,
       "numCompletions" -> Bogosorter.numCompletions,
-      "lastCompletion" -> "todo")
+      )
     )
   }
 }
