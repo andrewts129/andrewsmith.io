@@ -11,8 +11,7 @@ class BogoController @Inject()(cc: ControllerComponents, ws: WSClient) extends A
   def data: Action[AnyContent] = Action {
     Ok(Json.obj(
       "array" -> Bogosorter.array,
-      "numCompletions" -> Bogosorter.numCompletions,
-      )
+      "numCompletions" -> Bogosorter.getNumCompletions)
     )
   }
 }
