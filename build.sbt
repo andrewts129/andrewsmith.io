@@ -11,7 +11,6 @@ scalaVersion := "2.12.8"
 libraryDependencies ++= Seq(
     guice,
     ws,
-    "org.scalaj" %% "scalaj-http" % "2.4.1",
     "com.amazonaws" % "aws-java-sdk-s3" % "1.11.592",
     "io.swaydb" %% "swaydb" % "0.10.9"
 )
