@@ -38,3 +38,5 @@ deploy.sh
 logs/
 svc/
 scripts/
+.swaydb
+swaydb-stress-test.log
