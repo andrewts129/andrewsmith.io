@@ -37,5 +37,5 @@ class PageController @Inject()(cc: ControllerComponents, ws: WSClient, env: Envi
     }
 
     private def prod: Boolean = env.mode == Prod
-    private def tileServerUrl: String = sys.env.getOrElse("TILE_SERVER_URL", "https://columbus-building-tileserver.herokuapp.com")
+    private def tileServerUrl: String = sys.env.getOrElse("TILE_SERVER_URL", "http://andrewsmith.io:81")
 }
