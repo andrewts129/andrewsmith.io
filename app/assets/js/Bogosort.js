@@ -65,8 +65,8 @@ window.onload = async function () {
 
         if (diff.getFullYear() === 1) {
             result = "1 year, " + result
-        } else if (diff.getMonth() > 1) {
-            result = "" + diff.getMonth() + " years, " + result
+        } else if (diff.getFullYear() > 1) {
+            result = "" + diff.getFullYear() + " years, " + result
         }
 
         return result
