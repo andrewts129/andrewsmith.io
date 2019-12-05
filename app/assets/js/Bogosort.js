@@ -31,42 +31,50 @@ window.onload = async function () {
 
     const getDurationString = (start, end) => {
         const diff = new Date(end - start);
+
+        let seconds = diff.getSeconds();
+        let minutes = diff.getMinutes();
+        let hours = diff.getHours();
+        let days = diff.getDate();
+        let months = diff.getMonth();
+        let years = diff.getFullYear() - 1970;
+
         let result = "";
 
-        if (diff.getSeconds() === 1) {
+        if (seconds === 1) {
             result = "1 second"
         } else {
-            result = "" + diff.getSeconds() + " seconds"
+            result = "" + seconds + " seconds"
         }
 
-        if (diff.getMinutes() === 1) {
+        if (minutes === 1) {
             result = "1 minute and " + result
-        } else if (diff.getMinutes() > 1) {
-            result = "" + diff.getMinutes() + " minutes and " + result
+        } else if (minutes > 1) {
+            result = "" + minutes + " minutes and " + result
         }
 
-        if (diff.getHours() === 1) {
+        if (hours === 1) {
             result = "1 hour, " + result
-        } else if (diff.getHours() > 1) {
-            result = "" + diff.getHours() + " hours, " + result
+        } else if (hours > 1) {
+            result = "" + hours + " hours, " + result
         }
 
-        if (diff.getDate() === 1) {
+        if (days === 1) {
             result = "1 day, " + result
-        } else if (diff.getDate() > 1) {
-            result = "" + diff.getDate() + " days, " + result
+        } else if (days > 1) {
+            result = "" + days + " days, " + result
         }
 
-        if (diff.getMonth() === 1) {
+        if (months === 1) {
             result = "1 month, " + result
-        } else if (diff.getMonth() > 1) {
-            result = "" + diff.getMonth() + " months, " + result
+        } else if (months > 1) {
+            result = "" + months + " months, " + result
         }
 
-        if (diff.getFullYear() === 1) {
+        if (years === 1) {
             result = "1 year, " + result
-        } else if (diff.getFullYear() > 1) {
-            result = "" + diff.getFullYear() + " years, " + result
+        } else if (years > 1) {
+            result = "" + years + " years, " + result
         }
 
         return result
