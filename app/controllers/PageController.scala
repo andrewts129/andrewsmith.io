@@ -36,6 +36,10 @@ class PageController @Inject()(cc: ControllerComponents, ws: WSClient, env: Envi
         Ok(views.html.bogosort(prod))
     }
 
+    def homepage: Action[AnyContent] = Action {
+        Ok(views.html.home(prod))
+    }
+
     private def prod: Boolean = env.mode == Prod
     private def tileServerUrl: String = sys.env.getOrElse("TILE_SERVER_URL", "http://andrewsmith.io:81")
 }

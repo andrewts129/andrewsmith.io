@@ -1,0 +1,12 @@
+@import "index-style";
+
+button, input {
+  font-family: $text-font;
+  font-weight: $text-weight;
+  font-size: 1.2rem;
+  color: $text-color-medium;
+}
+
+input {
+  margin-left: 0.5rem;
+}
