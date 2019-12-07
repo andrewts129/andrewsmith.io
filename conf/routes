@@ -12,6 +12,7 @@ GET      /bogosort                   controllers.PageController.bogosort
 GET      /bogosort/data              controllers.BogoController.data
 GET      /resume                     controllers.PageController.resume
 GET      /AndrewSmithResume          controllers.FileController.resume(b: Option[String])
+GET      /home                       controllers.PageController.homepage
 
 GET      /robots.txt                 controllers.Assets.at(path="/public", file="robots.txt")
 
