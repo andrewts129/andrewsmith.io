@@ -3,3 +3,5 @@ logs/
 .idea/
 scripts/
 .env
+.github/
+.swaydb/
