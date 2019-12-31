@@ -5,3 +5,5 @@ scripts/
 .env
 .github/
 .swaydb/
+README.md
+*.log
