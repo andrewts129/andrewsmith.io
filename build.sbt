@@ -11,8 +11,8 @@ scalaVersion := "2.12.8"
 libraryDependencies ++= Seq(
     guice,
     ws,
-    "com.amazonaws" % "aws-java-sdk-s3" % "1.11.592",
-    "io.swaydb" %% "swaydb" % "0.10.9"
+    "com.amazonaws" % "aws-java-sdk-s3" % "1.11.699",
+    "io.swaydb" %% "swaydb" % "0.11"
 )
 
 pipelineStages in Assets:= Seq()
