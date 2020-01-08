@@ -8,7 +8,7 @@ import play.api.mvc.{AbstractController, Action, AnyContent, ControllerComponent
 @Singleton
 class MessageQueueController @Inject()(cc: ControllerComponents, ws: WSClient) extends AbstractController(cc) {
   def add: Action[AnyContent] = Action { request =>
-    val body = request.body.asText.get
+    val body = request.body.asFormUrlEncoded.get("message").head  // TODO fix this
     MessageQueue.add(body)
     Created(body)
   }

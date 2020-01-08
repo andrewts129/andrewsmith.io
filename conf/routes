@@ -14,7 +14,10 @@ GET      /resume                     controllers.PageController.resume
 GET      /AndrewSmithResume          controllers.FileController.resume(b: Option[String])
 GET      /home                       controllers.PageController.homepage
 
+
++nocsrf
 POST     /messages/add               controllers.MessageQueueController.add
+GET      /messages/add               controllers.PageController.messages
 POST     /messages/pop               controllers.MessageQueueController.pop
 
 GET      /robots.txt                 controllers.Assets.at(path="/public", file="robots.txt")
