@@ -8,10 +8,10 @@
         <link rel="icon" type="image/png" href="@routes.Assets.versioned("images/favicon.png")">
     </head>
     <body>
-        <form method="post">
+        <form name="messageForm" method="post">
             <label for="message">Message: </label>
             <input name="Body" id="message">
-            <button type="submit">Submit</button>
+            <button type="reset" onclick="document.forms['messageForm'].submit();">Submit</button>
         </form>
     </body>
     @if(prod) {
