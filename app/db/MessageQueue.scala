@@ -1,47 +1,40 @@
 package db
 
-import swaydb._
-import swaydb.serializers.Default._
+import java.time.Instant
+
+import io.getquill.{SnakeCase, SqliteJdbcContext}
 
 object MessageQueue {
-  private val messages = swaydb.persistent.Map[Int, String, Nothing, IO.ApiIO](dir = s"$swayDbFolder/messages").get
+  lazy val ctx = new SqliteJdbcContext(SnakeCase, "ctx")
+  private case class Message(id: Int, text: String, author: String, created: Long)
 
-  def add(text: String): Unit = {
-    val id = getLastId match {
-      case Some(value) => value + 1
-      case None => 0
+  def add(text: String, author: String, created: Instant): Unit = {
+    import ctx._
+
+    val q = quote {
+      query[Message].insert(_.text -> lift(text), _.author -> lift(author), _.created -> lift(created.getEpochSecond))
     }
 
-    messages.put(id, text)
+    ctx.run(q)
   }
 
-  def pop(): Option[String] = {
-    getHead match {
-      case Some(pair) =>
-        deleteHead()
-        Some(pair._2)
-      case None => None
+  def pop(): Option[(String, String, Instant)] = {
+    import ctx._
+
+    val select = quote {
+      infix"""SELECT * FROM message WHERE id = (SELECT MIN(id) FROM message)""".as[Query[Message]]
     }
-  }
 
-  private def getHead: Option[(Int, String)] = {
-    messages.headOption.toOption match {
-      case Some(pair) => pair
-      case None => None
+    val delete = quote {
+      infix"""DELETE FROM message WHERE id = (SELECT MIN(id) FROM message)""".as[Delete[Message]]
     }
-  }
 
-  private def getLastId: Option[Int] = {
-    messages.lastOption.toOption match {
-      case Some(Some(pair)) => Some(pair._1)
-      case _ => None
-    }
-  }
+    val rows = ctx.run(select)
+    ctx.run(delete)
 
-  private def deleteHead(): Unit = {
-    getHead match {
-      case Some(pair) => messages.remove(pair._1)
-      case None =>
+    rows match {
+      case Nil => None
+      case _ => Some((rows.head.text, rows.head.author, Instant.ofEpochSecond(rows.head.created)))
     }
   }
 }

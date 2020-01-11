@@ -4,6 +4,7 @@ import swaydb._
 import swaydb.serializers.Default._
 
 object BogoStats {
+  private val swayDbFolder: String = sys.env.getOrElse("SWAYDB_DIR", ".db/swaydb")
   private val stats = swaydb.persistent.Map[String, Int, Nothing, IO.ApiIO](dir = s"$swayDbFolder/bogostats").get
 
   object NumCompletions {
