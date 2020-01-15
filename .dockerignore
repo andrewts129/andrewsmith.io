@@ -4,6 +4,8 @@ logs/
 scripts/
 .env
 .github/
-.swaydb/
+.db/
 README.md
 *.log
+.gitignore
+.git/
