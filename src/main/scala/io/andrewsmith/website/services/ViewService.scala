@@ -13,7 +13,6 @@ object ViewService {
     case GET -> Root / "columbus-buildings" => Ok(ColumbusBuildings.page)
     case GET -> Root / "home" => Ok(Home.page)
     case GET -> Root / "messages" => Ok(Messages.page)
-    case GET -> Root / "one-hit-wonders" => Ok(OneHitWonders.page)
     case GET -> Root / "projects" => Ok(Projects.page)
     case GET -> Root / "resume" => Ok(Resume.page)
     case GET -> Root / "whispering-pablo" => Ok(WhisperingPablo.page)
