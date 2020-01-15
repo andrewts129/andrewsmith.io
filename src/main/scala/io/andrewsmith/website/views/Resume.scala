@@ -7,17 +7,17 @@ import scalatags.Text.implicits._
 import scalatags.Text.tags._
 import scalatags.Text.tags2.title
 
-// TODO implement
+// TODO
 object Resume {
   val page: TypedTag[String] = html(
     head(
       meta(charset := "UTF-8"),
-      title("TODO"),
+      title("Resume"),
       link(rel := "icon", `type` := "image/png", href := "/assets/images/favicon.png")
     ),
+    GoogleAnalytics.scriptTag,
     body(
-      h1("TODO")
-    ),
-    GoogleAnalytics.scriptTag
+      a(href := "/AndrewSmithResume.pdf", "Please click here if your browser does not redirect you")
+    )
   )
 }
