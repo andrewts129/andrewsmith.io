@@ -1,13 +1,16 @@
 package io.andrewsmith.website.views
 
-import scalatags.Text
-import scalatags.Text.all._
+import scalatags.Text.TypedTag
+import scalatags.Text.attrs._
+import scalatags.Text.implicits._
+import scalatags.Text.tags._
+import scalatags.Text.tags2.title
 
 // TODO implement
 object Home {
-  val page: Text.TypedTag[String] = html(
+  val page: TypedTag[String] = html(
     head(
-      title := "TODO",
+      title("TODO"),
       link(rel := "icon", `type` := "image/png", href := "/assets/images/favicon.png")
     ),
     body(
