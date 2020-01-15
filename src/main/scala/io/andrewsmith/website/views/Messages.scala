@@ -7,16 +7,21 @@ import scalatags.Text.implicits._
 import scalatags.Text.tags._
 import scalatags.Text.tags2.title
 
-// TODO implement
+// TODO
 object Messages {
   val page: TypedTag[String] = html(
     head(
       meta(charset := "UTF-8"),
-      title("TODO"),
+      title("Add Message"),
       link(rel := "icon", `type` := "image/png", href := "/assets/images/favicon.png")
     ),
     body(
-      h1("TODO")
+      form(name := "messageForm", method := "post",
+        label(`for` := "message", "Message: "),
+        input(name := "Body", id := "message"),
+        input(`type` := "hidden", name := "From", id := "Web Client"),
+        button(`type` := "reset", onclick := "document.forms['messageForm'].submit();", "Submit")
+      )
     ),
     GoogleAnalytics.scriptTag
   )
