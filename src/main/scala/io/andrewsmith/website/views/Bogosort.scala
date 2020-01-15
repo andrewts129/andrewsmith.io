@@ -23,7 +23,7 @@ object Bogosort {
         " and has sorted the array ",
         span(id := "num-completions"), ".")
     ),
-    script(`type` := "text/javascript", src := "https://d3js.org/d3.v5.min.js"),
+    script(src := "https://d3js.org/d3.v5.min.js"),
     GoogleAnalytics.scriptTag
   )
 }

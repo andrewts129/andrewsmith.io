@@ -65,7 +65,7 @@ object ColumbusBuildings {
         )
       )
     ),
-    script(`type` := "text/javascript", src := "https://api.mapbox.com/mapbox-gl-js/v1.5.0/mapbox-gl.js"),
+    script(src := "https://api.mapbox.com/mapbox-gl-js/v1.5.0/mapbox-gl.js"),
     GoogleAnalytics.scriptTag
   )
 }
