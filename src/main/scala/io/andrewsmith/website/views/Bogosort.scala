@@ -10,6 +10,7 @@ import scalatags.Text.tags2.title
 object Bogosort {
   val page: TypedTag[String] = html(
     head(
+      meta(charset := "UTF-8"),
       title("Bogosort"),
       link(rel := "icon", `type` := "image/png", href := "/assets/images/favicon.png")
     ),

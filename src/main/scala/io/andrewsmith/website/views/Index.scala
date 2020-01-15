@@ -10,6 +10,7 @@ import scalatags.Text.tags2.{title, section, nav}
 object Index {
   val page: TypedTag[String] = html(
     head(
+      meta(charset := "UTF-8"),
       title("Andrew Smith"),
       link(rel := "icon", `type` := "image/png", href := "/assets/images/favicon.png")
     ),
