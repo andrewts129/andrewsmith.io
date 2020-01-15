@@ -3,6 +3,7 @@ package io.andrewsmith.website.views
 import scalatags.Text
 import scalatags.Text.all._
 
+// TODO add css
 object Index {
   val page: Text.TypedTag[String] = html(
     head(

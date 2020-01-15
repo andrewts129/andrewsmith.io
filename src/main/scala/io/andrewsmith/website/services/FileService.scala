@@ -7,6 +7,6 @@ import org.http4s.dsl.io._
 object FileService {
   val routes: HttpRoutes[IO] = HttpRoutes.of[IO] {
     case GET -> Root / "robots.txt" => Ok("User-agent: *\nAllow: /")
-    case GET -> Root / "AndrewSmithResume.pdf" => Ok("TODO resume")
+    case GET -> Root / "AndrewSmithResume.pdf" => Ok("resume goes here") // TODO
   }
 }
