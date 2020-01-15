@@ -1,10 +1,11 @@
 package io.andrewsmith.website.views
 
+import io.andrewsmith.website.views.common.GoogleAnalytics
 import scalatags.Text.TypedTag
 import scalatags.Text.attrs._
 import scalatags.Text.implicits._
 import scalatags.Text.tags._
-import scalatags.Text.tags2.{title, section, nav}
+import scalatags.Text.tags2.{nav, section, title}
 
 // TODO add css
 object Index {
@@ -26,6 +27,7 @@ object Index {
           li(a("Contact", href := "mailto:andrewts129@gmail.com"))
         )
       )
-    )
+    ),
+    GoogleAnalytics.scriptTag
   )
 }

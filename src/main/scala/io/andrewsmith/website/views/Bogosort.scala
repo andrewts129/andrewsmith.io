@@ -1,5 +1,6 @@
 package io.andrewsmith.website.views
 
+import io.andrewsmith.website.views.common.GoogleAnalytics
 import scalatags.Text.TypedTag
 import scalatags.Text.attrs._
 import scalatags.Text.implicits._
@@ -22,6 +23,7 @@ object Bogosort {
         " and has sorted the array ",
         span(id := "num-completions"), ".")
     ),
-    script(`type` := "text/javascript", src := "https://d3js.org/d3.v5.min.js")
+    script(`type` := "text/javascript", src := "https://d3js.org/d3.v5.min.js"),
+    GoogleAnalytics.scriptTag
   )
 }
