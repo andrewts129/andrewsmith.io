@@ -1,7 +1,7 @@
 package io.andrewsmith.website.db
 
-import doobie.implicits._
 import cats.effect.IO
+import doobie.implicits._
 
 case class Message(id: Int, text: String, author: String, created: Long)
 

@@ -1,7 +1,7 @@
 package io.andrewsmith.website.db
 
-import doobie.implicits._
 import cats.effect.IO
+import doobie.implicits._
 
 case class BogoStats(key: String, value: Int)
 
