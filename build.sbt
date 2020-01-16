@@ -14,7 +14,9 @@ lazy val root = (project in file("."))
       "org.http4s" %% "http4s-scalatags" % http4sVersion,
       "io.circe" %% "circe-generic" % "0.12.3",
       "ch.qos.logback" % "logback-classic" % "1.2.3",
-      "com.lihaoyi" %% "scalatags" % "0.8.3"
+      "com.lihaoyi" %% "scalatags" % "0.8.3",
+      "org.tpolecat" %% "doobie-core" % "0.8.8",
+      "org.xerial" % "sqlite-jdbc" % "3.28.0"
     ),
     scalacOptions ++= Seq("-Ypartial-unification")
   )
