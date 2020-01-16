@@ -15,9 +15,9 @@ object Message {
     sql.transact(transactor)
   }
 
-  def pop(): IO[Message] = {
+  def pop(): IO[Option[Message]] = {
     val sql = for {
-      select <- sql"SELECT id, text, author, created FROM Message WHERE id = (SELECT MIN(id) FROM Message);".query[Message].unique
+      select <- sql"SELECT id, text, author, created FROM Message WHERE id = (SELECT MIN(id) FROM Message);".query[Message].option
       _ <- sql"DELETE FROM Message WHERE id = (SELECT MIN(id) FROM Message);".update.run
     } yield select
 

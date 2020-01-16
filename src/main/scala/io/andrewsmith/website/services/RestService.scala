@@ -11,14 +11,18 @@ import org.http4s.dsl.io._
 object RestService {
   case class BogosortState(array: Seq[Int], numCompletions: Int)
 
-  // TODO add failure logic in flatMaps
   val routes: HttpRoutes[IO] = HttpRoutes.of[IO] {
     case GET -> Root / "bogosort" / "data" =>
       val array = Seq(1, 2, 3)
-      BogoStats.numCompletions.flatMap(n => Ok(BogosortState(array, n).asJson))
+      BogoStats.numCompletions.flatMap(n =>
+        Ok(BogosortState(array, n).asJson)
+      )
     case POST -> Root / "messages" / "add" =>
       Message.add("text", "author").flatMap(m => Ok(m.asJson)) // TODO get request body
     case POST -> Root / "messages" / "pop" =>
-      Message.pop().flatMap(m => Ok(m.asJson))
+      Message.pop().flatMap {
+        case Some(message) => Ok(message.asJson)
+        case None => NoContent()
+      }
   }
 }
