@@ -8,7 +8,7 @@ import org.http4s.server.staticcontent.resourceService
 import scala.concurrent.ExecutionContext
 
 object ResourceService {
-  private implicit val cs: ContextShift[IO] = IO.contextShift(ExecutionContext.global) // TODO wtf is this?
+  private implicit val cs: ContextShift[IO] = IO.contextShift(ExecutionContext.global)
 
   val routes: HttpRoutes[IO] = resourceService[IO](Config("/public", ExecutionContext.global))
 }

@@ -7,6 +7,7 @@ case class Message(id: Int, text: String, author: String, created: Long)
 
 object Message {
   def add(text: String, author: String): IO[Message] = {
+    // TODO make created automatic
     val sql = for {
       _ <- sql"INSERT INTO Message (text, author, created) VALUES ($text, $author, -1);".update.run
       select <- sql"SELECT id, text, author, created FROM Message WHERE id = last_insert_rowid();".query[Message].unique

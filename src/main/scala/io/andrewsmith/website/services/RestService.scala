@@ -13,7 +13,7 @@ object RestService {
 
   val routes: HttpRoutes[IO] = HttpRoutes.of[IO] {
     case GET -> Root / "bogosort" / "data" =>
-      val array = Seq(1, 2, 3)
+      val array = Seq(1, 2, 3) // TODO
       BogoStats.numCompletions.flatMap(n =>
         Ok(BogosortState(array, n).asJson)
       )
