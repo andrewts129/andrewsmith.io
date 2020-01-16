@@ -16,7 +16,7 @@ object Messages {
       link(rel := "icon", `type` := "image/png", href := "/assets/images/favicon.png")
     ),
     body(
-      form(name := "messageForm", method := "post",
+      form(name := "messageForm", method := "post", action := "/api/messages/add",
         label(`for` := "message", "Message: "),
         input(name := "Body", id := "message"),
         input(`type` := "hidden", name := "From", id := "Web Client"),
