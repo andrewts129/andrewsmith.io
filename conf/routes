@@ -4,7 +4,7 @@
 # ~~~~
 
 GET      /                           controllers.PageController.index
-GET      /projects                   controllers.PageController.projects
+GET      /links                      controllers.PageController.links
 GET      /one-hit-wonders            controllers.PageController.oneHitWonders
 GET      /whispering-pablo           controllers.PageController.whisperingPablo
 GET      /columbus-buildings         controllers.PageController.columbusBuildings

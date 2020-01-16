@@ -16,8 +16,8 @@ class PageController @Inject()(cc: ControllerComponents, ws: WSClient, env: Envi
         Ok(views.html.oneHitWonders(prod))
     }
 
-    def projects: Action[AnyContent] = Action {
-        Ok(views.html.projects(prod))
+    def links: Action[AnyContent] = Action {
+        Ok(views.html.links(prod))
     }
 
     def resume: Action[AnyContent] = Action {

@@ -1,0 +1,74 @@
+@(prod: Boolean)
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Links</title>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300">
+        <link rel="icon" type="image/png" href="@routes.Assets.versioned("images/favicon.png")">
+        <link rel="stylesheet" href="@routes.Assets.versioned("css/projects-style.css")"/>
+    </head>
+    <body>
+        <div id="tall-page-container">
+            <div id="main-content">
+                <h1 id="title">Links</h1>
+                <hr class="horz-line">
+                <ul class="vert-list">
+                    <li>
+                        <section>
+                            <h2>Bogosort</h2>
+                            <ul>
+                                <li>This server is constantly attempting to sort an array of <var>n</var> = 10 using the famous sorting algorithm <a href="https://en.wikipedia.org/wiki/Bogosort">Bogosort</a>. It's not going well.</li>
+                                <li><a href=@routes.PageController.bogosort>Link</a></li>
+                                <li><a href="https://github.com/andrewts129/andrew-smith-dot-io">Source Code</a></li>
+                            </ul>
+                        </section>
+                    </li>
+                    <li>
+                        <section>
+                            <h2>Columbus Building Age Map</h2>
+                            <ul>
+                                <li>A map displaying the year of construction for (almost) every building in Franklin County, Ohio.</li>
+                                <li><a href="@routes.PageController.columbusBuildings">Link</a></li>
+                                <li><a href="https://github.com/andrewts129/columbus-buildings">Source Code</a></li>
+                            </ul>
+                        </section>
+                    </li>
+                    <li>
+                        <section>
+                            <h2>@@DonaldTrumBot</h2>
+                            <ul>
+                                <li>A Twitter bot written in Python that uses Markov chains to create (mostly-nonsensical) tweets resembling those of Donald Trump.</li>
+                                <li><a href="https://twitter.com/DonaldTrumBot">Link</a></li>
+                                <li><a href="https://github.com/andrewts129/donald-trump-bot">Source Code</a></li>
+                            </ul>
+                        </section>
+                    </li>
+                    <li>
+                        <section>
+                            <h2>Whispering Pablo</h2>
+                            <ul>
+                                <li><q>"Shitty Yik-Yak 2.0"</q> - Matt Cohen</li>
+                                <li><a href=@routes.PageController.whisperingPablo>Link</a></li>
+                                <li><a href="https://github.com/andrewts129/whispering-pablo">Source Code</a></li>
+                            </ul>
+                        </section>
+                    </li>
+                    <li>
+                        <section>
+                            <h2>Yell at me</h2>
+                            <ul>
+                                <li>Submit something through this form and the Raspberry Pi in my apartment will loudly speak it in a Scottish accent! (WIP, there may be a delay)</li>
+                                <li><a href=@routes.PageController.messages>Link</a></li>
+                            </ul>
+                        </section>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </body>
+    @if(prod) {
+        <script src="@routes.Assets.versioned("js/WakePablo.js")"></script>
+        @common.googleAnalytics()
+    }
+</html>
