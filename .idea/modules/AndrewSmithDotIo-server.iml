@@ -9,7 +9,11 @@
       <sourceFolder url="file://$MODULE_DIR$/../../server/src/main/scala" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/../../server/src/main/public" type="java-resource" />
       <sourceFolder url="file://$MODULE_DIR$/../../server/src/main/resources" type="java-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/../../server/target/web/sass/main" type="java-resource" />
       <excludeFolder url="file://$MODULE_DIR$/../../server/target" />
+      <excludeFolder url="file://$MODULE_DIR$/../../server/target/h4w" />
+      <excludeFolder url="file://$MODULE_DIR$/../../server/target/scala-2.12" />
+      <excludeFolder url="file://$MODULE_DIR$/../../server/target/streams" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

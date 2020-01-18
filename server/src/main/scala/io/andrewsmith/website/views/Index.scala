@@ -17,15 +17,18 @@ object Index {
       link(rel := "stylesheet", href := "/assets/css/index.css")
     ),
     body(
-      section(
-        h1("Andrew Smith"),
-        p("Computer Science & Engineering, The Ohio State University"),
-      ),
-      nav(
-        ul(
-          li(a("Projects", href := "/projects")),
-          li(a("GitHub", href := "https://github.com/andrewts129")),
-          li(a("Contact", href := "mailto:andrewts129@gmail.com"))
+      canvas(id := "animationCanvas"),
+      div(
+        section(
+          h1("Andrew Smith"),
+          p("Computer Science & Engineering, The Ohio State University"),
+        ),
+        nav(
+          ul(
+            li(a("Projects", href := "/projects")),
+            li(a("GitHub", href := "https://github.com/andrewts129")),
+            li(a("Contact", href := "mailto:andrewts129@gmail.com"))
+          )
         )
       )
     ),
