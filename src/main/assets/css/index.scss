@@ -1,0 +1,49 @@
+@import "root";
+
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+}
+
+h1 {
+  font-weight: 300;
+  font-size: 3.6rem;
+  margin-bottom: 35px;
+}
+
+h1 + p {
+  font-weight: 300;
+  font-size: 1.8rem;
+  margin-bottom: 35px;
+}
+
+nav ul {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+  min-width: 18rem;
+  font-size: 1.8rem;
+
+  list-style-type: none;
+
+  li {
+    flex-direction: row;
+
+    margin-left: 0.2rem;
+    margin-right: 0.2rem;
+
+    padding-left: 1rem;
+    &:not(:last-child) {
+      padding-right: 1rem;
+      border-right: 2px solid black;
+    }
+
+    a {
+      text-decoration: none;
+    }
+  }
+}

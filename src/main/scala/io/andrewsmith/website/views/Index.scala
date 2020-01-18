@@ -13,7 +13,8 @@ object Index {
     head(
       meta(charset := "UTF-8"),
       title("Andrew Smith"),
-      link(rel := "icon", `type` := "image/png", href := "/assets/images/favicon.png")
+      link(rel := "icon", `type` := "image/png", href := "/assets/images/favicon.png"),
+      link(rel := "stylesheet", href := "/assets/css/index.css")
     ),
     body(
       section(
