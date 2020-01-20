@@ -62,7 +62,13 @@ nav {
       }
 
       a {
+        color: $text-color;
+        font-weight: 300;
         text-decoration: none;
+
+        &:visited {
+          color: $text-color;
+        }
       }
     }
   }
