@@ -38,8 +38,8 @@ object Links {
                   `var`("n"), " = 10 using the famous sorting algorithm ",
                   a(href := "https://en.wikipedia.org/wiki/Bogosort", "Bogosort"),
                   ". It's not going well."),
-                li(a(href := "/columbus-buildings", "Link")),
-                li(a(href := "https://github.com/andrewts129/columbus-buildings", "Source Code"))
+                li(a(href := "/bogosort", "Link")),
+                li(a(href := "https://github.com/andrewts129/andrew-smith-dot-io", "Source Code"))
               )
             ),
           ),
