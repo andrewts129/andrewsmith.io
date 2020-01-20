@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Roboto:300,400&display=swap');
 
 $text-color: #111111;
 $accent-color: #bb0000;
@@ -6,4 +6,5 @@ $accent-color: #bb0000;
 html {
   color: $text-color;
   font-family: "Roboto", "sans-serif";
+  font-weight: 300;
 }
