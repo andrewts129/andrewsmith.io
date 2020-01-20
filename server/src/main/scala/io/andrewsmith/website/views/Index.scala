@@ -25,7 +25,7 @@ object Index {
         ),
         nav(
           ul(
-            li(a("Projects", href := "/projects")),
+            li(a("Links", href := "/links")),
             li(a("GitHub", href := "https://github.com/andrewts129")),
             li(a("Contact", href := "mailto:andrewts129@gmail.com"))
           )
