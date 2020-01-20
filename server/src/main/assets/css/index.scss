@@ -28,7 +28,7 @@ h1 {
 h1 + p {
   font-weight: 300;
   font-size: 1.8rem;
-  margin-bottom: 35px;
+  margin-bottom: 10px;
 }
 
 nav {
@@ -58,7 +58,7 @@ nav {
 
       &:not(:last-child) {
         padding-right: 1rem;
-        border-right: 2px solid black;
+        border-right: 2px solid $accent-color;
       }
 
       a {
