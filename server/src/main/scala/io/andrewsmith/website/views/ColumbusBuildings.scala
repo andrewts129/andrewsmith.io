@@ -14,7 +14,8 @@ object ColumbusBuildings {
       meta(charset := "UTF-8"),
       title("The Age of Columbus Buildings"),
       link(rel := "icon", `type` := "image/png", href := "/assets/images/favicon.png"),
-      link(rel := "stylesheet", href := "https://api.mapbox.com/mapbox-gl-js/v1.5.0/mapbox-gl.css")
+      link(rel := "stylesheet", href := "https://api.mapbox.com/mapbox-gl-js/v1.5.0/mapbox-gl.css"),
+      link(rel := "stylesheet", href := "/assets/css/columbusBuildings.css")
     ),
     body(
       div(id := "title-card",
@@ -43,7 +44,7 @@ object ColumbusBuildings {
             p(
               "Source: ",
               a(href := "https://www.franklincountyauditor.com/", "Franklin Country Auditor"),
-              "and ",
+              " and ",
               a(href := "https://gismaps.osu.edu/OSUMaps/Default.html?", "The Ohio State University"),
               ". Some dates are estimates and are likely inaccurate."
             ),
@@ -66,6 +67,7 @@ object ColumbusBuildings {
       )
     ),
     script(src := "https://api.mapbox.com/mapbox-gl-js/v1.5.0/mapbox-gl.js"),
+    script(src := "/assets/js/ColumbusBuildings.js"),
     GoogleAnalytics.scriptTag
   )
 }
