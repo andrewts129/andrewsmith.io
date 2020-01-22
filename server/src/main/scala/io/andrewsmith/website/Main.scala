@@ -17,7 +17,7 @@ object Main extends IOApp {
   ).orNotFound
 
   override def run(args: List[String]): IO[ExitCode] = BlazeServerBuilder[IO]
-    .bindHttp(4000) // TODO make configurable
+    .bindHttp(4000, "0.0.0.0") // TODO make configurable
     .withHttpApp(app)
     .serve
     .compile
