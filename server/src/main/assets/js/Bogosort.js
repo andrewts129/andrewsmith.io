@@ -1,7 +1,7 @@
 window.onload = async function () {
     const startDate = new Date(2019, 10, 4, 18, 27);
 
-    let currentData = [1, 2, 3, 4];
+    let currentData = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
     const margin = {top: 20, right: 20, bottom: 20, left: 20};
     const width = 750 - margin.left - margin.right;
