@@ -13,17 +13,21 @@ object Bogosort {
     head(
       meta(charset := "UTF-8"),
       title("Bogosort"),
-      link(rel := "icon", `type` := "image/png", href := "/assets/images/favicon.png")
+      link(rel := "icon", `type` := "image/png", href := "/assets/images/favicon.png"),
+      link(rel := "stylesheet", href := "/assets/css/bogosort.css")
     ),
     body(
-      h1("Bogosort"),
-      div(id := "bogo-container"),
-      p(s"This program has been running for ",
-        span(id := "total-duration"),
-        " and has sorted the array ",
-        span(id := "num-completions"), ".")
+      div(
+        h1("Bogosort"),
+        div(id := "bogo-container"),
+        p(s"This program has been running for ",
+          span(id := "total-duration"),
+          " and has sorted the array ",
+          span(id := "num-completions"), ".")
+      )
     ),
     script(src := "https://d3js.org/d3.v5.min.js"),
+    script(src := "/assets/js/Bogosort.js"),
     GoogleAnalytics.scriptTag
   )
 }

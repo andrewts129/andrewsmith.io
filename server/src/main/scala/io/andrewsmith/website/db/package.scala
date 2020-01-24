@@ -12,6 +12,6 @@ package object db {
 
   val transactor: Aux[IO, Unit] = Transactor.fromDriverManager[IO](
     "org.sqlite.JDBC",
-    "jdbc:sqlite:.db/db.sqlite"
+    "jdbc:sqlite:.db/db.sqlite" // TODO make configurable
   )
 }
