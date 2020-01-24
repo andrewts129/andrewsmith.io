@@ -1,23 +1,18 @@
 window.onload = async function () {
-    async function fetchData() {
-        const response = await fetch("/api/bogosort/data");
-        return response.json()
-    }
-
     const startDate = new Date(2019, 10, 4, 18, 27);
 
-    let currentData = await fetchData(true);
+    let currentData = [1, 2, 3, 4];
 
     const margin = {top: 20, right: 20, bottom: 20, left: 20};
     const width = 750 - margin.left - margin.right;
     const height = 500 - margin.top - margin.bottom;
 
     const x = d3.scaleBand()
-        .domain([...currentData.array.keys()])
+        .domain([...currentData.keys()])
         .range([0, width])
         .padding(0.1);
     const y = d3.scaleLinear()
-        .domain([d3.min(currentData.array), d3.max(currentData.array)])
+        .domain([d3.min(currentData), d3.max(currentData)])
         .range([height, 0]);
 
     const svg = d3.select("#bogo-container")
@@ -80,11 +75,9 @@ window.onload = async function () {
         return result
     };
 
-    const redraw = async () => {
-        const newData = await fetchData();
-
+    const redrawArray = async (newArray) => {
         svg.selectAll("rect")
-            .data(newData.array, (d) => d)
+            .data(newArray, (d) => d)
             .join((enter) =>
                     enter.append("rect")
                         .attr("fill", "steelblue")
@@ -97,18 +90,31 @@ window.onload = async function () {
             .attr("y", (d) => y(d))
             .attr("width", x.bandwidth())
             .attr("height", (d) => y(0) - y(d));
-
-        if (newData.numCompletions === 1) {
-            document.getElementById("num-completions").innerText = "" + newData.numCompletions + " time"
-        } else {
-            document.getElementById("num-completions").innerText = "" + newData.numCompletions + " times"
-        }
-
-        document.getElementById("total-duration").innerText = getDurationString(startDate, new Date());
-
-        currentData = newData;
     };
 
-    await redraw();
-    setInterval(redraw, 1000);
+    const redrawCompletions = async (newCompletions) => {
+        if (newCompletions === "1") {
+            document.getElementById("num-completions").innerText = "" + newCompletions + " time"
+        } else {
+            document.getElementById("num-completions").innerText = "" + newCompletions + " times"
+        }
+    };
+
+    const updateTimeDisplay = () => {
+        document.getElementById("total-duration").innerText = getDurationString(startDate, new Date());
+    };
+
+    const arrayEventSource = new EventSource('/api/bogosort/array');
+    arrayEventSource.onmessage = event => {
+        const newArray = event.data.split(',').map(n => parseInt(n));
+        redrawArray(newArray)
+    };
+
+    const eventSource = new EventSource('/api/bogosort/completions');
+    eventSource.onmessage = event => {
+        redrawCompletions(parseInt(event.data))
+    };
+
+    updateTimeDisplay();
+    setInterval(updateTimeDisplay, 1000);
 };
