@@ -104,15 +104,14 @@ window.onload = async function () {
         document.getElementById("total-duration").innerText = getDurationString(startDate, new Date());
     };
 
-    const arrayEventSource = new EventSource('/api/bogosort/array');
-    arrayEventSource.onmessage = event => {
-        const newArray = event.data.split(',').map(n => parseInt(n));
-        redrawArray(newArray)
-    };
+    const stateEventSource = new EventSource('/api/bogosort/state');
+    stateEventSource.onmessage = event => {
+        const afterSemicolonSplit = event.data.split(';');
+        const newArray = afterSemicolonSplit[0].split(',').map(n => parseInt(n));
+        const newCompletions = parseInt(afterSemicolonSplit[1]);
 
-    const eventSource = new EventSource('/api/bogosort/completions');
-    eventSource.onmessage = event => {
-        redrawCompletions(parseInt(event.data))
+        redrawArray(newArray);
+        redrawCompletions(newCompletions);
     };
 
     updateTimeDisplay();
