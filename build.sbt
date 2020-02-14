@@ -1,9 +1,9 @@
-val http4sVersion = "0.20.15"
+val http4sVersion = "0.21.1"
 
 lazy val commonSettings = {
   organization := "io.andrewsmith"
   version := "1.2"
-  scalaVersion := "2.12.10"
+  scalaVersion := "2.13.1"
 }
 
 lazy val server = (project in file("server"))
@@ -16,13 +16,12 @@ lazy val server = (project in file("server"))
       "org.http4s" %% "http4s-blaze-client" % http4sVersion,
       "org.http4s" %% "http4s-circe" % http4sVersion,
       "org.http4s" %% "http4s-scalatags" % http4sVersion,
-      "io.circe" %% "circe-generic" % "0.12.3",
+      "io.circe" %% "circe-generic" % "0.13.0",
       "ch.qos.logback" % "logback-classic" % "1.2.3",
-      "com.lihaoyi" %% "scalatags" % "0.8.3",
+      "com.lihaoyi" %% "scalatags" % "0.8.5",
       "org.tpolecat" %% "doobie-core" % "0.8.8",
       "org.xerial" % "sqlite-jdbc" % "3.28.0"
     ),
-    scalacOptions ++= Seq("-Ypartial-unification"),
     scalaJSProjects := Seq(client),
     pipelineStages in Assets := Seq(scalaJSPipeline),
     compile in Compile := ((compile in Compile) dependsOn scalaJSPipeline).value
