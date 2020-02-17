@@ -33,7 +33,7 @@ lazy val client = (project in file("client"))
   .settings(
     name := "AndrewSmithDotIo-client",
     libraryDependencies ++= Seq(
-      "org.scala-js" %%% "scalajs-dom" % "0.9.7"
+      "org.scala-js" %%% "scalajs-dom" % "1.0.0"
     )
   )
   .enablePlugins(ScalaJSPlugin, ScalaJSWeb)

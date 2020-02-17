@@ -9,8 +9,6 @@ import scala.util.Random
 
 // TODO redo this in a functional style
 object Index {
-  private val random = new Random()
-
   private val WIDTH = window.innerWidth
   private val HEIGHT = window.innerHeight
 
@@ -40,8 +38,6 @@ object Index {
     }
   }
 
-  private def randomBetween(a: Double, b: Double): Double = random.nextDouble() * (b - a) + a
-
   private def getCanvasContext: CanvasRenderingContext2D = {
     val context = document
       .getElementById("animationCanvas").asInstanceOf[Canvas]
@@ -56,14 +52,14 @@ object Index {
   private def buildBalls(): Vector[Ball] = {
     Vector.tabulate(15) {
       _ => new Ball(
-        initialX = randomBetween(0, WIDTH),
-        initialY = randomBetween(0, HEIGHT),
-        radius = randomBetween(5, 10),
-        initialVx = randomBetween(-3, 3),
-        initialVy = randomBetween(-3, 3),
+        initialX = Random.between(0.0, WIDTH),
+        initialY = Random.between(0.0, HEIGHT),
+        radius = Random.between(5.0, 10.0),
+        initialVx = Random.between(-3.0, 3.0),
+        initialVy = Random.between(-3.0, 3.0),
         color = {
-          val red = randomBetween(140, 220).toInt
-          val opacity = randomBetween(0.1, 0.5)
+          val red = Random.between(140, 220)
+          val opacity = Random.between(0.1, 0.5)
           s"rgba($red,0,0,$opacity)"
         }
       )
