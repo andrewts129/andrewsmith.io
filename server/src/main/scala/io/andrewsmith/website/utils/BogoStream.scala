@@ -12,11 +12,9 @@ import scala.util.Random
 object BogoStream {
   implicit val timer: Timer[IO] = IO.timer(ExecutionContext.global)
 
-  val state: Stream[IO, ServerSentEvent] = Stream.unfoldLoop(initArray)(
+  var state: Stream[IO, ServerSentEvent] = Stream.unfoldLoop(initArray)(
     a => (a, if (isSorted(a)) Some(initArray) else Some(randomSwap(a)))
-  )
-    .metered(1.second)
-    .map(a => ServerSentEvent({
+  ).map(a => ServerSentEvent({
       // TODO is there a way to do this without .unsafeRunSync()?
       if (isSorted(a)) {
         BogoStats.IncrementNumCompletions.unsafeRunSync()
@@ -25,9 +23,13 @@ object BogoStream {
       val completions = BogoStats.numCompletions.unsafeRunSync()
 
       s"${a.mkString(",")};$completions"
-    }))
+    })).debug()
 
-  private def initArray: Seq[Int] = Random.shuffle((1 to 10).toVector)
+  def start(): Unit = {
+    state = state.metered(1.second)
+  }
+
+  private def initArray: Seq[Int] = Random.shuffle((1 to 3).toVector)
 
   private def randomSwap[T](a: Seq[T]): Seq[T] = {
     val i = Random.nextInt(a.size)
