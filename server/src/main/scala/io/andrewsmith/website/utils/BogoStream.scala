@@ -16,10 +16,11 @@ object BogoStream {
     a => (a, Some(nextState(a)))
   ).metered(1.second)
 
-  val sseStream: Stream[IO, ServerSentEvent] = stateStream.map(a => ServerSentEvent({
-    val completions = BogoStats.numCompletions.unsafeRunSync() // TODO do this without unsafeRunSync?
-    s"${a.mkString(",")};$completions"
-  }))
+  val numCompletionsStream: Stream[IO, Int] = Stream.eval(BogoStats.numCompletions).repeat
+
+  val sseStream: Stream[IO, ServerSentEvent] = stateStream.zipWith(numCompletionsStream)((state, numCompletions) => {
+    ServerSentEvent(s"${state.mkString(",")};$numCompletions")
+  })
 
   private def nextState(a: Seq[Int]): Seq[Int] = {
     if (isSorted(a)) {
