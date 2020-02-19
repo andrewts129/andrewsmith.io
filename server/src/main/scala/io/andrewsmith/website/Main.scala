@@ -3,6 +3,7 @@ package io.andrewsmith.website
 import cats.effect._
 import cats.implicits._
 import io.andrewsmith.website.services._
+import io.andrewsmith.website.utils.BogoStream
 import org.http4s.HttpApp
 import org.http4s.implicits._
 import org.http4s.server.Router
@@ -16,10 +17,11 @@ object Main extends IOApp {
   ).orNotFound
 
   override def run(args: List[String]): IO[ExitCode] = BlazeServerBuilder[IO]
-    .bindHttp(4000, "0.0.0.0") // TODO make configurable
-    .withHttpApp(app)
-    .serve
-    .compile
-    .drain
-    .as(ExitCode.Success)
+      .bindHttp(4000, "0.0.0.0") // TODO make configurable
+      .withHttpApp(app)
+      .serve
+      .merge(BogoStream.stateStream) // Run bogosort in the background
+      .compile
+      .drain
+      .as(ExitCode.Success)
 }
