@@ -11,8 +11,8 @@ import org.http4s.server.blaze._
 
 object Main extends IOApp {
   private val app: HttpApp[IO] = Router(
-    "/" -> (FileService.routes <+> ViewService.routes),
-    "/api" -> (BogosortApiService.routes <+> MessagesApiService.routes),
+    "/" -> FileService.routes.combineK(ViewService.routes),
+    "/api" -> BogosortApiService.routes.combineK(MessagesApiService.routes),
     "/assets" -> ResourceService.routes
   ).orNotFound
 
