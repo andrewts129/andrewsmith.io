@@ -1,4 +1,3 @@
-// TODO convert to ScalaJS
 window.onload = async function () {
     const startDate = new Date(2019, 10, 4, 18, 27);
 

@@ -5,4 +5,3 @@ addSbtPlugin("com.vmunier" % "sbt-web-scalajs" % "1.0.10")
 addSbtPlugin("com.github.ahjohannessen" % "sbt-http4s-web" % "0.0.6")
 addSbtPlugin("org.irundaia.sbt" % "sbt-sassify" % "1.4.13")
 addSbtPlugin("com.eed3si9n" % "sbt-assembly" % "0.14.10")
-// TODO add plugin for javascript minification/optimization
