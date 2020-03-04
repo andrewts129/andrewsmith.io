@@ -20,7 +20,8 @@ lazy val server = (project in file("server"))
       "ch.qos.logback" % "logback-classic" % "1.2.3",
       "com.lihaoyi" %% "scalatags" % "0.8.5",
       "org.tpolecat" %% "doobie-core" % "0.8.8",
-      "org.xerial" % "sqlite-jdbc" % "3.28.0"
+      "org.xerial" % "sqlite-jdbc" % "3.28.0",
+      "com.amazonaws" % "aws-java-sdk-s3" % "1.11.735",
     ),
     scalaJSProjects := Seq(client),
     pipelineStages in Assets := Seq(scalaJSPipeline),
