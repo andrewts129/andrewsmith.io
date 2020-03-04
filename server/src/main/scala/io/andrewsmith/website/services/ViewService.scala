@@ -15,6 +15,5 @@ object ViewService {
     case GET -> Root / "messages" => Ok(MessagesView.page)
     case GET -> Root / "links" => Ok(LinksView.page)
     case GET -> Root / "resume" => Ok(ResumeView.page)
-    case GET -> Root / "whispering-pablo" => Ok(WhisperingPabloView.page)
   }
 }

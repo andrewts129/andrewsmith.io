@@ -55,16 +55,6 @@ object LinksView {
           ),
           li(
             section(
-              h2("Whispering Pablo"),
-              ul(
-                li(q("Shitty Yik-Yak 2.0"), " - Matt Cohen"),
-                li(a(href := "/whispering-pablo", "Link")),
-                li(a(href := "https://github.com/andrewts129/whispering-pablo", "Source Code"))
-              )
-            ),
-          ),
-          li(
-            section(
               h2("Yell at me"),
               ul(
                 li("Submit something through this form and the Raspberry Pi in my apartment will loudly speak it in a Scottish accent! (WIP, there may be a delay)"),
