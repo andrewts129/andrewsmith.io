@@ -8,7 +8,7 @@ import scalatags.Text.tags._
 import scalatags.Text.tags2.{section, title, `var`, q}
 
 // TODO
-object Links {
+object LinksView {
   val page: TypedTag[String] = html(
     head(
       meta(charset := "UTF-8"),

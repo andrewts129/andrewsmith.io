@@ -8,7 +8,7 @@ import scalatags.Text.tags._
 import scalatags.Text.tags2.title
 
 // TODO merge the pablo server into this repo. This isn't nearly complicated enough for a microservice
-object WhisperingPablo {
+object WhisperingPabloView {
   val page: TypedTag[String] = html(
     head(
       meta(charset := "UTF-8"),

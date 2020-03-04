@@ -8,13 +8,13 @@ import org.http4s.scalatags._
 
 object ViewService {
   val routes: HttpRoutes[IO] = HttpRoutes.of[IO] {
-    case GET -> Root => Ok(Index.page)
-    case GET -> Root / "bogosort" => Ok(Bogosort.page)
-    case GET -> Root / "columbus-buildings" => Ok(ColumbusBuildings.page)
-    case GET -> Root / "home" => Ok(Home.page)
-    case GET -> Root / "messages" => Ok(Messages.page)
-    case GET -> Root / "links" => Ok(Links.page)
-    case GET -> Root / "resume" => Ok(Resume.page)
-    case GET -> Root / "whispering-pablo" => Ok(WhisperingPablo.page)
+    case GET -> Root => Ok(IndexView.page)
+    case GET -> Root / "bogosort" => Ok(BogosortView.page)
+    case GET -> Root / "columbus-buildings" => Ok(ColumbusBuildingsView.page)
+    case GET -> Root / "home" => Ok(HomeView.page)
+    case GET -> Root / "messages" => Ok(MessagesView.page)
+    case GET -> Root / "links" => Ok(LinksView.page)
+    case GET -> Root / "resume" => Ok(ResumeView.page)
+    case GET -> Root / "whispering-pablo" => Ok(WhisperingPabloView.page)
   }
 }

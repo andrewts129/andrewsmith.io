@@ -6,7 +6,7 @@ import scalatags.Text.implicits._
 import scalatags.Text.tags._
 import scalatags.Text.tags2.title
 
-object Resume {
+object ResumeView {
   val page: TypedTag[String] = html(
     head(
       meta(charset := "UTF-8"),

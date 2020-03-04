@@ -8,7 +8,7 @@ import scala.scalajs.js.annotation.JSExportTopLevel
 import scala.util.Random
 
 // TODO redo this in a functional style
-object Index {
+object IndexScript {
   private val WIDTH = window.innerWidth
   private val HEIGHT = window.innerHeight
 

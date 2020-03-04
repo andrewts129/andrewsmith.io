@@ -8,7 +8,7 @@ import scalatags.Text.tags._
 import scalatags.Text.tags2.{nav, section, title}
 
 // TODO add css
-object Index {
+object IndexView {
   val page: TypedTag[String] = html(
     head(
       meta(charset := "UTF-8"),

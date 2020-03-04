@@ -8,7 +8,7 @@ import scalatags.Text.tags._
 import scalatags.Text.tags2.title
 
 // TODO
-object ColumbusBuildings {
+object ColumbusBuildingsView {
   val page: TypedTag[String] = html(
     head(
       meta(charset := "UTF-8"),
