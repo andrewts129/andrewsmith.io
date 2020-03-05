@@ -22,7 +22,7 @@ object Main extends IOApp {
       .bindHttp(port, "0.0.0.0")
       .withHttpApp(app)
       .serve
-      .merge(BogoStream.stateStream) // Run bogosort in the background
+      .concurrently(BogoStream.stateStream) // Run bogosort in the background
       .compile
       .drain
       .as(ExitCode.Success)
