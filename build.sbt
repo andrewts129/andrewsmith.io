@@ -29,7 +29,7 @@ lazy val server = (project in file("server"))
     pipelineStages in Assets := Seq(scalaJSPipeline),
     compile in Compile := ((compile in Compile) dependsOn scalaJSPipeline).value
   ).settings( // Flyway
-    flywayUrl := "jdbc:sqlite:server/.db/db.sqlite", // TODO env var
+    flywayUrl := s"jdbc:sqlite:server/${sys.env.getOrElse("SQLITE_DB_PATH", "sqlite.db")}",
     flywayLocations := Seq("migrations")
   ).enablePlugins(SbtWeb, Http4sWebPlugin, FlywayPlugin)
 

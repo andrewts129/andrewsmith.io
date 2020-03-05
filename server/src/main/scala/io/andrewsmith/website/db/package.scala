@@ -8,7 +8,7 @@ import org.flywaydb.core.Flyway
 import scala.concurrent.ExecutionContext
 
 package object db {
-  private val dbUrl = "jdbc:sqlite:.db/db.sqlite" // TODO use env var
+  private val dbUrl = s"jdbc:sqlite:${sys.env.getOrElse("SQLITE_DB_PATH", "sqlite.db")}"
 
   // Runs database migrations
   Flyway.configure()

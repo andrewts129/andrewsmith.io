@@ -16,8 +16,10 @@ object Main extends IOApp {
     "/assets" -> ResourceService.routes
   ).orNotFound
 
+  private val port = sys.env.getOrElse("PORT", "4000").toInt
+
   override def run(args: List[String]): IO[ExitCode] = BlazeServerBuilder[IO]
-      .bindHttp(4000, "0.0.0.0") // TODO make configurable
+      .bindHttp(port, "0.0.0.0")
       .withHttpApp(app)
       .serve
       .merge(BogoStream.stateStream) // Run bogosort in the background
