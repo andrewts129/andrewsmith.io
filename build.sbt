@@ -22,6 +22,7 @@ lazy val server = (project in file("server"))
       "org.tpolecat" %% "doobie-core" % "0.8.8",
       "org.xerial" % "sqlite-jdbc" % "3.28.0",
       "com.amazonaws" % "aws-java-sdk-s3" % "1.11.735",
+      "org.flywaydb"  %  "flyway-core" % "6.2.4",
     )
   ).settings( // ScalaJS
     scalaJSProjects := Seq(client),
