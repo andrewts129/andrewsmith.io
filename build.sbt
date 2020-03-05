@@ -22,12 +22,15 @@ lazy val server = (project in file("server"))
       "org.tpolecat" %% "doobie-core" % "0.8.8",
       "org.xerial" % "sqlite-jdbc" % "3.28.0",
       "com.amazonaws" % "aws-java-sdk-s3" % "1.11.735",
-    ),
+    )
+  ).settings( // ScalaJS
     scalaJSProjects := Seq(client),
     pipelineStages in Assets := Seq(scalaJSPipeline),
     compile in Compile := ((compile in Compile) dependsOn scalaJSPipeline).value
-  )
-  .enablePlugins(SbtWeb, Http4sWebPlugin)
+  ).settings( // Flyway
+    flywayUrl := "jdbc:sqlite:server/.db/db.sqlite", // TODO env var
+    flywayLocations := Seq("migrations")
+  ).enablePlugins(SbtWeb, Http4sWebPlugin, FlywayPlugin)
 
 lazy val client = (project in file("client"))
   .settings(commonSettings)

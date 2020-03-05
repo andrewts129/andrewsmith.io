@@ -2,7 +2,7 @@ package io.andrewsmith.website.utils
 
 import cats.effect.{IO, Timer}
 import fs2.Stream
-import io.andrewsmith.website.db.BogoStats
+import io.andrewsmith.website.db.BogoStat
 import org.http4s.ServerSentEvent
 
 import scala.concurrent.ExecutionContext
@@ -16,7 +16,7 @@ object BogoStream {
     a => (a, Some(nextState(a)))
   ).metered(1.second)
 
-  val numCompletionsStream: Stream[IO, Int] = Stream.eval(BogoStats.numCompletions).repeat
+  val numCompletionsStream: Stream[IO, Int] = Stream.eval(BogoStat.numCompletions).repeat
 
   val sseStream: Stream[IO, ServerSentEvent] = stateStream.zipWith(numCompletionsStream)((state, numCompletions) => {
     ServerSentEvent(s"${state.mkString(",")};$numCompletions")
@@ -24,7 +24,7 @@ object BogoStream {
 
   private def nextState(a: Seq[Int]): Seq[Int] = {
     if (isSorted(a)) {
-      BogoStats.IncrementNumCompletions.unsafeRunSync() // TODO do this without unsafeRunSync?
+      BogoStat.IncrementNumCompletions.unsafeRunSync() // TODO do this without unsafeRunSync?
       initArray
     } else randomSwap(a)
   }
