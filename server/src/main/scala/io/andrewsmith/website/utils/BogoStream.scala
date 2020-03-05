@@ -17,7 +17,7 @@ object BogoStream {
     a => (a, Some(nextState(a)))
   ).metered(1.second)
 
-  val numCompletionsStream: Stream[IO, Int] = Stream.eval(BogoStat.numCompletions).repeat
+  val numCompletionsStream: Stream[IO, Int] = Stream.repeatEval(BogoStat.numCompletions)
 
   val sseStream: Stream[IO, ServerSentEvent] = stateStream.zipWith(numCompletionsStream)((state, numCompletions) => {
     ServerSentEvent(s"${state.mkString(",")};$numCompletions")
