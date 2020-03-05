@@ -9,6 +9,7 @@ import scala.concurrent.ExecutionContext
 import scala.concurrent.duration._
 import scala.util.Random
 
+// TODO this doesn't really work
 object BogoStream {
   implicit val timer: Timer[IO] = IO.timer(ExecutionContext.global)
 
