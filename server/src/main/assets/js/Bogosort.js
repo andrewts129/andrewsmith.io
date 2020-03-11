@@ -1,4 +1,5 @@
-window.onload = async function () {
+// TODO convert to ScalaJS
+window.onload = async () => {
     const startDate = new Date(2019, 10, 4, 18, 27);
 
     let currentData = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];

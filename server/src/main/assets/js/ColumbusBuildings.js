@@ -1,5 +1,5 @@
-// TODO convert this to ScalaJS
-(() => {
+// TODO convert this to ScalaJS or add Closure Compiler
+window.onload = async () => {
     if (!mapboxgl.supported()) {
         window.alert("Sorry, your browser doesn't support the map on this page")
     }
@@ -51,4 +51,4 @@
             });
         })
     }
-})();
+};
