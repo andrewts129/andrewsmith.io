@@ -11,6 +11,12 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="sbt: org.scala-lang:scala-library:2.13.1:jar" level="project" />
+    <orderEntry type="library" name="sbt: org.typelevel:cats-macros_2.13:2.1.0:jar" level="project" />
+    <orderEntry type="library" name="sbt: org.typelevel:cats-kernel_2.13:2.1.0:jar" level="project" />
+    <orderEntry type="library" name="sbt: org.typelevel:cats-effect_2.13:2.0.0:jar" level="project" />
+    <orderEntry type="library" name="sbt: org.typelevel:cats-core_2.13:2.1.0:jar" level="project" />
+    <orderEntry type="library" name="sbt: org.scodec:scodec-bits_2.13:1.1.12:jar" level="project" />
+    <orderEntry type="library" name="sbt: co.fs2:fs2-core_2.13:2.2.1:jar" level="project" />
     <orderEntry type="library" name="sbt: org.scala-js:scalajs-dom_sjs1_2.13:1.0.0:jar" level="project" />
     <orderEntry type="library" name="sbt: org.scala-js:scalajs-library_2.13:1.0.1:jar" level="project" />
     <orderEntry type="library" scope="TEST" name="sbt: org.scala-js:scalajs-test-bridge_2.13:1.0.1:jar" level="project" />

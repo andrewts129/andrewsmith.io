@@ -1,18 +1,23 @@
 package io.andrewsmith.website
 
+import cats.effect.{IO, Timer}
+import cats.implicits._
+import fs2.Stream
 import org.scalajs.dom.html.Canvas
 import org.scalajs.dom.{CanvasRenderingContext2D, document, window}
 
-import scala.scalajs.js.timers.setTimeout
+import scala.concurrent.ExecutionContext
 import scala.scalajs.js.annotation.JSExportTopLevel
+import scala.scalajs.js.timers.setTimeout
 import scala.util.Random
+import scala.concurrent.duration._
 
-// TODO redo this in a functional style
+
 object IndexScript {
   private val WIDTH = window.innerWidth
   private val HEIGHT = window.innerHeight
 
-  private val dt = 1
+  private val dt = 1000
   private val G = 0.0001
   private val maxSpeed = 10
   private val tooFastDampening = 0.2
@@ -21,21 +26,21 @@ object IndexScript {
 
   @JSExportTopLevel("indexMain")
   def main(): Unit = {
+    implicit val timer: Timer[IO] = IO.timer(ExecutionContext.global)
+
     val context = getCanvasContext
-    val balls = buildBalls()
-    redraw(context, balls)
-  }
+    val stateStream: Stream[IO, List[BallState]] = Stream.unfoldLoop(buildInitialBalls())(
+      ballStates => (ballStates, Some(ballStates.map(_.nextState())))
+    )
 
-  private def redraw(context: CanvasRenderingContext2D, balls: Vector[Ball]): Unit = {
-    context.clearRect(0, 0, WIDTH, HEIGHT)
-    balls.foreach { ball =>
-      ball.nextState()
-      ball.draw(context)
-    }
+    val drawingStream: Stream[IO, IO[List[Unit]]] = stateStream.map(
+      ballStates => ballStates.traverse(_.draw(context))
+    )
 
-    setTimeout(dt) {
-      redraw(context, balls)
-    }
+    drawingStream.metered(1.second)
+      .compile
+      .drain
+      .unsafeRunSync()
   }
 
   private def getCanvasContext: CanvasRenderingContext2D = {
@@ -49,45 +54,49 @@ object IndexScript {
     context
   }
 
-  private def buildBalls(): Vector[Ball] = {
-    Vector.tabulate(15) {
-      _ => new Ball(
-        initialX = Random.between(0.0, WIDTH),
-        initialY = Random.between(0.0, HEIGHT),
-        radius = Random.between(5.0, 10.0),
-        initialVx = Random.between(-3.0, 3.0),
-        initialVy = Random.between(-3.0, 3.0),
-        color = {
-          val red = Random.between(140, 220)
-          val opacity = Random.between(0.1, 0.5)
-          s"rgba($red,0,0,$opacity)"
-        }
-      )
+  private def buildInitialBalls(): List[BallState] = {
+    List.tabulate(15) {
+      _ =>
+        new BallState(
+          color = {
+            val red = Random.between(140, 220)
+            val opacity = Random.between(0.1, 0.5)
+            s"rgba($red,0,0,$opacity)"
+          },
+          radius = Random.between(5.0, 10.0),
+          x = Random.between(0.0, WIDTH),
+          y = Random.between(0.0, HEIGHT),
+          vx = Random.between(-3.0, 3.0),
+          vy = Random.between(-3.0, 3.0),
+        )
     }
   }
 
-  private class Ball(initialX: Double, initialY: Double, initialVx: Double, initialVy: Double, radius: Double, color: String) {
+  private class BallState(val radius: Double,
+                          val color: String,
+                          val x: Double = 0,
+                          val y: Double = 0,
+                          val vx: Double = 0,
+                          val vy: Double = 0,
+                          val ax: Double = 0,
+                          val ay: Double = 0,
+                          val fx: Double = 0,
+                          val fy: Double = 0,
+                         ) {
     private val mass: Double = (4.0 / 3) * math.Pi * math.pow(radius, 3) / 1000
 
-    private var x: Double = initialX
-    private var y: Double = initialY
-    private var vx: Double = initialVx
-    private var vy: Double = initialVy
-    private var ax: Double = 0
-    private var ay: Double = 0
-    private var fx: Double = 0
-    private var fy: Double = 0
-
-    def nextState(): Unit = {
-      this.fx = nextFx()
-      this.fy = nextFy()
-      this.ax = nextAx()
-      this.ay = nextAy()
-      this.vx = nextVx()
-      this.vy = nextVy()
-      this.x = nextX()
-      this.y = nextY()
-    }
+    def nextState(): BallState = new BallState(
+      this.radius,
+      this.color,
+      nextX(),
+      nextY(),
+      nextVx(),
+      nextVy(),
+      nextAx(),
+      nextAy(),
+      nextFx(),
+      nextFy()
+    )
 
     private def nextX(): Double = this.x + (this.vx * dt) + (0.5 * this.ax * math.pow(dt, 2))
 
@@ -147,7 +156,7 @@ object IndexScript {
       }
     }
 
-    def draw(context: CanvasRenderingContext2D): Unit = {
+    def draw(context: CanvasRenderingContext2D): IO[Unit] = IO {
       context.beginPath()
       context.arc(this.x, this.y, this.radius, 0, 2 * math.Pi)
       context.fillStyle = this.color
@@ -160,4 +169,5 @@ object IndexScript {
     val y: Double = HEIGHT / 2
     val mass: Double = 40000000
   }
+
 }
