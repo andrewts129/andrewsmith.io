@@ -8,22 +8,35 @@ import org.http4s.HttpApp
 import org.http4s.implicits._
 import org.http4s.server.Router
 import org.http4s.server.blaze._
+import fs2.Stream
+import fs2.concurrent.Topic
 
 object Main extends IOApp {
-  private val app: HttpApp[IO] = Router(
-    "/" -> (FileService.routes <+> ViewService.routes),
-    "/api" -> (BogosortApiService.routes <+> MessagesApiService.routes),
-    "/assets" -> ResourceService.routes
-  ).orNotFound
-
   private val port = sys.env.getOrElse("PORT", "4000").toInt
 
-  override def run(args: List[String]): IO[ExitCode] = BlazeServerBuilder[IO]
-      .bindHttp(port, "0.0.0.0")
-      .withHttpApp(app)
-      .serve
-      .concurrently(BogoStream.bogoStream) // Run bogosort in the background
-      .compile
-      .drain
-      .as(ExitCode.Success)
+  override def run(args: List[String]): IO[ExitCode] = {
+    for {
+      bogoStateTopic <- Topic[IO, Seq[Int]]((10 to 1).toVector)
+      exitCode <- {
+        val bogoStream = BogoStream.bogoStream.through(bogoStateTopic.publish)
+
+        val app: HttpApp[IO] = Router(
+          "/" -> (FileService.routes <+> ViewService.routes),
+          "/api" -> (BogosortApiService.routes(bogoStateTopic) <+> MessagesApiService.routes),
+          "/assets" -> ResourceService.routes
+        ).orNotFound
+
+        val httpStream = BlazeServerBuilder[IO]
+          .bindHttp(port, "0.0.0.0")
+          .withHttpApp(app)
+          .serve
+
+        Stream(httpStream, bogoStream)
+          .parJoinUnbounded
+          .compile
+          .drain
+          .as(ExitCode.Success)
+      }
+    } yield exitCode
+  }
 }
