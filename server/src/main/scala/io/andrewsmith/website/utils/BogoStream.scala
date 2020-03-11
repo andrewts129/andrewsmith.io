@@ -3,7 +3,6 @@ package io.andrewsmith.website.utils
 import cats.effect.{IO, Timer}
 import fs2.Stream
 import io.andrewsmith.website.db.BogoStat
-import org.http4s.ServerSentEvent
 
 import scala.concurrent.ExecutionContext
 import scala.concurrent.duration._
@@ -13,21 +12,16 @@ import scala.util.Random
 object BogoStream {
   implicit val timer: Timer[IO] = IO.timer(ExecutionContext.global)
 
-  val stateStream: Stream[IO, Seq[Int]] = Stream.unfoldLoop(initArray)(
-    a => (a, Some(nextState(a)))
-  ).metered(1.second)
-
-  val numCompletionsStream: Stream[IO, Int] = Stream.repeatEval(BogoStat.numCompletions)
-
-  val sseStream: Stream[IO, ServerSentEvent] = stateStream.zipWith(numCompletionsStream)((state, numCompletions) => {
-    ServerSentEvent(s"${state.mkString(",")};$numCompletions")
-  })
+  val bogoStream: Stream[IO, Seq[Int]] = Stream.unfoldLoop(initArray)(
+    array => (array, Some(nextState(array)))
+  )
+    .metered(1.second)
+    .evalTap(
+      array => if (isSorted(array)) BogoStat.IncrementNumCompletions else IO()
+    )
 
   private def nextState(a: Seq[Int]): Seq[Int] = {
-    if (isSorted(a)) {
-      BogoStat.IncrementNumCompletions.unsafeRunSync() // TODO do this without unsafeRunSync?
-      initArray
-    } else randomSwap(a)
+    if (isSorted(a)) initArray else randomSwap(a)
   }
 
   private def initArray: Seq[Int] = Random.shuffle((1 to 10).toVector)
