@@ -10,6 +10,7 @@ import org.http4s.server.Router
 import org.http4s.server.blaze._
 import fs2.Stream
 import fs2.concurrent.Topic
+import org.http4s.server.middleware.GZip
 
 object Main extends IOApp {
   private val port = sys.env.getOrElse("PORT", "4000").toInt
@@ -26,9 +27,11 @@ object Main extends IOApp {
           "/assets" -> ResourceService.routes
         ).orNotFound
 
+        val appWithMiddleware = GZip(app)
+
         val httpStream = BlazeServerBuilder[IO]
           .bindHttp(port, "0.0.0.0")
-          .withHttpApp(app)
+          .withHttpApp(appWithMiddleware)
           .serve
 
         Stream(httpStream, bogoStream)
