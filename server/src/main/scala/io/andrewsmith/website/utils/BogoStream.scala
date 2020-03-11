@@ -14,11 +14,11 @@ object BogoStream {
 
   val bogoStream: Stream[IO, Seq[Int]] = Stream.unfoldLoop(initArray)(
     array => (array, Some(nextState(array)))
-  )
-    .metered(1.second)
-    .evalTap(
-      array => if (isSorted(array)) BogoStat.IncrementNumCompletions else IO()
-    )
+  ).evalTap(
+    array => if (isSorted(array)) BogoStat.IncrementNumCompletions else IO()
+  ).metered(1.second)
+
+  val numCompletionsStream: Stream[IO, Int] = Stream.repeatEval(BogoStat.numCompletions)
 
   private def nextState(a: Seq[Int]): Seq[Int] = {
     if (isSorted(a)) initArray else randomSwap(a)
