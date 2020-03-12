@@ -3,8 +3,8 @@ package io.andrewsmith.website.services
 import cats.effect.IO
 import fs2.concurrent.Topic
 import io.andrewsmith.website.utils.BogoStream
-import org.http4s.{HttpRoutes, ServerSentEvent}
 import org.http4s.dsl.io._
+import org.http4s.{HttpRoutes, ServerSentEvent}
 
 object BogosortApiService {
   def routes(bogoStateTopic: Topic[IO, Seq[Int]]): HttpRoutes[IO] = HttpRoutes.of[IO] {

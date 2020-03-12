@@ -2,14 +2,14 @@ package io.andrewsmith.website
 
 import cats.effect._
 import cats.implicits._
+import fs2.Stream
+import fs2.concurrent.Topic
 import io.andrewsmith.website.services._
 import io.andrewsmith.website.utils.BogoStream
 import org.http4s.HttpApp
 import org.http4s.implicits._
 import org.http4s.server.Router
 import org.http4s.server.blaze._
-import fs2.Stream
-import fs2.concurrent.Topic
 import org.http4s.server.middleware.GZip
 
 object Main extends IOApp {

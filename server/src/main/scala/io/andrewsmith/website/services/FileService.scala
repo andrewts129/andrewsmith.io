@@ -2,12 +2,12 @@ package io.andrewsmith.website.services
 
 import cats.effect.IO
 import com.amazonaws.auth.EnvironmentVariableCredentialsProvider
-import com.amazonaws.services.s3.{AmazonS3, AmazonS3ClientBuilder}
 import com.amazonaws.services.s3.model.S3Object
+import com.amazonaws.services.s3.{AmazonS3, AmazonS3ClientBuilder}
 import com.amazonaws.util.IOUtils
-import org.http4s.{HttpRoutes, MediaType}
 import org.http4s.dsl.io._
 import org.http4s.headers.`Content-Type`
+import org.http4s.{HttpRoutes, MediaType}
 
 object FileService {
   // TODO do I really need AWS here? This is stupid

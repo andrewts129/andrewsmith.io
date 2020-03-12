@@ -5,8 +5,8 @@ import io.andrewsmith.website.db.Message
 import io.circe.generic.auto._
 import io.circe.syntax._
 import org.http4s.HttpRoutes
-import org.http4s.dsl.io._
 import org.http4s.circe.CirceEntityCodec._
+import org.http4s.dsl.io._
 
 object MessagesApiService {
   case class AddRequest(Body: String, From: String)

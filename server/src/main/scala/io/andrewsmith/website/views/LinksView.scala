@@ -5,7 +5,7 @@ import scalatags.Text.TypedTag
 import scalatags.Text.attrs._
 import scalatags.Text.implicits._
 import scalatags.Text.tags._
-import scalatags.Text.tags2.{section, title, `var`, q}
+import scalatags.Text.tags2.{`var`, section, title}
 
 object LinksView {
   val page: TypedTag[String] = html(
