@@ -4,10 +4,11 @@ import org.scalajs.dom.html.Canvas
 import org.scalajs.dom.{CanvasRenderingContext2D, document, window}
 
 import scala.scalajs.js.timers.setTimeout
-import scala.scalajs.js.annotation.JSExportTopLevel
+import scala.scalajs.js.annotation.{JSExport, JSExportTopLevel}
 import scala.util.Random
 
-// TODO redo this in a functional style
+// TODO redo this in a functional style when FS2 supports ScalaJS 1.x
+@JSExportTopLevel("IndexScript")
 object IndexScript {
   private val WIDTH = window.innerWidth
   private val HEIGHT = window.innerHeight
@@ -19,7 +20,7 @@ object IndexScript {
   private val collisionPadding = 300
   private val bounceDampening = -0.6
 
-  @JSExportTopLevel("indexMain")
+  @JSExport
   def main(): Unit = {
     val context = getCanvasContext
     val balls = buildBalls()

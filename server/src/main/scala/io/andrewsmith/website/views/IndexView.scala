@@ -33,7 +33,7 @@ object IndexView {
       )
     ),
     ScalaJs.scriptTag,
-    script("indexMain();"),
+    script("IndexScript.main();"),
     GoogleAnalytics.scriptTag,
   )
 }
