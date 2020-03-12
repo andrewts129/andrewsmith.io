@@ -1,20 +1,18 @@
 package io.andrewsmith.website.views
 
-import io.andrewsmith.website.views.common.{GoogleAnalytics, ScalaJs}
+import io.andrewsmith.website.views.common.{GoogleAnalytics, Head, ScalaJs}
 import scalatags.Text.TypedTag
 import scalatags.Text.attrs._
 import scalatags.Text.implicits._
-import scalatags.Text.tags._
-import scalatags.Text.tags2.{nav, section, title}
+import scalatags.Text.tags.{frag, _}
+import scalatags.Text.tags2.{nav, section}
 
 object IndexView {
   val page: TypedTag[String] = html(
-    head(
-      meta(charset := "UTF-8"),
-      title("Andrew Smith"),
-      link(rel := "icon", `type` := "image/png", href := "/assets/images/favicon.png"),
+    lang := "en-US",
+    Head.tag("Andrew Smith", "Andrew Smith's homepage", frag(
       link(rel := "stylesheet", href := "/assets/css/index.css")
-    ),
+    )),
     body(
       canvas(id := "animationCanvas"),
       div(

@@ -1,20 +1,17 @@
 package io.andrewsmith.website.views
 
-import io.andrewsmith.website.views.common.GoogleAnalytics
+import io.andrewsmith.website.views.common.{GoogleAnalytics, Head}
 import scalatags.Text.TypedTag
 import scalatags.Text.attrs._
 import scalatags.Text.implicits._
-import scalatags.Text.tags._
-import scalatags.Text.tags2.title
+import scalatags.Text.tags.{frag, _}
 
 object BogosortView {
   val page: TypedTag[String] = html(
-    head(
-      meta(charset := "UTF-8"),
-      title("Bogosort"),
-      link(rel := "icon", `type` := "image/png", href := "/assets/images/favicon.png"),
+    lang := "en-US",
+    Head.tag("Bogosort", "A constantly running attempt to sort an array using the Bogosort algorithm", frag(
       link(rel := "stylesheet", href := "/assets/css/bogosort.css")
-    ),
+    )),
     body(
       div(
         h1("Bogosort"),

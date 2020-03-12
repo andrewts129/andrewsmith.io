@@ -1,19 +1,15 @@
 package io.andrewsmith.website.views
 
-import io.andrewsmith.website.views.common.GoogleAnalytics
+import io.andrewsmith.website.views.common.{GoogleAnalytics, Head}
 import scalatags.Text.TypedTag
 import scalatags.Text.attrs._
 import scalatags.Text.implicits._
-import scalatags.Text.tags._
-import scalatags.Text.tags2.title
+import scalatags.Text.tags.{frag, _}
 
 object MessagesView {
   val page: TypedTag[String] = html(
-    head(
-      meta(charset := "UTF-8"),
-      title("Add Message"),
-      link(rel := "icon", `type` := "image/png", href := "/assets/images/favicon.png")
-    ),
+    lang := "en-US",
+    Head.tag("Add Message", "Form to submit a message that will be spoken through my Raspberry Pi's speakers", frag()),
     body(
       form(name := "messageForm", method := "post", action := "/api/messages/add",
         label(`for` := "message", "Message: "),

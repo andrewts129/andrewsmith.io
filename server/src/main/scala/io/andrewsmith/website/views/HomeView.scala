@@ -1,19 +1,17 @@
 package io.andrewsmith.website.views
 
-import io.andrewsmith.website.views.common.GoogleAnalytics
+import io.andrewsmith.website.views.common.{GoogleAnalytics, Head}
 import scalatags.Text.TypedTag
 import scalatags.Text.attrs._
 import scalatags.Text.implicits._
-import scalatags.Text.tags._
-import scalatags.Text.tags2.title
+import scalatags.Text.tags.{frag, _}
 
 object HomeView {
   val page: TypedTag[String] = html(
-    head(
-      meta(charset := "UTF-8"),
-      title("andrewsmith.io.net"),
-      link(rel := "icon", `type` := "image/png", href := "/assets/images/favicon.png")
-    ),
+    lang := "en-US",
+    Head.tag("andrewsmith.io.net", "andrewsmith.io.net", frag(
+      link(rel := "stylesheet", href := "/assets/css/index.css")
+    )),
     body(
       h1("welcome to www.andrewsmith.io.net!"),
       form(method := "get", action := "https://www.google.com/search",

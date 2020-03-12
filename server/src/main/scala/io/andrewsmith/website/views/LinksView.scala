@@ -1,20 +1,18 @@
 package io.andrewsmith.website.views
 
-import io.andrewsmith.website.views.common.GoogleAnalytics
+import io.andrewsmith.website.views.common.{GoogleAnalytics, Head}
 import scalatags.Text.TypedTag
 import scalatags.Text.attrs._
 import scalatags.Text.implicits._
-import scalatags.Text.tags._
-import scalatags.Text.tags2.{`var`, section, title}
+import scalatags.Text.tags.{frag, _}
+import scalatags.Text.tags2.{`var`, section}
 
 object LinksView {
   val page: TypedTag[String] = html(
-    head(
-      meta(charset := "UTF-8"),
-      title("Stuff I've Made"),
-      link(rel := "icon", `type` := "image/png", href := "/assets/images/favicon.png"),
+    lang := "en-US",
+    Head.tag("Stuff I've Made", "Links to various projects I've worked on", frag(
       link(rel := "stylesheet", href := "/assets/css/links.css")
-    ),
+    )),
     body(
       div(
         h1("Stuff I've Made"),

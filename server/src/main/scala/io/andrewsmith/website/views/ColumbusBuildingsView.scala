@@ -1,21 +1,18 @@
 package io.andrewsmith.website.views
 
-import io.andrewsmith.website.views.common.GoogleAnalytics
+import io.andrewsmith.website.views.common.{GoogleAnalytics, Head}
 import scalatags.Text.TypedTag
 import scalatags.Text.attrs._
 import scalatags.Text.implicits._
-import scalatags.Text.tags._
-import scalatags.Text.tags2.title
+import scalatags.Text.tags.{frag, _}
 
 object ColumbusBuildingsView {
   val page: TypedTag[String] = html(
-    head(
-      meta(charset := "UTF-8"),
-      title("The Age of Columbus Buildings"),
-      link(rel := "icon", `type` := "image/png", href := "/assets/images/favicon.png"),
+    lang := "en-US",
+    Head.tag("The Age of Columbus Buildings", "A map displaying the year of construction for (almost) every building in Franklin County, Ohio.", frag(
       link(rel := "stylesheet", href := "https://api.mapbox.com/mapbox-gl-js/v1.5.0/mapbox-gl.css"),
       link(rel := "stylesheet", href := "/assets/css/columbusBuildings.css")
-    ),
+    )),
     body(
       div(id := "title-card",
         h1("The Age of Columbus Buildings")
