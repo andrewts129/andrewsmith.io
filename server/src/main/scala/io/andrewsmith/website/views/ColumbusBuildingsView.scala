@@ -63,7 +63,7 @@ object ColumbusBuildingsView {
       )
     ),
     script(src := "https://api.mapbox.com/mapbox-gl-js/v1.5.0/mapbox-gl.js"),
-    script(src := "/assets/js/ColumbusBuildings.js"),
+    script(src := "/assets/js/ColumbusBuildings.min.js"),
     GoogleAnalytics.scriptTag
   )
 }

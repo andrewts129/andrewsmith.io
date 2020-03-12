@@ -26,7 +26,7 @@ lazy val server = (project in file("server"))
     )
   ).settings( // ScalaJS
     scalaJSProjects := Seq(client),
-    pipelineStages in Assets := Seq(scalaJSPipeline),
+    pipelineStages in Assets := Seq(closure, scalaJSPipeline),
     compile in Compile := ((compile in Compile) dependsOn scalaJSPipeline).value,
     isDevMode in scalaJSPipeline := !sys.env.get("SCALAJS_PROD").contains("true")
   ).settings( // Flyway
