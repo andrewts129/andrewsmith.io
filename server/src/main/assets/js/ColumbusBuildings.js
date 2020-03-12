@@ -1,3 +1,4 @@
+// TODO convert this to ScalaJS (when ScalablyTyped is updated for Scalajs 1.x) or add Closure Compiler
 window.onload = async () => {
     if (!mapboxgl.supported()) {
         window.alert("Sorry, your browser doesn't support the map on this page")

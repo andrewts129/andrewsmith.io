@@ -23,7 +23,7 @@ object BogosortView {
       )
     ),
     script(src := "https://d3js.org/d3.v5.min.js"),
-    script(src := "/assets/js/Bogosort.min.js"),
+    script(src := "/assets/js/Bogosort.js"),
     GoogleAnalytics.scriptTag
   )
 }
