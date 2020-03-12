@@ -7,5 +7,8 @@ import scalatags.Text.tags.script
 
 object ScalaJs {
   private val filename = if (sys.env.get("SCALAJS_PROD").contains("true")) "andrewsmithdotio-client-opt-bundle.js" else "andrewsmithdotio-client-fastopt-bundle.js"
-  val scriptTag: TypedTag[String] = script(src := s"assets/$filename")
+  def function(functionName: String): Frag = frag(
+    script(src := s"assets/$filename"),
+    script(s"$functionName();")
+  )
 }
