@@ -13,7 +13,6 @@ FROM openjdk:12-jdk
 
 COPY --from=packager /app/server/target/scala-2.13/AndrewSmithDotIo-server-assembly-0.1.0-SNAPSHOT.jar /app.jar
 
-ENV PORT 8000
 ENV SCALAJS_PROD true
-EXPOSE $PORT
+EXPOSE 8000
 CMD java -jar /app.jar

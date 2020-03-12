@@ -13,8 +13,6 @@ import org.http4s.server.blaze._
 import org.http4s.server.middleware.GZip
 
 object Main extends IOApp {
-  private val port = sys.env.getOrElse("PORT", "4000").toInt
-
   override def run(args: List[String]): IO[ExitCode] = {
     for {
       bogoStateTopic <- Topic[IO, Seq[Int]]((10 to 1).toVector)
@@ -30,7 +28,7 @@ object Main extends IOApp {
         val appWithMiddleware = GZip(app)
 
         val httpStream = BlazeServerBuilder[IO]
-          .bindHttp(port, "0.0.0.0")
+          .bindHttp(8000, "0.0.0.0")
           .withHttpApp(appWithMiddleware)
           .serve
 
