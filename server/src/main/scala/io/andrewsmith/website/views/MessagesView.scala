@@ -18,7 +18,7 @@ object MessagesView {
       form(name := "messageForm", method := "post", action := "/api/messages/add",
         label(`for` := "message", "Message: "),
         input(name := "Body", id := "message"),
-        input(`type` := "hidden", name := "From", id := "Web Client"),
+        input(`type` := "hidden", name := "From", value := "Web Client"),
         button(`type` := "reset", onclick := "document.forms['messageForm'].submit();", "Submit")
       )
     ),

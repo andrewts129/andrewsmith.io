@@ -13,7 +13,7 @@ object MessagesApiService {
 
   val routes: HttpRoutes[IO] = HttpRoutes.of[IO] {
     case request @ POST -> Root / "messages" / "add" =>
-      request.decode[AddRequest] { body =>
+      request.decode[AddRequest] { body => // TODO this is broken
         Message.add(body.Body, body.From).flatMap(m => Ok(m.asJson))
       }
     case POST -> Root / "messages" / "pop" =>

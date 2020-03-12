@@ -3,13 +3,12 @@ package io.andrewsmith.website.db
 import cats.effect.IO
 import doobie.implicits._
 
-case class Message(id: Int, text: String, author: String, created: Long)
+case class Message(id: Int, text: String, author: String, created: Option[Long])
 
 object Message {
   def add(text: String, author: String): IO[Message] = {
-    // TODO make created automatic
     val sql = for {
-      _ <- sql"INSERT INTO Message (text, author, created) VALUES ($text, $author, -1);".update.run
+      _ <- sql"INSERT INTO Message (text, author) VALUES ($text, $author);".update.run
       select <- sql"SELECT id, text, author, created FROM Message WHERE id = last_insert_rowid();".query[Message].unique
     } yield select
 
