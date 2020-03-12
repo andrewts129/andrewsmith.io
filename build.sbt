@@ -27,7 +27,8 @@ lazy val server = (project in file("server"))
   ).settings( // ScalaJS
     scalaJSProjects := Seq(client),
     pipelineStages in Assets := Seq(scalaJSPipeline),
-    compile in Compile := ((compile in Compile) dependsOn scalaJSPipeline).value
+    compile in Compile := ((compile in Compile) dependsOn scalaJSPipeline).value,
+    isDevMode in scalaJSPipeline := !sys.env.get("SCALAJS_PROD").contains("true")
   ).settings( // Flyway
     flywayUrl := s"jdbc:sqlite:server/${sys.env.getOrElse("SQLITE_DB_PATH", "sqlite.db")}",
     flywayLocations := Seq("migrations")

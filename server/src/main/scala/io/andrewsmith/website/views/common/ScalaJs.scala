@@ -6,6 +6,6 @@ import scalatags.Text.implicits._
 import scalatags.Text.tags.script
 
 object ScalaJs {
-  // TODO add logic that will pick the fast optimized file in dev
-  val scriptTag: TypedTag[String] = script(src := "assets/andrewsmithdotio-client-opt.js")
+  private val filename = if (sys.env.get("SCALAJS_PROD").contains("true")) "andrewsmithdotio-client-opt.js" else "andrewsmithdotio-client-fastopt.js"
+  val scriptTag: TypedTag[String] = script(src := s"assets/$filename")
 }
