@@ -8,9 +8,6 @@
       </parameters>
     </profile>
     <profile name="sbt 3" modules="AndrewSmithDotIo-client">
-      <parameters>
-        <parameter value="-P:scalajs:mapSourceURI:file:/home/andrew/Projects/Active/AndrewSmithDotIo/client/src/main/scala/-&gt;c68cff9c9a949171ad74/" />
-      </parameters>
       <plugins>
         <plugin path="$USER_HOME$/.cache/coursier/v1/https/repo1.maven.org/maven2/org/scala-js/scalajs-compiler_2.13.1/1.0.1/scalajs-compiler_2.13.1-1.0.1.jar" />
       </plugins>

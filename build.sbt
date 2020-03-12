@@ -32,7 +32,7 @@ lazy val server = (project in file("server"))
   ).settings( // Flyway
     flywayUrl := s"jdbc:sqlite:server/${sys.env.getOrElse("SQLITE_DB_PATH", "sqlite.db")}",
     flywayLocations := Seq("migrations")
-  ).enablePlugins(SbtWeb, Http4sWebPlugin, FlywayPlugin)
+  ).enablePlugins(SbtWeb, Http4sWebPlugin, WebScalaJSBundlerPlugin, FlywayPlugin)
 
 lazy val client = (project in file("client"))
   .settings(commonSettings)
@@ -40,9 +40,10 @@ lazy val client = (project in file("client"))
     name := "AndrewSmithDotIo-client",
     libraryDependencies ++= Seq(
       "org.scala-js" %%% "scalajs-dom" % "1.0.0"
-    )
+    ),
+    webpackBundlingMode := BundlingMode.LibraryAndApplication()
   )
-  .enablePlugins(ScalaJSPlugin, ScalaJSWeb)
+  .enablePlugins(ScalaJSBundlerPlugin)
 
 // loads the server project at sbt startup
 onLoad in Global := (onLoad in Global).value andThen {s: State => "project server" :: s}
