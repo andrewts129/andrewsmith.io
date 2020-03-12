@@ -7,7 +7,6 @@ import scalatags.Text.implicits._
 import scalatags.Text.tags._
 import scalatags.Text.tags2.title
 
-// TODO
 object BogosortView {
   val page: TypedTag[String] = html(
     head(

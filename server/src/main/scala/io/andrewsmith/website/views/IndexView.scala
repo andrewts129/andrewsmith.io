@@ -7,7 +7,6 @@ import scalatags.Text.implicits._
 import scalatags.Text.tags._
 import scalatags.Text.tags2.{nav, section, title}
 
-// TODO add css
 object IndexView {
   val page: TypedTag[String] = html(
     head(

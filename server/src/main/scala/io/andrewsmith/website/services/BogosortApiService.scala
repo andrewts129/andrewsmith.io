@@ -11,7 +11,7 @@ object BogosortApiService {
     case GET -> Root / "bogosort" / "state" => Ok(
       bogoStateTopic.subscribe(4)
         .zipWith(BogoStream.numCompletionsStream)((state, numCompletions) =>
-          ServerSentEvent(s"${state.mkString(",")};$numCompletions") // TODO get actual counts
+          ServerSentEvent(s"${state.mkString(",")};$numCompletions")
     ))
   }
 }

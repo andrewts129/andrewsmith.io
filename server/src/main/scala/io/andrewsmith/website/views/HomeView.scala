@@ -7,7 +7,6 @@ import scalatags.Text.implicits._
 import scalatags.Text.tags._
 import scalatags.Text.tags2.title
 
-// TODO
 object HomeView {
   val page: TypedTag[String] = html(
     head(
