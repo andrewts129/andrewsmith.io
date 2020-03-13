@@ -2,8 +2,7 @@
 window.onload = async () => {
     if (!mapboxgl.supported()) {
         window.alert("Sorry, your browser doesn't support the map on this page")
-    }
-    else {
+    } else {
         // This comes from a script tag on the page that pulls in an environment variable
         tileServerURL = tileServerURL ? tileServerURL : "http://andrewsmith.io:81";
 
