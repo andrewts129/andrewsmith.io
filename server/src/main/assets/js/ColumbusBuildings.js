@@ -4,7 +4,9 @@ window.onload = async () => {
         window.alert("Sorry, your browser doesn't support the map on this page")
     }
     else {
-        const tileServerURL = "http://andrewsmith.io:81"; // TODO make env var
+        // This comes from a script tag on the page that pulls in an environment variable
+        tileServerURL = tileServerURL ? tileServerURL : "http://andrewsmith.io:81";
+
         const map = new mapboxgl.Map({
             container: 'map',
             center: [-82.9988, 39.9612],

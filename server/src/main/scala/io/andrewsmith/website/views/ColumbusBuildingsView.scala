@@ -7,6 +7,7 @@ import scalatags.Text.implicits._
 import scalatags.Text.tags.{frag, _}
 
 object ColumbusBuildingsView {
+  private val tileServerUrl = sys.env.get("CBUS_BUILDING_TILE_SERVER_URL")
   val page: TypedTag[String] = html(
     lang := "en-US",
     Head.tag("The Age of Columbus Buildings", "A map displaying the year of construction for (almost) every building in Franklin County, Ohio.", frag(
@@ -63,6 +64,7 @@ object ColumbusBuildingsView {
       )
     ),
     script(src := "https://api.mapbox.com/mapbox-gl-js/v1.5.0/mapbox-gl.js"),
+    if (tileServerUrl.isDefined) script(s"let tileServerURL='${tileServerUrl.get}';") else frag(),
     script(src := "/assets/js/ColumbusBuildings.js"),
     GoogleAnalytics.scriptTag
   )
