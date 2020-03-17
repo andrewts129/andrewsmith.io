@@ -48,6 +48,14 @@ window.onload = async () => {
                             return [stopYears[index], color]
                         })
                     }
+                },
+                layout: { // Sort so that older buildings are on top and undated buildings are at the back
+                    "fill-sort-key": ["case",
+                        ["==", ["get", "year_built"], 0],
+                            -3000,
+                        // default
+                            ["-", ["to-number", ["get", "year_built"]]]
+                    ]
                 }
             });
         })
