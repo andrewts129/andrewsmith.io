@@ -64,7 +64,7 @@ object ColumbusBuildingsView {
       )
     ),
     script(src := "https://api.mapbox.com/mapbox-gl-js/v1.8.1/mapbox-gl.js"),
-    if (tileServerUrl.isDefined) script(s"let tileServerURL='${tileServerUrl.get}';") else frag(),
+    script(s"let tileServerURL='${tileServerUrl.getOrElse("")}';"),
     script(src := "/assets/js/ColumbusBuildings.js"),
     GoogleAnalytics.scriptTag
   )
