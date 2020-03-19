@@ -1,11 +1,11 @@
 FROM mozilla/sbt AS packager
 
+ENV SCALAJS_PROD true
+RUN apt-get update && apt-get -y install curl gnupg && curl -sL https://deb.nodesource.com/setup_12.x  | bash - && apt-get -y install nodejs
+
 COPY . /app
 WORKDIR /app
 
-RUN apt-get update && apt-get -y install curl gnupg && curl -sL https://deb.nodesource.com/setup_12.x  | bash - && apt-get -y install nodejs
-
-ENV SCALAJS_PROD true
 RUN sbt assembly
 
 # TODO find a way to use a slimmer image
