@@ -4,14 +4,11 @@ import cats.effect.{IO, Timer}
 import fs2.Stream
 import io.andrewsmith.website.db.BogoStat
 
-import scala.concurrent.ExecutionContext
 import scala.concurrent.duration._
 import scala.util.Random
 
 object BogoStream {
-  implicit val timer: Timer[IO] = IO.timer(ExecutionContext.global)
-
-  val bogoStream: Stream[IO, Seq[Int]] = Stream.unfoldLoop(initArray)(
+  def bogoStream(implicit timer: Timer[IO]): Stream[IO, Seq[Int]] = Stream.unfoldLoop(initArray)(
     array => (array, Some(nextState(array)))
   ).evalTap(
     array => if (isSorted(array)) BogoStat.IncrementNumCompletions else IO()

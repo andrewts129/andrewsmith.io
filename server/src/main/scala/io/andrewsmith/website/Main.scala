@@ -32,8 +32,8 @@ object Main extends IOApp {
           .withHttpApp(appWithMiddleware)
           .serve
 
-        Stream(httpStream, bogoStream)
-          .parJoinUnbounded
+        httpStream
+          .merge(bogoStream)
           .compile
           .drain
           .as(ExitCode.Success)
