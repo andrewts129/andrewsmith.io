@@ -8,6 +8,10 @@ window.onload = async () => {
     const width = 750 - margin.left - margin.right;
     const height = 500 - margin.top - margin.bottom;
 
+    // Queue data from the server as it comes in, then pop and draw once a second
+    // Smooths the animation when the network or server sees small delays
+    const stateQueue = [];
+
     const x = d3.scaleBand()
         .domain([...currentData.keys()])
         .range([0, width])
@@ -76,7 +80,7 @@ window.onload = async () => {
         return result
     };
 
-    const redrawArray = async (newArray) => {
+    const redrawArray = (newArray) => {
         svg.selectAll("rect")
             .data(newArray, (d) => d)
             .join((enter) =>
@@ -93,7 +97,7 @@ window.onload = async () => {
             .attr("height", (d) => y(0) - y(d));
     };
 
-    const redrawCompletions = async (newCompletions) => {
+    const redrawCompletions = (newCompletions) => {
         if (newCompletions === "1") {
             document.getElementById("num-completions").innerText = "" + newCompletions + " time"
         } else {
@@ -105,16 +109,25 @@ window.onload = async () => {
         document.getElementById("total-duration").innerText = getDurationString(startDate, new Date());
     };
 
+    const redraw = () => {
+        if (stateQueue.length > 0) {
+            const state = stateQueue.shift();
+            redrawArray(state.array);
+            redrawCompletions(state.completions);
+        }
+    };
+
     const stateEventSource = new EventSource('/api/bogosort/state');
     stateEventSource.onmessage = event => {
         const afterSemicolonSplit = event.data.split(';');
         const newArray = afterSemicolonSplit[0].split(',').map(n => parseInt(n));
         const newCompletions = parseInt(afterSemicolonSplit[1]);
 
-        redrawArray(newArray);
-        redrawCompletions(newCompletions);
+        stateQueue.push({array: newArray, completions: newCompletions});
     };
 
     updateTimeDisplay();
     setInterval(updateTimeDisplay, 1000);
+    redraw();
+    setInterval(redraw, 1000);
 };
