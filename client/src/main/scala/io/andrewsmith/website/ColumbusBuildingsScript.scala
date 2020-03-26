@@ -1,14 +1,12 @@
 package io.andrewsmith.website
 
-import typings.mapboxGl.{mod => mapboxgl}
 import org.scalajs.dom.window.alert
-import typings.mapboxGl.mod.{Control, FillPaint, FullscreenControl, Layer, MapboxOptions, StyleFunction, VectorSource}
-import typings.mapboxGl.mapboxGlStrings.{vector, fill}
+import typings.mapboxGl.mapboxGlStrings.{fill, vector}
+import typings.mapboxGl.mod._
+import typings.mapboxGl.{mod => mapboxgl}
 
 import scala.scalajs.js
 import scala.scalajs.js.annotation.{JSExport, JSExportTopLevel}
-
-import js.JSConverters._
 
 
 @JSExportTopLevel("ColumbusBuildingsScript")
@@ -59,7 +57,15 @@ object ColumbusBuildingsScript {
               property = "year_built",
               stops = stops.asInstanceOf[js.Array[js.Array[_]]]
             )
-          )
+          ),
+          layout = js.Dynamic.literal( // Sort so that older buildings are on top and undated buildings are at the back
+            "fill-sort-key" -> js.Array("case",
+              js.Array("==", js.Array("get", "year_built"), 0),
+                -3000,
+              // default
+                js.Array("-", js.Array("to-number", js.Array("get", "year_built")))
+            )
+          ).asInstanceOf[FillLayout]
         ))
       })
     }
