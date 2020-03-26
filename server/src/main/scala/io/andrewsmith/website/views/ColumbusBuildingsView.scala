@@ -7,7 +7,7 @@ import scalatags.Text.implicits._
 import scalatags.Text.tags.{frag, _}
 
 object ColumbusBuildingsView {
-  private val tileServerUrl = sys.env.get("CBUS_BUILDING_TILE_SERVER_URL")
+  private val tileServerUrl = sys.env.getOrElse("CBUS_BUILDING_TILE_SERVER_URL", "http://andrewsmith.io:81")
   val page: TypedTag[String] = html(
     lang := "en-US",
     Head.tag("The Age of Columbus Buildings", "A map displaying the year of construction for (almost) every building in Franklin County, Ohio.", frag(
@@ -63,7 +63,7 @@ object ColumbusBuildingsView {
         )
       )
     ),
-    ScalaJs.function("ColumbusBuildingsScript.main"),
+    ScalaJs.execute("ColumbusBuildingsScript", "main", tileServerUrl),
     GoogleAnalytics.scriptTag
   )
 }

@@ -29,7 +29,7 @@ object IndexView {
         )
       )
     ),
-    ScalaJs.function("IndexScript.main"),
+    ScalaJs.execute("IndexScript", "main"),
     GoogleAnalytics.scriptTag,
   )
 }
