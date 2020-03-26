@@ -1,17 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="sqlite.db" uuid="14ad0045-30b1-43f6-817c-7fa236b369cb">
+    <data-source source="LOCAL" name="db" uuid="3d2989a4-a007-4a1b-89d9-1f6ccf1a75fa">
       <driver-ref>sqlite.xerial</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
-      <jdbc-url>jdbc:sqlite:$PROJECT_DIR$/.db/sqlite.db</jdbc-url>
-    </data-source>
-    <data-source source="LOCAL" name="${SQLITE_DB_PATH}" uuid="9c7a3e4d-5128-4027-a4ab-ea6b723be264">
-      <driver-ref>sqlite.xerial</driver-ref>
-      <synchronize>true</synchronize>
-      <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
-      <jdbc-url>jdbc:sqlite:$PROJECT_DIR$/${SQLITE_DB_PATH}</jdbc-url>
+      <jdbc-url>jdbc:sqlite:$PROJECT_DIR$/server/.db/db.sqlite</jdbc-url>
       <libraries>
         <library>
           <url>file://$APPLICATION_CONFIG_DIR$/jdbc-drivers/Xerial SQLiteJDBC/3.25.1/license.txt</url>

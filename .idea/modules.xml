@@ -2,8 +2,10 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/AndrewSmithDotIo.iml" filepath="$PROJECT_DIR$/.idea/modules/AndrewSmithDotIo.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/AndrewSmithDotIo-build.iml" filepath="$PROJECT_DIR$/.idea/modules/AndrewSmithDotIo-build.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/AndrewSmithDotIo-client.iml" filepath="$PROJECT_DIR$/.idea/modules/AndrewSmithDotIo-client.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/AndrewSmithDotIo-server.iml" filepath="$PROJECT_DIR$/.idea/modules/AndrewSmithDotIo-server.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/andrewsmithdotio.iml" filepath="$PROJECT_DIR$/.idea/modules/andrewsmithdotio.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/andrewsmithdotio-build.iml" filepath="$PROJECT_DIR$/.idea/modules/andrewsmithdotio-build.iml" />
     </modules>
   </component>
 </project>
