@@ -8,6 +8,9 @@ import typings.mapboxGl.mapboxGlStrings.{vector, fill}
 import scala.scalajs.js
 import scala.scalajs.js.annotation.{JSExport, JSExportTopLevel}
 
+import js.JSConverters._
+
+
 @JSExportTopLevel("ColumbusBuildingsScript")
 object ColumbusBuildingsScript {
   @JSExport
@@ -44,6 +47,7 @@ object ColumbusBuildingsScript {
 
         val colors = js.Array("#eaeae5", "#e41a1c", "#f24d0e", "#ff7f00", "#FFBF1A", "#ffff33", "#A6D73F", "#4daf4a", "#429781", "#377eb8", "#6866AE", "#984ea3")
         val stopYears = js.Array(0, 1800, 1825, 1850, 1875, 1900, 1925, 1950, 1975, 2000, 2025, 2050)
+        val stops = stopYears.zip(colors).map(tup => js.Array(tup._1, tup._2))
 
         map.addLayer(Layer(
           id = "buildings",
@@ -53,7 +57,7 @@ object ColumbusBuildingsScript {
           paint = FillPaint(
             `fill-color` = StyleFunction(
               property = "year_built",
-              stops = stopYears.zip(colors).map(tup => js.Array(tup))
+              stops = stops.asInstanceOf[js.Array[js.Array[_]]]
             )
           )
         ))
