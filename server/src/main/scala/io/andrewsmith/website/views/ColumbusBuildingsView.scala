@@ -1,13 +1,13 @@
 package io.andrewsmith.website.views
 
-import io.andrewsmith.website.views.common.{GoogleAnalytics, Head}
+import io.andrewsmith.website.views.common.{GoogleAnalytics, Head, ScalaJs}
 import scalatags.Text.TypedTag
 import scalatags.Text.attrs._
 import scalatags.Text.implicits._
 import scalatags.Text.tags.{frag, _}
 
 object ColumbusBuildingsView {
-  private val tileServerUrl = sys.env.get("CBUS_BUILDING_TILE_SERVER_URL")
+  private val tileServerUrl = sys.env.getOrElse("CBUS_BUILDING_TILE_SERVER_URL", "http://andrewsmith.io:81")
   val page: TypedTag[String] = html(
     lang := "en-US",
     Head.tag("The Age of Columbus Buildings", "A map displaying the year of construction for (almost) every building in Franklin County, Ohio.", frag(
@@ -63,9 +63,7 @@ object ColumbusBuildingsView {
         )
       )
     ),
-    script(src := "https://api.mapbox.com/mapbox-gl-js/v1.8.1/mapbox-gl.js"),
-    script(s"let tileServerURL='${tileServerUrl.getOrElse("")}';"),
-    script(src := "/assets/js/ColumbusBuildings.js"),
+    ScalaJs.execute("ColumbusBuildingsScript", "main", tileServerUrl),
     GoogleAnalytics.scriptTag
   )
 }

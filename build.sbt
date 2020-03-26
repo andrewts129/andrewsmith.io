@@ -41,9 +41,13 @@ lazy val client = (project in file("client"))
     libraryDependencies ++= Seq(
       "org.scala-js" %%% "scalajs-dom" % "1.0.0"
     ),
+    npmDependencies in Compile ++= Seq(
+      "mapbox-gl" -> "1.8.1",
+      "@types/mapbox-gl" -> "1.8.1"
+    ),
     webpackBundlingMode := BundlingMode.LibraryAndApplication()
   )
-  .enablePlugins(ScalaJSBundlerPlugin)
+  .enablePlugins(ScalaJSBundlerPlugin, ScalablyTypedConverterPlugin)
 
 // loads the server project at sbt startup
 onLoad in Global := (onLoad in Global).value andThen {s: State => "project server" :: s}
