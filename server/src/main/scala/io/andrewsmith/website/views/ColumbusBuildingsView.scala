@@ -1,6 +1,6 @@
 package io.andrewsmith.website.views
 
-import io.andrewsmith.website.views.common.{GoogleAnalytics, Head}
+import io.andrewsmith.website.views.common.{GoogleAnalytics, Head, ScalaJs}
 import scalatags.Text.TypedTag
 import scalatags.Text.attrs._
 import scalatags.Text.implicits._
@@ -63,9 +63,7 @@ object ColumbusBuildingsView {
         )
       )
     ),
-    script(src := "https://api.mapbox.com/mapbox-gl-js/v1.8.1/mapbox-gl.js"),
-    script(s"let tileServerURL='${tileServerUrl.getOrElse("")}';"),
-    script(src := "/assets/js/ColumbusBuildings.js"),
+    ScalaJs.function("ColumbusBuildingsScript.main"),
     GoogleAnalytics.scriptTag
   )
 }
