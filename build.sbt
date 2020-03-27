@@ -41,7 +41,7 @@ lazy val client = (project in file("client"))
     libraryDependencies ++= Seq(
       "org.scala-js" %%% "scalajs-dom" % "1.0.0"
     )
-    ).enablePlugins(ScalaJSPlugin, ScalaJSWeb)
+  ).enablePlugins(ScalaJSPlugin, ScalaJSWeb)
 
 // loads the server project at sbt startup
 onLoad in Global := (onLoad in Global).value andThen {s: State => "project server" :: s}
