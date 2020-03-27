@@ -12,12 +12,10 @@ import scala.scalajs.js.annotation.{JSExport, JSExportTopLevel}
 @JSExportTopLevel("ColumbusBuildingsScript")
 object ColumbusBuildingsScript {
   @JSExport
-  def main(): Unit = {
+  def main(tileServerUrl: String): Unit = {
     if (!mapboxgl.supported()) {
       alert("Sorry, your browser doesn't support the map on this page")
     } else {
-      val tileServerUrl = "http://www.andrewsmith.io:81" // TODO
-
       val map = new mapboxgl.Map(MapboxOptions(
         container = "map",
         center = js.Tuple2(-82.9988, 39.9612),
