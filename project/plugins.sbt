@@ -7,7 +7,3 @@ addSbtPlugin("org.irundaia.sbt" % "sbt-sassify" % "1.4.13")
 addSbtPlugin("com.eed3si9n" % "sbt-assembly" % "0.14.10")
 addSbtPlugin("io.github.davidmweber" % "flyway-sbt" % "6.2.3")
 addSbtPlugin("au.com.onegeek" %% "sbt-dotenv" % "2.1.146")
-addSbtPlugin("ch.epfl.scala" % "sbt-web-scalajs-bundler" % "0.17.0")
-
-resolvers += Resolver.bintrayRepo("oyvindberg", "converter")
-addSbtPlugin("org.scalablytyped.converter" % "sbt-converter" % "1.0.0-beta7")

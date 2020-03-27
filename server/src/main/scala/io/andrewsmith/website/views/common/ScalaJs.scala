@@ -5,8 +5,7 @@ import scalatags.Text.implicits._
 import scalatags.Text.tags.script
 
 object ScalaJs {
-  private val filename = if (sys.env.get("SCALAJS_PROD").contains("true")) "andrewsmithdotio-client-opt-bundle.js" else "andrewsmithdotio-client-fastopt-bundle.js"
-
+  private val filename = if (sys.env.get("SCALAJS_PROD").contains("true")) "andrewsmithdotio-client-opt.js" else "andrewsmithdotio-client-fastopt.js"
   def execute(obj: String, function: String, args: String*): Frag = frag(
     script(src := s"assets/$filename"),
     script(s"$obj.$function(${args.map(arg => "'" + arg + "'").mkString(",")});")
