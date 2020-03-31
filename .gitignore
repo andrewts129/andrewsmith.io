@@ -1,5 +1,6 @@
 .db/
 .env
+**/target/
 
 .idea/
 # Created by https://www.gitignore.io/api/sbt,linux,scala,intellij
