@@ -1,4 +1,20 @@
-window.onload = async () => {
+import * as d3 from 'd3';
+
+interface State {
+    array: number[]
+    completions: number
+}
+
+const main = (): void => {
+    const stateEventSource = new EventSource('/api/bogosort/state');
+    stateEventSource.onmessage = (event) => {
+        const afterSemicolonSplit = event.data.split(';');
+        const newArray = afterSemicolonSplit[0].split(',').map(n => parseInt(n));
+        const newCompletions = parseInt(afterSemicolonSplit[1]);
+
+        stateQueue.push({array: newArray, completions: newCompletions});
+    };
+
     const startDate = new Date(2019, 10, 4, 18, 27);
 
     let currentData = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
@@ -9,10 +25,10 @@ window.onload = async () => {
 
     // Queue data from the server as it comes in, then pop and draw once a second
     // Smooths the animation when the network or server sees small delays
-    const stateQueue = [];
+    const stateQueue: State[] = [];
 
     const x = d3.scaleBand()
-        .domain([...currentData.keys()])
+        .domain([...currentData.keys()].map(x => x.toString()))
         .range([0, width])
         .padding(0.1);
     const y = d3.scaleLinear()
@@ -24,12 +40,12 @@ window.onload = async () => {
         .attr("width", width + margin.left + margin.right)
         .attr("height", height + margin.top + margin.bottom)
         .append("g")
-        .attr("translate", "translate(" + margin.left + ", " + margin.top + ")");
+        .attr("translate", `translate(${margin.left}, ${margin.top})`);
 
     const t = svg.transition().duration(500);
 
-    const getDurationString = (start, end) => {
-        const diff = new Date(end - start);
+    const getDurationString = (start: Date, end: Date): string => {
+        const diff = new Date(end.valueOf() - start.valueOf());
 
         let seconds = diff.getSeconds();
         let minutes = diff.getMinutes();
@@ -38,7 +54,7 @@ window.onload = async () => {
         let months = diff.getMonth();
         let years = diff.getFullYear() - 1970;
 
-        let result = "";
+        let result;
 
         if (seconds === 1) {
             result = "1 second"
@@ -79,17 +95,17 @@ window.onload = async () => {
         return result
     };
 
-    const redrawArray = (newArray) => {
+    const redrawArray = (newArray: number[]): void => {
         svg.selectAll("rect")
-            .data(newArray, (d) => d)
+            .data(newArray, (d) => d.toString())
             .join((enter) =>
                     enter.append("rect")
                         .attr("fill", "steelblue")
-                        .attr("x", (d, i) => x(i)),
+                        .attr("x", (d, i) => x(i.toString())),
                 (update) =>
                     update.call(update => update.transition(t)
-                    .attr("x", (d, i) => x(i))
-                )
+                        .attr("x", (d, i) => x(i.toString()))
+                    )
             )
             .attr("y", (d) => y(d))
             .attr("width", x.bandwidth())
@@ -104,11 +120,11 @@ window.onload = async () => {
         }
     };
 
-    const updateTimeDisplay = () => {
+    const updateTimeDisplay = (): void => {
         document.getElementById("total-duration").innerText = getDurationString(startDate, new Date());
     };
 
-    const redraw = () => {
+    const redraw = (): void => {
         if (stateQueue.length > 0) {
             const state = stateQueue.shift();
             redrawArray(state.array);
@@ -116,17 +132,10 @@ window.onload = async () => {
         }
     };
 
-    const stateEventSource = new EventSource('/api/bogosort/state');
-    stateEventSource.onmessage = event => {
-        const afterSemicolonSplit = event.data.split(';');
-        const newArray = afterSemicolonSplit[0].split(',').map(n => parseInt(n));
-        const newCompletions = parseInt(afterSemicolonSplit[1]);
-
-        stateQueue.push({array: newArray, completions: newCompletions});
-    };
-
     updateTimeDisplay();
     setInterval(updateTimeDisplay, 1000);
     redraw();
     setInterval(redraw, 1000);
 };
+
+window.onload = main;

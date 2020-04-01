@@ -10,7 +10,6 @@ object BogosortView {
   val page: TypedTag[String] = html(
     lang := "en-US",
     Head.tag("Bogosort", "A constantly running attempt to sort an array using the Bogosort algorithm", frag(
-      script(src := "https://d3js.org/d3.v5.min.js", defer := true),
       script(src := "/assets/js/Bogosort.js", defer := true),
       link(rel := "stylesheet", href := "/assets/css/bogosort.css")
     )),

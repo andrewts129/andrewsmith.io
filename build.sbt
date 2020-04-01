@@ -28,12 +28,9 @@ lazy val root = (project in file("."))
     Assets / WebpackKeys.webpack / WebpackKeys.binary := baseDirectory.value / "node_modules" / ".bin" / "webpack",
     Assets / WebpackKeys.webpack / WebpackKeys.configFile := baseDirectory.value / "webpack.config.js",
     Assets / WebpackKeys.webpack / WebpackKeys.entries := Map(
-      "js/Index.js" -> Seq(
-        "src/main/assets/js/Index.ts",
-      ),
-      "js/ColumbusBuildings.js" -> Seq(
-        "src/main/assets/js/ColumbusBuildings.ts"
-      )
+      "js/Index.js" -> Seq("src/main/assets/js/Index.ts"),
+      "js/ColumbusBuildings.js" -> Seq("src/main/assets/js/ColumbusBuildings.ts"),
+      "js/Bogosort.js" -> Seq("src/main/assets/js/Bogosort.ts")
     )
   ).settings( // Flyway
     flywayUrl := s"jdbc:sqlite:${sys.env.getOrElse("SQLITE_DB_PATH", "sqlite.db")}",
