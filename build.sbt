@@ -1,3 +1,5 @@
+import givers.webpack.SbtWebpack.autoImport.WebpackKeys.sourceDirs
+
 val http4sVersion = "0.21.1"
 
 lazy val root = (project in file("."))
@@ -20,7 +22,17 @@ lazy val root = (project in file("."))
       "com.amazonaws" % "aws-java-sdk-s3" % "1.11.735",
       "org.flywaydb"  %  "flyway-core" % "6.2.4",
     )
+  ).settings( // Webpack
+    Assets / WebpackKeys.webpack / sourceDirs := Seq(baseDirectory.value / "src/main", baseDirectory.value / "node_modules"),
+    Assets / WebpackKeys.webpack / includeFilter := "*.ts",
+    Assets / WebpackKeys.webpack / WebpackKeys.binary := new File(".") / "node_modules" / ".bin" / "webpack",
+    Assets / WebpackKeys.webpack / WebpackKeys.configFile := new File(".") / "webpack.config.js",
+    Assets / WebpackKeys.webpack / WebpackKeys.entries := Map(
+      "js/compiled.js" -> Seq(
+        "src/main/assets/js/Tindex.ts",
+      )
+    )
   ).settings( // Flyway
     flywayUrl := s"jdbc:sqlite:${sys.env.getOrElse("SQLITE_DB_PATH", "sqlite.db")}",
     flywayLocations := Seq("migrations")
-  ).enablePlugins(SbtWeb, Http4sWebPlugin, FlywayPlugin)
+  ).enablePlugins(SbtWeb, Http4sWebPlugin, SbtWebpack, FlywayPlugin)
