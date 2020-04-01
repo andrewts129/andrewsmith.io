@@ -1,15 +1,11 @@
 val http4sVersion = "0.21.1"
 
-lazy val commonSettings = {
-  organization := "io.andrewsmith"
-  version := "1.2"
-  scalaVersion := "2.13.1"
-}
-
-lazy val server = (project in file("server"))
-  .settings(commonSettings)
+lazy val root = (project in file("."))
   .settings(
-    name := "AndrewSmithDotIo-server",
+    name := "AndrewSmithDotIo",
+    organization := "io.andrewsmith",
+    version := "1.2",
+    scalaVersion := "2.13.1",
     libraryDependencies ++= Seq(
       "org.http4s" %% "http4s-dsl" % http4sVersion,
       "org.http4s" %% "http4s-blaze-server" % http4sVersion,
@@ -24,30 +20,7 @@ lazy val server = (project in file("server"))
       "com.amazonaws" % "aws-java-sdk-s3" % "1.11.735",
       "org.flywaydb"  %  "flyway-core" % "6.2.4",
     )
-  ).settings( // ScalaJS
-    scalaJSProjects := Seq(client),
-    pipelineStages in Assets := Seq(scalaJSPipeline),
-    compile in Compile := ((compile in Compile) dependsOn scalaJSPipeline).value,
-    isDevMode in scalaJSPipeline := !sys.env.get("SCALAJS_PROD").contains("true")
   ).settings( // Flyway
     flywayUrl := s"jdbc:sqlite:server/${sys.env.getOrElse("SQLITE_DB_PATH", "sqlite.db")}",
     flywayLocations := Seq("migrations")
-  ).enablePlugins(SbtWeb, Http4sWebPlugin, WebScalaJSBundlerPlugin, FlywayPlugin)
-
-lazy val client = (project in file("client"))
-  .settings(commonSettings)
-  .settings(
-    name := "AndrewSmithDotIo-client",
-    libraryDependencies ++= Seq(
-      "org.scala-js" %%% "scalajs-dom" % "1.0.0"
-    ),
-    npmDependencies in Compile ++= Seq(
-      "mapbox-gl" -> "1.8.1",
-      "@types/mapbox-gl" -> "1.8.1"
-    ),
-    webpackBundlingMode := BundlingMode.LibraryAndApplication()
-  )
-  .enablePlugins(ScalaJSBundlerPlugin, ScalablyTypedConverterPlugin)
-
-// loads the server project at sbt startup
-onLoad in Global := (onLoad in Global).value andThen {s: State => "project server" :: s}
+  ).enablePlugins(SbtWeb, Http4sWebPlugin, FlywayPlugin)

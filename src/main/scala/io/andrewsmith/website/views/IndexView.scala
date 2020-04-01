@@ -1,6 +1,6 @@
 package io.andrewsmith.website.views
 
-import io.andrewsmith.website.views.common.{GoogleAnalytics, Head, ScalaJs}
+import io.andrewsmith.website.views.common.{GoogleAnalytics, Head}
 import scalatags.Text.TypedTag
 import scalatags.Text.attrs._
 import scalatags.Text.implicits._
@@ -11,6 +11,7 @@ object IndexView {
   val page: TypedTag[String] = html(
     lang := "en-US",
     Head.tag("Andrew Smith", "Andrew Smith's homepage", frag(
+      script(src := "/assets/js/Index.js", defer := true),
       link(rel := "stylesheet", href := "/assets/css/index.css")
     )),
     body(
@@ -29,7 +30,6 @@ object IndexView {
         )
       )
     ),
-    ScalaJs.execute("IndexScript", "main"),
     GoogleAnalytics.scriptTag,
   )
 }

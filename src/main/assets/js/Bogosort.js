@@ -1,4 +1,3 @@
-// TODO convert to ScalaJS (when ScalablyTyped is updated for Scalajs 1.x)
 window.onload = async () => {
     const startDate = new Date(2019, 10, 4, 18, 27);
 
