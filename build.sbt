@@ -23,13 +23,13 @@ lazy val root = (project in file("."))
       "org.flywaydb"  %  "flyway-core" % "6.2.4",
     )
   ).settings( // Webpack
-    Assets / WebpackKeys.webpack / sourceDirs := Seq(baseDirectory.value / "src/main", baseDirectory.value / "node_modules"),
+    Assets / WebpackKeys.webpack / sourceDirs := Seq(baseDirectory.value / "src" / "main", baseDirectory.value / "node_modules"),
     Assets / WebpackKeys.webpack / includeFilter := "*.ts",
-    Assets / WebpackKeys.webpack / WebpackKeys.binary := new File(".") / "node_modules" / ".bin" / "webpack",
-    Assets / WebpackKeys.webpack / WebpackKeys.configFile := new File(".") / "webpack.config.js",
+    Assets / WebpackKeys.webpack / WebpackKeys.binary := baseDirectory.value / "node_modules" / ".bin" / "webpack",
+    Assets / WebpackKeys.webpack / WebpackKeys.configFile := baseDirectory.value / "webpack.config.js",
     Assets / WebpackKeys.webpack / WebpackKeys.entries := Map(
-      "js/compiled.js" -> Seq(
-        "src/main/assets/js/Tindex.ts",
+      "js/Index.js" -> Seq(
+        "src/main/assets/js/Index.ts",
       )
     )
   ).settings( // Flyway

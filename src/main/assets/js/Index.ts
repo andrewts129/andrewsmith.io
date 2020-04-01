@@ -1,3 +1,5 @@
+export {} // TODO get rid of this?
+
 // How far off the screen the balls need to go before bouncing off the edges
 // If 0, they bounce off the edges of the screen
 const collisionPadding = 300;
@@ -24,41 +26,57 @@ const tooFastDampening = 0.2;
 const bounceDampening = 0.6;
 
 // Generates a random decimal number between a and b.
-const randNumBetween = (a, b) => {
+const randNumBetween = (a: number, b: number): number => {
     return Math.random() * (b - a) + a
 };
 
-function Ball(x, y, radius, color) {
-    this.radius = radius;
-    this.mass = (4 / 3) * Math.PI * Math.pow(this.radius, 3) / 1000;  // Divide by 1000 bc the balls were way too heavy
-    this.color = color;
-    
-    this.p = {
-        x: x,
-        y: y
-    };
-    
-    this.v = {
-        x: randNumBetween(-3, 3),
-        y: randNumBetween(-3, 3)
-    };
+interface TwoDimensionalVector {
+    x: number
+    y: number
+}
 
-    this.a = {
-        x: 0,
-        y: 0
-    };
-    
-    this.f = {
-        x: 0,
-        y: 0
-    };
+class Ball {
+    radius: number;
+    mass: number;
+    color: string;
+    p: TwoDimensionalVector;
+    v: TwoDimensionalVector;
+    a: TwoDimensionalVector;
+    f: TwoDimensionalVector;
 
-    this.updatePosition = () => {
+    constructor(x: number, y: number, radius: number, color: string) {
+        this.radius = radius;
+        this.mass = (4 / 3) * Math.PI * Math.pow(this.radius, 3) / 1000;  // Divide by 1000 bc the balls were way too heavy
+        this.color = color;
+
+        this.p = {
+            x: x,
+            y: y
+        };
+
+        this.v = {
+            x: randNumBetween(-3, 3),
+            y: randNumBetween(-3, 3)
+        };
+
+        this.a = {
+            x: 0,
+            y: 0
+        };
+
+        this.f = {
+            x: 0,
+            y: 0
+        };
+    }
+
+
+    updatePosition = (): void => {
         this.p.x = this.p.x + (this.v.x * dt) + (0.5 * this.a.x * Math.pow(dt, 2));
         this.p.y = this.p.y + (this.v.y * dt) + (0.5 * this.a.y * Math.pow(dt, 2));
     };
 
-    this.updateVelocity = () => {
+    updateVelocity = (): void => {
         this.v.x = this.v.x + (this.a.x * dt);
         this.v.y = this.v.y + (this.a.y * dt);
 
@@ -71,12 +89,12 @@ function Ball(x, y, radius, color) {
         }
     };
 
-    this.updateAcceleration = () => {
+    updateAcceleration = (): void => {
         this.a.x = this.f.x / this.mass;
         this.a.y = this.f.y / this.mass;
     };
 
-    this.updateForce = () => {
+    updateForce = (): void => {
         const distBetweenSq = Math.pow(blackHole.x - this.p.x, 2) + Math.pow(blackHole.y - this.p.y, 2);
 
         // To prevent weird behavior when the ball gets really close to the center
@@ -96,7 +114,7 @@ function Ball(x, y, radius, color) {
         }
     };
 
-    this.checkCollisionBorders = () => {
+    checkCollisionBorders = (): void => {
         // Reverses the ball's direction if it hits a boundary (usually the boundaries are pretty far outside of the
         // screen
         if ((this.p.x - this.radius + collisionPadding < 0) || (this.p.x + this.radius - collisionPadding > width)) {
@@ -108,9 +126,9 @@ function Ball(x, y, radius, color) {
         }
     };
 
-    this.draw = (context) => {
+    draw = (context: CanvasRenderingContext2D): void => {
         // Returns true if the ball is currently on the screen
-        const isVisible = () => !(this.p.x + this.radius < 0 || this.p.x - this.radius > width || this.p.y + this.radius < 0 || this.p.y - this.radius > height);
+        const isVisible = (): boolean => !(this.p.x + this.radius < 0 || this.p.x - this.radius > width || this.p.y + this.radius < 0 || this.p.y - this.radius > height);
 
         // Only draw the ball if it's actually visible
         if (isVisible()) {
@@ -121,7 +139,7 @@ function Ball(x, y, radius, color) {
         }
     };
 
-    this.nextState = () => {
+    nextState = (): void => {
         this.updateForce();
         this.updateAcceleration();
         this.updateVelocity();
@@ -131,14 +149,14 @@ function Ball(x, y, radius, color) {
 }
 
 // Generates a random rgba color that is mostly red and pretty transparent
-const generateColor = () => {
+const generateColor = (): string => {
     const redValue = Math.floor(randNumBetween(140, 220));
     const opacity = randNumBetween(0.1, 0.5);
 
-    return "rgba(" + redValue + ",0,0," + opacity + ")";
+    return `rgba(${redValue},0,0,${opacity})`;
 };
 
-const buildBalls = () => Array.from({length: 15}, () => {
+const buildBalls = (): Ball[] => Array.from({length: 15}, () => {
     const newBallX = randNumBetween(0, width);
     const newBallY = randNumBetween(0, height);
 
@@ -146,17 +164,19 @@ const buildBalls = () => Array.from({length: 15}, () => {
     return new Ball(newBallX, newBallY, newBallRadius, generateColor());
 });
 
-const updateAll = (context, balls) => {
+const updateAll = (context: CanvasRenderingContext2D, balls: Ball[]): void => {
     context.clearRect(0, 0, width, height);
+
     balls.forEach((ball) => {
         ball.nextState();
         ball.draw(context);
     });
+
     setTimeout(updateAll, dt, context, balls);
 };
 
-const main = () => {
-    const canvas = document.getElementById("animationCanvas");
+const main = (): void => {
+    const canvas = document.getElementById("animationCanvas") as HTMLCanvasElement;
     const context = canvas.getContext("2d");
 
     context.canvas.width = width;
