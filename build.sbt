@@ -30,6 +30,9 @@ lazy val root = (project in file("."))
     Assets / WebpackKeys.webpack / WebpackKeys.entries := Map(
       "js/Index.js" -> Seq(
         "src/main/assets/js/Index.ts",
+      ),
+      "js/ColumbusBuildings.js" -> Seq(
+        "src/main/assets/js/ColumbusBuildings.ts"
       )
     )
   ).settings( // Flyway
