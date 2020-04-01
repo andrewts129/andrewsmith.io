@@ -11,6 +11,7 @@ object IndexView {
   val page: TypedTag[String] = html(
     lang := "en-US",
     Head.tag("Andrew Smith", "Andrew Smith's homepage", frag(
+      script(src := "/assets/js/Index.js", defer := true),
       link(rel := "stylesheet", href := "/assets/css/index.css")
     )),
     body(
@@ -29,7 +30,6 @@ object IndexView {
         )
       )
     ),
-    script(src := "/assets/js/Index.js"),
     GoogleAnalytics.scriptTag,
   )
 }
