@@ -7,3 +7,4 @@ scripts/
 .swaydb/
 README.md
 *.log
+Dockerfile

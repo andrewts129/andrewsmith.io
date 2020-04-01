@@ -21,6 +21,6 @@ lazy val root = (project in file("."))
       "org.flywaydb"  %  "flyway-core" % "6.2.4",
     )
   ).settings( // Flyway
-    flywayUrl := s"jdbc:sqlite:server/${sys.env.getOrElse("SQLITE_DB_PATH", "sqlite.db")}",
+    flywayUrl := s"jdbc:sqlite:${sys.env.getOrElse("SQLITE_DB_PATH", "sqlite.db")}",
     flywayLocations := Seq("migrations")
   ).enablePlugins(SbtWeb, Http4sWebPlugin, FlywayPlugin)

@@ -10,7 +10,7 @@ RUN sbt assembly
 # TODO find a way to use a slimmer image
 FROM openjdk:12-jdk
 
-COPY --from=packager /app/server/target/scala-2.13/AndrewSmithDotIo-assembly-0.1.0-SNAPSHOT.jar /app.jar
+COPY --from=packager /app/target/scala-2.13/AndrewSmithDotIo-assembly-1.2.jar /app.jar
 
 EXPOSE 8000
 CMD java -jar /app.jar
