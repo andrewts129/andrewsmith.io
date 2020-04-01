@@ -1,4 +1,9 @@
+import scala.sys.process._
+
 val http4sVersion = "0.21.1"
+
+lazy val npmInstallTask = taskKey[Unit]("Install front-end dependencies")
+npmInstallTask := { "npm install".! }
 
 lazy val root = (project in file("."))
   .settings(
@@ -29,7 +34,8 @@ lazy val root = (project in file("."))
       "js/Index.js" -> Seq("src/main/assets/js/Index.ts"),
       "js/ColumbusBuildings.js" -> Seq("src/main/assets/js/ColumbusBuildings.ts"),
       "js/Bogosort.js" -> Seq("src/main/assets/js/Bogosort.ts")
-    )
+    ),
+    Assets / WebpackKeys.webpack := ((Assets / WebpackKeys.webpack) dependsOn npmInstallTask).value
   ).settings( // Flyway
     flywayUrl := s"jdbc:sqlite:${sys.env.getOrElse("SQLITE_DB_PATH", "sqlite.db")}",
     flywayLocations := Seq("migrations")
