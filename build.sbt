@@ -1,5 +1,3 @@
-import givers.webpack.SbtWebpack.autoImport.WebpackKeys.sourceDirs
-
 val http4sVersion = "0.21.1"
 
 lazy val root = (project in file("."))
@@ -23,8 +21,8 @@ lazy val root = (project in file("."))
       "org.flywaydb"  %  "flyway-core" % "6.2.4",
     )
   ).settings( // Webpack
-    Assets / WebpackKeys.webpack / sourceDirs := Seq(baseDirectory.value / "src" / "main", baseDirectory.value / "node_modules"),
     Assets / WebpackKeys.webpack / includeFilter := "*.ts",
+    Assets / WebpackKeys.webpack / WebpackKeys.sourceDirs := Seq(baseDirectory.value / "src" / "main", baseDirectory.value / "node_modules"),
     Assets / WebpackKeys.webpack / WebpackKeys.binary := baseDirectory.value / "node_modules" / ".bin" / "webpack",
     Assets / WebpackKeys.webpack / WebpackKeys.configFile := baseDirectory.value / "webpack.config.js",
     Assets / WebpackKeys.webpack / WebpackKeys.entries := Map(

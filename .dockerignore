@@ -8,3 +8,4 @@ scripts/
 README.md
 *.log
 Dockerfile
+*/node_modules/
