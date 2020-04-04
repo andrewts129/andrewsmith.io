@@ -27,7 +27,7 @@ lazy val root = (project in file("."))
     )
   ).settings( // Webpack
     Assets / WebpackKeys.webpack / includeFilter := "*.ts",
-    Assets / WebpackKeys.webpack / WebpackKeys.sourceDirs := Seq(baseDirectory.value / "src" / "main", baseDirectory.value / "node_modules"),
+    Assets / WebpackKeys.webpack / WebpackKeys.sourceDirs := Seq(baseDirectory.value / "src" / "main" / "assets", baseDirectory.value / "node_modules"),
     Assets / WebpackKeys.webpack / WebpackKeys.binary := baseDirectory.value / "node_modules" / ".bin" / "webpack",
     Assets / WebpackKeys.webpack / WebpackKeys.configFile := baseDirectory.value / "webpack.config.js",
     Assets / WebpackKeys.webpack / WebpackKeys.entries := Map(
