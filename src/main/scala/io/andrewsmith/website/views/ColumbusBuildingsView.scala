@@ -6,6 +6,8 @@ import scalatags.Text.attrs._
 import scalatags.Text.implicits._
 import scalatags.Text.tags.{frag, _}
 import scalatags.Text.tags2.noscript
+import scalatags.Text.svgTags.{svg, path}
+import scalatags.Text.svgAttrs
 
 object ColumbusBuildingsView {
   private val tileServerUrl = sys.env.get("CBUS_BUILDING_TILE_SERVER_URL")  // TODO
@@ -63,6 +65,11 @@ object ColumbusBuildingsView {
               " and ",
               a(href := "https://github.com/andrewts129/andrew-smith-dot-io", "visualization"),
               " can be found on GitHub."
+            )
+          ),
+          a(id := "legend-source-collapse-button", href := "#",
+            svg(svgAttrs.viewBox := "0 0 32 32",
+              path(svgAttrs.d := "M15.997 13.374l-7.081 7.081L7 18.54l8.997-8.998 9.003 9-1.916 1.916z")
             )
           )
         )

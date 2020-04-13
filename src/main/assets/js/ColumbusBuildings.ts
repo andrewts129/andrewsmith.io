@@ -57,6 +57,20 @@ const main = (): void => {
                 }
             });
         });
+
+        // TODO
+        const collapseButton = document.getElementById('legend-source-collapse-button');
+        collapseButton.addEventListener('click', () => {
+            const source = document.getElementById('legend-source');
+            const arrow = collapseButton.firstElementChild;
+            if (!source.style.display || source.style.display === 'flex') {
+                source.style.display = 'none';
+                arrow.classList.add('rotated');
+            } else {
+                source.style.display = 'flex';
+                arrow.classList.remove('rotated');
+            }
+        });
     }
 };
 
