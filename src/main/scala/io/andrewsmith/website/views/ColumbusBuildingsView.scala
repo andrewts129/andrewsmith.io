@@ -5,9 +5,10 @@ import scalatags.Text.TypedTag
 import scalatags.Text.attrs._
 import scalatags.Text.implicits._
 import scalatags.Text.tags.{frag, _}
+import scalatags.Text.tags2.noscript
 
 object ColumbusBuildingsView {
-  private val tileServerUrl = sys.env.get("CBUS_BUILDING_TILE_SERVER_URL")
+  private val tileServerUrl = sys.env.get("CBUS_BUILDING_TILE_SERVER_URL")  // TODO
   val page: TypedTag[String] = html(
     lang := "en-US",
     Head.tag("The Age of Columbus Buildings", "A map displaying the year of construction for (almost) every building in Franklin County, Ohio.", frag(
@@ -18,6 +19,9 @@ object ColumbusBuildingsView {
     body(
       div(id := "title-card",
         h1("The Age of Columbus Buildings")
+      ),
+      noscript(
+        p("This map requires JavaScript to view.")
       ),
       div(id := "map",
         div(id := "legend",

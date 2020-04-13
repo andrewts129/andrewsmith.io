@@ -5,6 +5,7 @@ import scalatags.Text.TypedTag
 import scalatags.Text.attrs._
 import scalatags.Text.implicits._
 import scalatags.Text.tags.{frag, _}
+import scalatags.Text.tags2.noscript
 
 object BogosortView {
   val page: TypedTag[String] = html(
@@ -16,6 +17,9 @@ object BogosortView {
     body(
       div(
         h1("Bogosort"),
+        noscript(
+          p("This animation requires JavaScript to view.")
+        ),
         div(id := "bogo-container"),
         p(s"This program has been running for ",
           span(id := "total-duration"),
