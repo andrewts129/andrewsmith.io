@@ -103,23 +103,31 @@ $legend-colors: #e41a1c, #f24d0e, #ff7f00, #FFBF1A, #ffff33, #A6D73F, #4daf4a, #
   margin: auto;
 }
 
+// Only display this button on mobile
 #legend-source-collapse-button {
-  position: relative;
-  float: right;
-  margin-right: 0.7rem;
-  margin-top: -1.5rem;
-  margin-bottom: 0.5rem;
+  display: none;
+}
 
-  svg {
-    display:inline-block;
-    fill: $text-color-very-light;
-    width: 2em;
-    height: 2em;
-    vertical-align: middle;
-    overflow: hidden;
+@media screen and (max-width: 900px) {
+  #legend-source-collapse-button {
+    display: block;
+    position: relative;
+    float: right;
+    margin-right: 0.7rem;
+    margin-top: -1.5rem;
+    margin-bottom: 0.5rem;
 
-    &.rotated {
-      transform: rotate(-180deg);
+    svg {
+      display:inline-block;
+      fill: $text-color-very-light;
+      width: 2em;
+      height: 2em;
+      vertical-align: middle;
+      overflow: hidden;
+
+      &.rotated {
+        transform: rotate(-180deg);
+      }
     }
   }
 }

@@ -58,7 +58,6 @@ const main = (): void => {
             });
         });
 
-        // TODO
         const collapseButton = document.getElementById('legend-source-collapse-button');
         collapseButton.addEventListener('click', () => {
             const source = document.getElementById('legend-source');
