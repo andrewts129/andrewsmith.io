@@ -12,7 +12,7 @@ object LinksView {
     lang := "en-US",
     Head.tag("Stuff I've Made", "Links to various projects I've worked on", frag(
       link(rel := "stylesheet", href := "/assets/css/links.css")
-    )),
+    ), includeViewport = false),
     body(
       div(
         h1("Stuff I've Made"),

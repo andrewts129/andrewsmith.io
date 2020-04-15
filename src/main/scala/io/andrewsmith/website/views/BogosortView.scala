@@ -13,7 +13,7 @@ object BogosortView {
     Head.tag("Bogosort", "A constantly running attempt to sort an array using the Bogosort algorithm", frag(
       script(src := "/assets/js/Bogosort.js", defer := true),
       link(rel := "stylesheet", href := "/assets/css/bogosort.css")
-    )),
+    ), includeViewport = false),
     body(
       div(
         h1("Bogosort"),
