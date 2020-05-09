@@ -1,0 +1,28 @@
+{
+  "name": "andrewsmithdotio-client",
+  "version": "0.0.1",
+  "description": "",
+  "author": "andrewts129@gmail.com",
+  "scripts": {
+    "build": "gulp build",
+    "clean": "rm -rf dist",
+    "dev": "concurrently \"gulp dev\" \"http-server dist/ -p 3000\""
+  },
+  "dependencies": {
+    "d3": "^5.16.0",
+    "mapbox-gl": "^1.10.0"
+  },
+  "devDependencies": {
+    "@types/d3": "^5.7.2",
+    "@types/mapbox-gl": "^1.9.1",
+    "concurrently": "^5.2.0",
+    "gulp": "^4.0.2",
+    "gulp-ejs": "^5.1.0",
+    "gulp-rename": "^2.0.0",
+    "gulp-sass": "^4.1.0",
+    "gulp-typescript": "^6.0.0-alpha.1",
+    "http-server": "^0.12.3",
+    "node-sass": "^4.14.1",
+    "typescript": "^3.8.3"
+  }
+}

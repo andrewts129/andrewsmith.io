@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>The Age of Columbus Buildings</title>
+    <meta name="author" content="Andrew Smith" />
+    <meta
+      name="description"
+      content="A map displaying the year of construction for (almost) every building in Franklin County, Ohio."
+    />
+    <script defer src="/columbusBuildings.js"></script>
+    <link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/v1.8.1/mapbox-gl.css" />
+    <link rel="stylesheet" href="/columbusBuildings.css" />
+    <link rel="icon" type="image/png" href="/favicon.png" />
+  </head>
+  <body>
+    <div id="title-card">
+      <h1>The Age of Columbus Buildings</h1>
+    </div>
+    <noscript>This map requires JavaScript to render.</noscript>
+    <div id="map">
+      <div id="legend">
+        <div>
+          <p id="legend-description">Year Built:</p>
+          <div id="legend-gradient">
+            <span>1800</span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span>1900</span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span>2000</span>
+            <span></span>
+          </div>
+        </div>
+        <div id="legend-source">
+          <p>
+            Source:
+            <a href="https://www.franklincountyauditor.com/">Franklin Country Auditor</a>
+            and
+            <a href="https://gismaps.osu.edu/OSUMaps/Default.html?">The Ohio State University</a>
+            . Some dates are estimates and are likely inaccurate.
+          </p>
+          <p>
+            Inspired by
+            <a href="https://www.bklynr.com/block-by-block-brooklyns-past-and-present/">
+              Block by Block, Brooklyn’s Past and Present
+            </a>
+            and
+            <a href="https://nathanrooy.github.io/pages/2017-02-15-the-age-of-cincinnati-full-screen.html">
+              The Age of Cincinnati
+            </a>
+            .
+          </p>
+          <p>
+            Source code for the
+            <a href="https://github.com/andrewts129/columbus-buildings">data processing</a>
+            and
+            <a href="https://github.com/andrewts129/andrew-smith-dot-io">visualization</a>
+            can be found on GitHub.
+          </p>
+        </div>
+        <a id="legend-source-collapse-button" href="#">
+          <svg viewBox="0 0 32 32">
+            <path d="M15.997 13.374l-7.081 7.081L7 18.54l8.997-8.998 9.003 9-1.916 1.916z"></path>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </body>
+  <%- include('include/analytics'); -%>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Bogosort</title>
+    <meta name="author" content="Andrew Smith" />
+    <meta
+      name="description"
+      content="A constantly running attempt to sort an array using the Bogosort algorithm"
+    />
+    <script defer src="/bogosort.js"></script>
+    <link rel="stylesheet" href="/bogosort.css" />
+    <link rel="icon" type="image/png" href="/favicon.png" />
+  </head>
+  <body>
+    <div>
+      <h1>Bogosort</h1>
+      <noscript>This animation requires JavaScript to view</noscript>
+      <div id="bogo-container"></div>
+      <p>
+        This program has been running for <span id="total-duration"></span> and
+        has sorted the array <span id="num-completions"></span>
+      </p>
+    </div>
+  </body>
+  <%- include('include/analytics'); -%>
+</html>
