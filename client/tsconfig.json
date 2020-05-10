@@ -1,10 +1,8 @@
 {
   "compilerOptions": {
-    "module": "ES2015",
+    "module": "none",
     "declaration": true,
     "removeComments": true,
-    "emitDecoratorMetadata": true,
-    "experimentalDecorators": true,
     "target": "ES6",
     "sourceMap": true,
     "outDir": "./dist",
