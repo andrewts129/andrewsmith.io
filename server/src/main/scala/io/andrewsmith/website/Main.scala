@@ -19,7 +19,7 @@ object Main extends IOApp {
         val bogoStream = BogoStream.bogoStream.through(bogoStateTopic.publish)
 
         val app: HttpApp[IO] = Router(
-          "/" -> (FileService.routes <+> ResourceService.routes),
+          "/" -> StaticService.routes,
           "/api" -> (BogosortApiService.routes(bogoStateTopic) <+> MessagesApiService.routes),
         ).orNotFound
 
