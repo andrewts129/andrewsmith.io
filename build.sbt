@@ -1,9 +1,4 @@
-//import scala.sys.process._
-
 val http4sVersion = "0.21.1"
-
-//lazy val npmInstallTask = taskKey[Unit]("Install front-end dependencies")
-//npmInstallTask := { "npm install".! }
 
 lazy val commonSettings = {
   organization := "io.andrewsmith"
