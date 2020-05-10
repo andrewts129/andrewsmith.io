@@ -3,7 +3,7 @@ namespace ColumbusBuildings {
         if (!mapboxgl.supported()) {
             window.alert("Sorry, your browser doesn't support the map on this page")
         } else {
-            const tileServerUrl = 'http://tileserver.andrewsmith.io'; // TODO
+            const tileServerUrl = 'https://tileserver.andrewsmith.io'; // TODO
 
             const map = new mapboxgl.Map({
                 container: 'map',
