@@ -19,9 +19,8 @@ object Main extends IOApp {
         val bogoStream = BogoStream.bogoStream.through(bogoStateTopic.publish)
 
         val app: HttpApp[IO] = Router(
-          "/" -> FileService.routes,
+          "/" -> (FileService.routes <+> ResourceService.routes),
           "/api" -> (BogosortApiService.routes(bogoStateTopic) <+> MessagesApiService.routes),
-          "/assets" -> ResourceService.routes
         ).orNotFound
 
         val appWithMiddleware = GZip(app)

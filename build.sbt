@@ -5,18 +5,24 @@ val http4sVersion = "0.21.1"
 //lazy val npmInstallTask = taskKey[Unit]("Install front-end dependencies")
 //npmInstallTask := { "npm install".! }
 
+lazy val commonSettings = {
+  organization := "io.andrewsmith"
+  version := "1.2"
+  scalaVersion := "2.13.1"
+}
+
 lazy val client = (project in file("client"))
+  .settings(commonSettings)
   .settings(
+    name := "andrewsmithdotio-client",
     resourceDirectory in Compile := baseDirectory.value / "dist"
   )
 
 lazy val server = (project in file("server"))
   .dependsOn(client)
+  .settings(commonSettings)
   .settings(
     name := "andrewsmithdotio-server",
-    organization := "io.andrewsmith",
-    version := "1.2",
-    scalaVersion := "2.13.1",
     libraryDependencies ++= Seq(
       "org.http4s" %% "http4s-dsl" % http4sVersion,
       "org.http4s" %% "http4s-blaze-server" % http4sVersion,

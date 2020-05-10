@@ -14,5 +14,5 @@ object ResourceService {
   private val blockingPool = Executors.newFixedThreadPool(4)
   private val blocker = Blocker.liftExecutorService(blockingPool)
 
-  val routes: HttpRoutes[IO] = resourceService[IO](Config("dist/", blocker))
+  val routes: HttpRoutes[IO] = resourceService[IO](Config("/", blocker))
 }
