@@ -1,4 +1,5 @@
-*/target/
+**/target/
+**/dist
 logs/
 .idea/
 scripts/
@@ -6,6 +7,8 @@ scripts/
 .github/
 .swaydb/
 README.md
-*.log
+**/*.log
 Dockerfile
-*/node_modules/
+**/node_modules/
+**/*.db
+**/*.sqlite

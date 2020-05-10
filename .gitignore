@@ -1,9 +1,12 @@
 .db/
+**/*.db
 .env
 **/target/
+**/dist/
 node_modules/
 
 .idea/
+**/.vscode/
 # Created by https://www.gitignore.io/api/sbt,linux,scala,intellij
 # Edit at https://www.gitignore.io/?templates=sbt,linux,scala,intellij
 
