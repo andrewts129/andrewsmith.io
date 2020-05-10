@@ -1,10 +1,4 @@
 addSbtPlugin("io.spray" % "sbt-revolver" % "0.9.1")
-addSbtPlugin("com.typesafe.sbt" % "sbt-web" % "1.4.4")
-addSbtPlugin("com.github.ahjohannessen" % "sbt-http4s-web" % "0.0.6")
-addSbtPlugin("org.irundaia.sbt" % "sbt-sassify" % "1.4.13")
 addSbtPlugin("com.eed3si9n" % "sbt-assembly" % "0.14.10")
 addSbtPlugin("io.github.davidmweber" % "flyway-sbt" % "6.2.3")
 addSbtPlugin("au.com.onegeek" %% "sbt-dotenv" % "2.1.146")
-
-resolvers += Resolver.bintrayRepo("givers", "maven")
-addSbtPlugin("givers.webpack" % "sbt-webpack" % "0.9.0")

@@ -2,7 +2,6 @@ package io.andrewsmith.website
 
 import cats.effect._
 import cats.implicits._
-import fs2.Stream
 import fs2.concurrent.Topic
 import io.andrewsmith.website.services._
 import io.andrewsmith.website.utils.BogoStream
@@ -20,7 +19,7 @@ object Main extends IOApp {
         val bogoStream = BogoStream.bogoStream.through(bogoStateTopic.publish)
 
         val app: HttpApp[IO] = Router(
-          "/" -> (FileService.routes <+> ViewService.routes),
+          "/" -> FileService.routes,
           "/api" -> (BogosortApiService.routes(bogoStateTopic) <+> MessagesApiService.routes),
           "/assets" -> ResourceService.routes
         ).orNotFound
