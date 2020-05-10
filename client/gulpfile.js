@@ -3,6 +3,7 @@ const rename = require("gulp-rename");
 
 const ts = require("gulp-typescript");
 const tsProject = ts.createProject("tsconfig.json");
+const terser = require('gulp-terser');
 
 const sass = require("gulp-sass");
 sass.compiler = require("node-sass");
@@ -10,7 +11,7 @@ sass.compiler = require("node-sass");
 const ejs = require("gulp-ejs");
 
 const compileTypescript = () => {
-  return tsProject.src().pipe(tsProject()).js.pipe(dest("dist"));
+  return tsProject.src().pipe(tsProject()).js.pipe(terser()).pipe(dest("dist"));
 };
 
 const compileTypescriptLive = () => {
@@ -19,7 +20,7 @@ const compileTypescriptLive = () => {
 
 const compileSass = () => {
   return src("src/css/**/*.scss")
-    .pipe(sass().on("error", sass.logError))
+    .pipe(sass({outputStyle: 'compressed'}).on("error", sass.logError))
     .pipe(dest("dist"));
 };
 
