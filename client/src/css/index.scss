@@ -2,6 +2,7 @@
 
 body {
   margin: 0;
+  overflow: hidden;
 
   // This is basically a fake "body" so that we can overlay it on the canvas
   &>div {
