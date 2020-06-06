@@ -5,7 +5,7 @@ namespace Bogosort {
     }
 
     const main = (): void => {
-        const stateEventSource = new EventSource('/api/bogosort/state');
+        const stateEventSource = new EventSource('/bogosort/state');
         stateEventSource.onmessage = (event) => {
             const afterSemicolonSplit = event.data.split(';');
             const newArray = afterSemicolonSplit[0].split(',').map((n: string) => parseInt(n));

@@ -20,7 +20,8 @@ object Main extends IOApp {
 
         val app: HttpApp[IO] = Router(
           "/" -> StaticService.routes,
-          "/api" -> (BogosortApiService.routes(bogoStateTopic) <+> MessagesApiService.routes),
+          "/bogosort" -> BogosortService.routes(bogoStateTopic),
+          "/messages" -> MessagesService.routes
         ).orNotFound
 
         val appWithMiddleware = GZip(app)
