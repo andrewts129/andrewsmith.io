@@ -1,7 +1,8 @@
 package io.andrewsmith.website
 
+import scala.concurrent.ExecutionContext.global
+
 import cats.effect._
-import cats.implicits._
 import fs2.concurrent.Topic
 import io.andrewsmith.website.services._
 import io.andrewsmith.website.utils.BogoStream
@@ -26,7 +27,7 @@ object Main extends IOApp {
 
         val appWithMiddleware = GZip(app)
 
-        val httpStream = BlazeServerBuilder[IO]
+        val httpStream = BlazeServerBuilder[IO](global)
           .bindHttp(8000, "0.0.0.0")
           .withHttpApp(appWithMiddleware)
           .serve
