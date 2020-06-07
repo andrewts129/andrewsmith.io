@@ -1,6 +1,6 @@
 FROM mozilla/sbt AS packager
 
-RUN apt-get update && apt-get -y install curl gnupg && curl -sL https://deb.nodesource.com/setup_13.x  | bash - && apt-get -y install nodejs
+RUN apt-get update && apt-get -y install curl gnupg && curl -sL https://deb.nodesource.com/setup_12.x  | bash - && apt-get -y install nodejs
 
 COPY . /app
 WORKDIR /app
