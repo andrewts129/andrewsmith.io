@@ -10,7 +10,7 @@ RUN sbt assembly
 
 FROM adoptopenjdk/openjdk11:jre-11.0.7_10-alpine
 
-COPY --from=packager /app/server/target/scala-2.13/andrewsmithdotio-server-assembly-0.1.0-SNAPSHOT.jar /app.jar
+COPY --from=packager /app/server/target/scala-2.13/website-server-assembly-0.1.0-SNAPSHOT.jar /app.jar
 
 EXPOSE 8000
 CMD java -jar /app.jar

@@ -9,7 +9,7 @@ lazy val commonSettings = {
 lazy val client = (project in file("client"))
   .settings(commonSettings)
   .settings(
-    name := "andrewsmithdotio-client",
+    name := "website-client",
     resourceDirectory in Compile := baseDirectory.value / "dist"
   )
 
@@ -17,7 +17,7 @@ lazy val server = (project in file("server"))
   .dependsOn(client)
   .settings(commonSettings)
   .settings(
-    name := "andrewsmithdotio-server",
+    name := "website-server",
     libraryDependencies ++= Seq(
       "org.http4s" %% "http4s-dsl" % http4sVersion,
       "org.http4s" %% "http4s-blaze-server" % http4sVersion,

@@ -1,7 +1,7 @@
 {
-  "name": "andrewsmithdotio-client",
+  "name": "andrewsmith.io-client",
   "version": "0.0.1",
-  "description": "",
+  "description": "Front-end for andrewsmith.io",
   "author": "andrewts129@gmail.com",
   "scripts": {
     "build": "gulp build",
