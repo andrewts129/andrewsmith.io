@@ -1,8 +1,8 @@
 namespace Speak {
-    const textBox = document.getElementById('textBox') as HTMLInputElement
-    const submitButton = document.getElementById('submitButton') as HTMLInputElement;
+    const onSubmit = async (event: any): Promise<void> => {
+        const textBox = document.getElementById('textBox') as HTMLInputElement
+        const submitButton = document.getElementById('submitButton') as HTMLInputElement;
 
-    const onSubmit = async (): Promise<void> => {
         textBox.disabled = true;
         submitButton.disabled = true;
 
@@ -18,10 +18,12 @@ namespace Speak {
             textBox.disabled = false;
             submitButton.disabled = false;
         })
+
+        event.preventDefault();
     }
 
     const main = (): void => {
-        submitButton.addEventListener('click', onSubmit)
+        document.getElementById('form').addEventListener('submit', onSubmit)
     };
 
     window.onload = main;

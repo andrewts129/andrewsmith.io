@@ -9,10 +9,10 @@
     <%- include('include/favicon'); -%>
   </head>
   <body>
-    <form>
+    <form id="form">
       <label for="message">Text: </label>
-      <input name="textBox" id="textBox" />
-      <button id="submitButton" type="button">Submit</button>
+      <input name="textBox" id="textBox" required="required" />
+      <button id="submitButton" type="submit">Submit</button>
     </form>
   </body>
   <%- include('include/analytics'); -%>
