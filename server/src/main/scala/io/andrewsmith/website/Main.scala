@@ -1,11 +1,10 @@
 package io.andrewsmith.website
 
 import scala.concurrent.ExecutionContext.global
-
 import cats.effect._
 import fs2.concurrent.Topic
 import io.andrewsmith.website.services._
-import io.andrewsmith.website.utils.BogoStream
+import io.andrewsmith.website.utils.{BogoStream, MessageStream}
 import org.http4s.HttpApp
 import org.http4s.implicits._
 import org.http4s.server.Router
@@ -16,13 +15,16 @@ object Main extends IOApp {
   override def run(args: List[String]): IO[ExitCode] = {
     for {
       bogoStateTopic <- Topic[IO, Seq[Int]]((10 to 1).toVector)
+      messageTopic <- Topic[IO, String]("")
+
       exitCode <- {
         val bogoStream = BogoStream.bogoStream.through(bogoStateTopic.publish)
+        val messageStream = MessageStream.messageStream.through(messageTopic.publish)
 
         val app: HttpApp[IO] = Router(
           "/" -> StaticService.routes,
           "/bogosort" -> BogosortService.routes(bogoStateTopic),
-          "/messages" -> MessagesService.routes
+          "/messages" -> MessagesService.routes(messageTopic)
         ).orNotFound
 
         val appWithMiddleware = GZip(app)
@@ -34,6 +36,7 @@ object Main extends IOApp {
 
         httpStream
           .merge(bogoStream)
+          .merge(messageStream)
           .compile
           .drain
           .as(ExitCode.Success)
