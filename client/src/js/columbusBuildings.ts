@@ -12,20 +12,22 @@ namespace ColumbusBuildings {
                 minZoom: 11,
                 maxZoom: 16,
                 style: `${tileServerUrl}/styles/base/style.json`,
-                antialias: true,
+                antialias: true
             });
+
+            map.scrollZoom.setWheelZoomRate(0.1)
 
             map.on('load', () => {
                 map.addSource('buildings', {
                     type: 'vector',
-                    tiles:[`${tileServerUrl}/data/buildings/{z}/{x}/{y}.pbf`],
+                    tiles: [`${tileServerUrl}/data/buildings/{z}/{x}/{y}.pbf`],
                     minzoom: 11,
                     maxzoom: 15,
                 });
 
                 map.addSource('columbus', {
                     type: 'vector',
-                    tiles:[`${tileServerUrl}/data/columbus/{z}/{x}/{y}.pbf`]
+                    tiles: [`${tileServerUrl}/data/columbus/{z}/{x}/{y}.pbf`]
                 });
 
                 map.addControl(new mapboxgl.FullscreenControl());
