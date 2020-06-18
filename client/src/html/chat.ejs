@@ -9,11 +9,14 @@
     <%- include('include/favicon'); -%>
   </head>
   <body>
-    <form id="form">
-      <label for="message">Text: </label>
-      <input name="textBox" id="textBox" required="required" />
-      <button id="submitButton" type="submit">Submit</button>
-    </form>
+    <p id="introText">Click anywhere to enter</p>
+    <template id="contentTemplate">
+      <form id="form">
+        <label for="message">Text: </label>
+        <input name="textBox" id="textBox" required="required" />
+        <button id="submitButton" type="submit">Submit</button>
+      </form>
+    </template>
   </body>
   <%- include('include/analytics'); -%>
 </html>

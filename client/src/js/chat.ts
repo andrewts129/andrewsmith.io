@@ -83,16 +83,26 @@ namespace Chat {
         }
     }
 
-    const main = (): void => {
+    const onClickAnywhere = (): void => {
+        document.body.removeChild(document.getElementById('introText'));
+
+        const template = document.getElementById('contentTemplate') as HTMLTemplateElement
+        const form = template.content.cloneNode(true);
+        document.body.appendChild(form);
+
         document.getElementById('form').addEventListener('submit', onSubmit);
 
+        popFromBuffer();
+        setInterval(popFromBuffer, 300)
+    }
+
+    const main = (): void => {
         const messageEventSource = new EventSource('/messages/stream');
         messageEventSource.onmessage = (event) => {
             state.messageBuffer.push(event.data);
         };
 
-        popFromBuffer();
-        setInterval(popFromBuffer, 300)
+        document.body.addEventListener('click', onClickAnywhere, true);
     };
 
     window.onload = main;
