@@ -65,10 +65,14 @@ namespace Chat {
                 audio.play();
             });
 
-            return new Promise((resolve) => {
+            return new Promise((resolve, reject) => {
                 audio.addEventListener('ended', () => {
                     resolve();
                 });
+
+                audio.addEventListener('error', () => {
+                    reject();
+                })
             });
         }
     }
@@ -76,7 +80,13 @@ namespace Chat {
     const popFromBuffer = async () => {
         if (state.messageBuffer.length > 0) {
             const message = state.messageBuffer.shift();
-            await speak(message);
+
+            try {
+                await speak(message);
+            } catch (e) {
+                console.log(e);
+                alert('Error');
+            }
 
             if (message === state.mySubmission) {
                 state.mySubmission = undefined;
