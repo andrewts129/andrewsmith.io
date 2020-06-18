@@ -85,11 +85,12 @@ namespace Chat {
     }
 
     const onClickAnywhere = (): void => {
-        document.body.removeChild(document.getElementById('introText'));
+        document.body.removeEventListener('click', onClickAnywhere, true);
+        document.getElementById('introContainer').remove();
 
         const template = document.getElementById('contentTemplate') as HTMLTemplateElement
         const form = template.content.cloneNode(true);
-        document.body.appendChild(form);
+        document.getElementsByClassName('hero-body')[0].appendChild(form);
 
         document.getElementById('form').addEventListener('submit', onSubmit);
 

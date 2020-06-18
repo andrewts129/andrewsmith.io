@@ -14,15 +14,41 @@ body {
   justify-content: center;
 }
 
-#introText {
-  font-weight: 300;
-  font-size: 2.4rem;
+#introContainer {
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  p {
+    font-weight: 300;
+    font-size: 2.4rem;
+  }
 }
 
-#submitButton {
-  font-family: inherit;
-}
+#formContainer {
+  width: 100%;
+  height: 100%;
 
-#textBox {
-  font-family: inherit;
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: center;
+
+  form {
+    padding-top: 30rem;
+
+    #submitButton {
+      font-family: inherit;
+    }
+
+    #textBox {
+      font-family: inherit;
+
+      @media (min-width: 768px) {
+        width: 45rem;
+      }
+    }
+  }
 }
