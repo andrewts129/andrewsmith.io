@@ -51,6 +51,7 @@ namespace Chat {
             alert('Message failed!');
         }
 
+        textBox.value = '';
         textBox.disabled = false;
         submitButton.disabled = false;
     }

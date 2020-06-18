@@ -6,15 +6,22 @@
     <meta name="author" content="Andrew Smith" />
     <meta name="description" content="Text-to-speech chatroom" />
     <script defer src="/chat.js"></script>
+    <link rel="stylesheet" href="/chat.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.0/css/bulma.min.css" />
     <%- include('include/favicon'); -%>
   </head>
   <body>
     <p id="introText">Click anywhere to enter</p>
     <template id="contentTemplate">
       <form id="form">
-        <label for="message">Text: </label>
-        <input name="textBox" id="textBox" required="required" />
-        <button id="submitButton" type="submit">Submit</button>
+        <div class="field is-grouped">
+          <div class="control">
+            <input class="input is-medium" name="textBox" id="textBox" required="required" />
+          </div>
+          <div class="control">
+            <button class="button is-medium is-info" id="submitButton" type="submit">Send</button>
+          </div>
+        </div>
       </form>
     </template>
   </body>
