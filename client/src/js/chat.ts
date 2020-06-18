@@ -92,6 +92,7 @@ namespace Chat {
         const form = template.content.cloneNode(true);
         document.getElementsByClassName('hero-body')[0].appendChild(form);
 
+        document.getElementById('')
         document.getElementById('form').addEventListener('submit', onSubmit);
 
         popFromBuffer();

@@ -2,9 +2,9 @@
 <html lang="en-us">
   <head>
     <meta charset="UTF-8" />
-    <title>Text To Speech</title>
+    <title>Chat</title>
     <meta name="author" content="Andrew Smith" />
-    <meta name="description" content="Text-to-speech chatroom" />
+    <meta name="description" content="A chat room" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <script defer src="/chat.js"></script>
     <link rel="stylesheet" href="/chat.css" />
@@ -24,7 +24,7 @@
         <form id="form">
           <div class="field has-addons">
             <div class="control">
-              <input class="input is-medium" name="textBox" id="textBox" required="required" />
+              <input class="input is-medium" name="textBox" id="textBox" required="required" maxlength="500" />
             </div>
             <div class="control">
               <button class="button is-medium is-info" id="submitButton" type="submit">Send</button>
