@@ -5,6 +5,10 @@ namespace Bogosort {
     }
 
     const main = (): void => {
+        // Queue data from the server as it comes in, then pop and draw once a second
+        // Smooths the animation when the network or server sees small delays
+        const stateQueue: State[] = [];
+
         const stateEventSource = new EventSource('/bogosort/state');
         stateEventSource.onmessage = (event) => {
             const afterSemicolonSplit = event.data.split(';');
@@ -21,10 +25,6 @@ namespace Bogosort {
         const margin = {top: 20, right: 20, bottom: 20, left: 20};
         const width = 750 - margin.left - margin.right;
         const height = 500 - margin.top - margin.bottom;
-
-        // Queue data from the server as it comes in, then pop and draw once a second
-        // Smooths the animation when the network or server sees small delays
-        const stateQueue: State[] = [];
 
         const x = d3.scaleBand()
             .domain([...currentData.keys()].map(x => x.toString()))

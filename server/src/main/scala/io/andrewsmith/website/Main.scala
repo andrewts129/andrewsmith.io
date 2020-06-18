@@ -16,13 +16,15 @@ object Main extends IOApp {
   override def run(args: List[String]): IO[ExitCode] = {
     for {
       bogoStateTopic <- Topic[IO, Seq[Int]]((10 to 1).toVector)
+      messageTopic <- Topic[IO, String]("")
+
       exitCode <- {
         val bogoStream = BogoStream.bogoStream.through(bogoStateTopic.publish)
 
         val app: HttpApp[IO] = Router(
           "/" -> StaticService.routes,
           "/bogosort" -> BogosortService.routes(bogoStateTopic),
-          "/messages" -> MessagesService.routes
+          "/messages" -> MessagesService.routes(messageTopic)
         ).orNotFound
 
         val appWithMiddleware = GZip(app)

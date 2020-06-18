@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Text To Speech</title>
+    <meta name="author" content="Andrew Smith" />
+    <meta name="description" content="Text-to-speech chatroom" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script defer src="/chat.js"></script>
+    <link rel="stylesheet" href="/chat.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.0/css/bulma.min.css" />
+    <%- include('include/favicon'); -%>
+  </head>
+  <body>
+    <section class="hero is-fullheight">
+      <div class="hero-body">
+        <div id="introContainer" class="container has-text-centered">
+          <p>Click anywhere to enter</p>
+        </div>
+      </div>
+    </section>
+    <template id="contentTemplate">
+      <div id="formContainer" class="container">
+        <form id="form">
+          <div class="field has-addons">
+            <div class="control">
+              <input class="input is-medium" name="textBox" id="textBox" required="required" />
+            </div>
+            <div class="control">
+              <button class="button is-medium is-info" id="submitButton" type="submit">Send</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </template>
+  </body>
+  <%- include('include/analytics'); -%>
+</html>
