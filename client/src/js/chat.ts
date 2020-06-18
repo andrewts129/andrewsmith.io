@@ -59,21 +59,25 @@ namespace Chat {
     const speak = async (text: string): Promise<void> => {
         if (text.length > 0) {
             const url = `https://voice.andrewsmith.io/${encodeURIComponent(text)}`;
-            const audio = new Audio(url);
+            if (url.length < 2000) {
+                const audio = new Audio(url);
 
-            audio.addEventListener('canplaythrough', () => {
-                audio.play();
-            });
-
-            return new Promise((resolve, reject) => {
-                audio.addEventListener('ended', () => {
-                    resolve();
+                audio.addEventListener('canplaythrough', () => {
+                    audio.play();
                 });
 
-                audio.addEventListener('error', () => {
-                    reject();
-                })
-            });
+                return new Promise((resolve, reject) => {
+                    audio.addEventListener('ended', () => {
+                        resolve();
+                    });
+
+                    audio.addEventListener('error', () => {
+                        reject();
+                    })
+                });
+            } else {
+                alert('Too long');
+            }
         }
     }
 
