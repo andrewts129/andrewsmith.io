@@ -1,10 +1,11 @@
 package io.andrewsmith.website
 
 import scala.concurrent.ExecutionContext.global
+
 import cats.effect._
 import fs2.concurrent.Topic
 import io.andrewsmith.website.services._
-import io.andrewsmith.website.utils.{BogoStream, MessageStream}
+import io.andrewsmith.website.utils.BogoStream
 import org.http4s.HttpApp
 import org.http4s.implicits._
 import org.http4s.server.Router
@@ -19,7 +20,6 @@ object Main extends IOApp {
 
       exitCode <- {
         val bogoStream = BogoStream.bogoStream.through(bogoStateTopic.publish)
-        val messageStream = MessageStream.messageStream.through(messageTopic.publish)
 
         val app: HttpApp[IO] = Router(
           "/" -> StaticService.routes,
@@ -36,7 +36,6 @@ object Main extends IOApp {
 
         httpStream
           .merge(bogoStream)
-          .merge(messageStream)
           .compile
           .drain
           .as(ExitCode.Success)
