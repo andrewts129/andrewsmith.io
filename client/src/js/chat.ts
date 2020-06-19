@@ -1,12 +1,16 @@
 namespace Chat {
+    // Weird speaker/audio handling explained here: https://stackoverflow.com/a/57547943
+
     interface State {
         messageBuffer: string[]
         mySubmission: string | undefined
+        speakers: HTMLAudioElement[]
     }
 
     const state: State = {
         messageBuffer: [],
-        mySubmission: undefined
+        mySubmission: undefined,
+        speakers: Array.from({ length: 16 }, () => new Audio())
     }
 
     const blockWhileSubmissionPending = async (): Promise<void> => {
@@ -60,21 +64,28 @@ namespace Chat {
         if (text.length > 0) {
             const url = `https://voice.andrewsmith.io/${encodeURIComponent(text)}`;
             if (url.length < 2000) {
-                const audio = new Audio(url);
+                const audio = state.speakers.find((speaker) => !speaker.src);
 
-                audio.addEventListener('canplaythrough', () => {
-                    audio.play();
-                });
+                if (audio) {
+                    // Workaround for Safari since this isn't happening in a click handler
+                    audio.src = url;
 
-                return new Promise((resolve, reject) => {
-                    audio.addEventListener('ended', () => {
-                        resolve();
+                    audio.addEventListener('canplaythrough', () => {
+                        audio.play();
                     });
 
-                    audio.addEventListener('error', () => {
-                        reject();
-                    })
-                });
+                    return new Promise((resolve, reject) => {
+                        audio.addEventListener('ended', () => {
+                            audio.src = '';
+                            resolve();
+                        });
+
+                        audio.addEventListener('error', () => {
+                            audio.src = '';
+                            reject();
+                        })
+                    });
+                }
             } else {
                 alert('Too long');
             }
@@ -107,6 +118,13 @@ namespace Chat {
         document.getElementsByClassName('hero-body')[0].appendChild(form);
 
         document.getElementById('form').addEventListener('submit', onSubmit);
+
+        // Safari only allows audio to be played from a click handler?
+        state.speakers.forEach((speaker) => {
+            speaker.addEventListener('canplay', () => {
+                speaker.play();
+            });
+        });
 
         popFromBuffer();
         setInterval(popFromBuffer, 300)
