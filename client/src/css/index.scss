@@ -33,9 +33,10 @@ body {
 section {
   // My name
   h1 {
-    font-weight: 300;
+    font-weight: 500;
     font-size: 3.6rem;
     margin-bottom: 0;
+    color: $accent-color;
   }
 
   // Subtitle
