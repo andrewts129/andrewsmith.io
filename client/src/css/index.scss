@@ -13,27 +13,24 @@ body {
     height: 100%;
 
     display: grid;
-    grid-template-rows: 20% auto 20%;
-    grid-template-areas:
-      "nav"
-      "main"
-      ".";
+
+    // The content centered
+    & > div {
+      justify-self: center;
+      align-self: center;
+
+      // The content won't actually be completely centered on the screen automatically because of the browser's nav bar, so
+      // this moves it closer to the real center
+      margin-bottom: 5rem;
+
+      // So that it's not hugging the edges on mobile
+      margin-left: 2rem;
+      margin-right: 2rem;
+    }
   }
 }
 
 section {
-  grid-area: main;
-  justify-self: center;
-  align-self: center;
-
-  // The content won't actually be completely centered on the screen automatically because of the browser's nav bar, so
-  // this moves it closer to the real center
-  margin-bottom: 5rem;
-
-  // So that it's not hugging the edges on mobile
-  margin-left: 2rem;
-  margin-right: 2rem;
-
   // My name
   h1 {
     font-weight: 300;
@@ -46,22 +43,20 @@ section {
     font-weight: 300;
     font-size: 1.8rem;
     margin-top: 0.5rem;
+    margin-bottom: 0;
   }
 }
 
 nav {
-  grid-area: nav;
-  justify-self: end;
-  align-self: center;
-
-  margin-right: 10%;
-
   ul {
     display: flex;
     flex-flow: row wrap;
     justify-content: flex-start;
 
-    font-size: 1.8rem;
+    font-size: 1.6rem;
+
+    // Overwriting default
+    padding-left: 0;
 
     list-style-type: none;
     li {
