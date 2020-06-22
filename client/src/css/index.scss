@@ -58,16 +58,13 @@ nav {
 
   ul {
     display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+    flex-flow: row wrap;
+    justify-content: flex-start;
 
     font-size: 1.8rem;
 
     list-style-type: none;
-
     li {
-      flex-direction: row;
-
       margin-right: 0.2rem;
 
       &:not(:last-child) {
