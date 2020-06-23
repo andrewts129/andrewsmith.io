@@ -95,17 +95,30 @@ nav {
     }
 
     #projectsListParent {
-      ul {
-        opacity: 0;
-        transition: opacity 300ms ease;
+      $num-projects: 3;
 
+      ul {
+        visibility: hidden;
+        transition: visibility #{$num-projects * 300ms};
+
+        display: flex;
         flex-direction: column;
         position: absolute;
-        top: 100%; // Places this below the bottom of the list
+        top: 100%; // Places this below the bottom of the nav
         padding-top: 1rem;
 
         padding-left: 1rem;
         line-height: 1.6;
+
+        li {
+          opacity: 0;
+        }
+
+        @for $i from 0 to $num-projects {
+          li:nth-child(#{$i + 1}) {
+            transition: opacity #{$num-projects * 300 - $i * 300}ms ease;
+          }
+        }
 
         a {
           font-size: 1.4rem;
@@ -116,7 +129,17 @@ nav {
       }
 
       &:hover ul {
-        opacity: 1;
+        visibility: visible;
+
+        li {
+          opacity: 1;
+        }
+
+        @for $i from 0 to $num-projects {
+          li:nth-child(#{$i + 1}) {
+            transition: opacity #{500 + $i * 500}ms ease;
+          }
+        }
       }
     }
   }
