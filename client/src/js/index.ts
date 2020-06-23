@@ -175,6 +175,10 @@ namespace Index {
     };
 
     const main = (): void => {
+        document.getElementById('projectsLink').addEventListener('click', (event: MouseEvent) => {
+            event.preventDefault();
+        });
+
         const canvas = document.getElementById('animationCanvas') as HTMLCanvasElement;
         const context = canvas.getContext('2d');
 
