@@ -98,6 +98,7 @@ nav {
       $num-projects: 3;
 
       ul {
+        // Visibility change is delayed until opacity animation is done (otherwise it gets cut off)
         visibility: hidden;
         transition: visibility #{$num-projects * 300ms};
 
@@ -114,6 +115,7 @@ nav {
           opacity: 0;
         }
 
+        // Transition out bottom to top
         @for $i from 0 to $num-projects {
           li:nth-child(#{$i + 1}) {
             transition: opacity #{$num-projects * 300 - $i * 300}ms ease;
@@ -128,13 +130,15 @@ nav {
         }
       }
 
-      &:hover ul {
+      &:hover ul,
+      &:focus-within ul {
         visibility: visible;
 
         li {
           opacity: 1;
         }
 
+        // Transition in top to bottom
         @for $i from 0 to $num-projects {
           li:nth-child(#{$i + 1}) {
             transition: opacity #{500 + $i * 500}ms ease;
