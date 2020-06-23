@@ -4,6 +4,9 @@ body {
   margin: 0;
   overflow: hidden;
 
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
   // This is basically a fake "body" so that we can overlay it on the canvas
   & > div {
     position: fixed;
