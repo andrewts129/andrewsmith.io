@@ -93,6 +93,8 @@ nav {
 
     #projectsList {
       display: none; // Set to 'flex' on button click or if JS is not enabled
+      flex-direction: column;
+      position: absolute;
     }
   }
 }
