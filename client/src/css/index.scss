@@ -91,10 +91,18 @@ nav {
       }
     }
 
-    #projectsList {
-      display: none; // Set to 'flex' on button click or if JS is not enabled
-      flex-direction: column;
-      position: absolute;
+    #projectsListParent {
+      ul {
+        opacity: 0;
+        transition: opacity 300ms ease;
+
+        flex-direction: column;
+        position: absolute;
+      }
+
+      &:hover ul {
+        opacity: 1;
+      }
     }
   }
 }

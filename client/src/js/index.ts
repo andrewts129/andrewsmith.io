@@ -174,20 +174,7 @@ namespace Index {
         setTimeout(updateAll, dt, context, balls);
     };
 
-    const onProjectsHover = (): void => {
-        document.getElementById('projectsList').style.display = 'flex';
-    }
-
-    const onProjectsHoverLeave = (): void => {
-        document.getElementById('projectsList').style.display = 'none';
-    }
-
     const main = (): void => {
-        // 'Projects' dropdown toggle
-        document.getElementById('projectsListParent').addEventListener('mouseover', onProjectsHover);
-        document.getElementById('projectsListParent').addEventListener('mouseleave', onProjectsHoverLeave);
-
-        // Background animation
         const canvas = document.getElementById('animationCanvas') as HTMLCanvasElement;
         const context = canvas.getContext('2d');
 
