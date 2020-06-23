@@ -9,6 +9,13 @@
     <link rel="stylesheet" href="/index.css" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <%- include('include/favicon'); -%>
+    <noscript>
+      <style>
+        #projectsList {
+          display: flex !important;
+        }
+      </style>
+    </noscript>
   </head>
   <body>
     <canvas id="animationCanvas"></canvas>
@@ -20,7 +27,14 @@
         </section>
         <nav>
           <ul>
-            <li><a href="/links">Projects</a></li>
+            <li>
+              <a href="#" id="projectsButton">Projects</a>
+              <ul id="projectsList">
+                <li><a href="/columbus-buildings">Age of Columbus Buildings Map</a></li>
+                <li><a href="https://twitter.com/DonaldTrumBot">@DonaldTrumBot</a></li>
+                <li><a href="/bogosort">Bogosort</a></li>
+              </ul>
+            </li>
             <li><a href="https://github.com/andrewts129">GitHub</a></li>
             <li><a href="https://www.linkedin.com/in/andrewsmith129/">LinkedIn</a></li>
             <li><a href="mailto:andrewts129@gmail.com">Contact</a></li>

@@ -155,7 +155,7 @@ namespace Index {
         return `rgba(${redValue},0,0,${opacity})`;
     };
 
-    const buildBalls = (): Ball[] => Array.from({length: 15}, () => {
+    const buildBalls = (): Ball[] => Array.from({ length: 15 }, () => {
         const newBallX = randNumBetween(0, width);
         const newBallY = randNumBetween(0, height);
 
@@ -175,8 +175,8 @@ namespace Index {
     };
 
     const main = (): void => {
-        const canvas = document.getElementById("animationCanvas") as HTMLCanvasElement;
-        const context = canvas.getContext("2d");
+        const canvas = document.getElementById('animationCanvas') as HTMLCanvasElement;
+        const context = canvas.getContext('2d');
 
         context.canvas.width = width;
         context.canvas.height = height;
