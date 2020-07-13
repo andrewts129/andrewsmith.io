@@ -58,8 +58,16 @@ nav {
 
   > ul {
     display: flex;
-    flex-flow: row wrap;
     justify-content: flex-start;
+
+    $column-breakpoint: 525px;
+
+    // Rows when there's room, column when there isn't
+    flex-direction: row;
+    @media only screen and (max-device-width: $column-breakpoint) {
+      flex-direction: column;
+      width: fit-content; // For positioning of projects list
+    }
 
     // Anchoring for the projects dropdown
     position: relative;
@@ -72,6 +80,16 @@ nav {
     > li {
       margin-right: 0.2rem;
 
+      a {
+        color: $text-color;
+        font-weight: 300;
+        text-decoration: none;
+
+        &:visited {
+          color: $text-color;
+        }
+      }
+
       &:not(:last-child) {
         padding-right: 0.6rem;
 
@@ -83,14 +101,13 @@ nav {
         }
       }
 
-      a {
-        color: $text-color;
-        font-weight: 300;
-        text-decoration: none;
-
-        &:visited {
-          color: $text-color;
+      // No slashes when rendering as column
+      @media only screen and (max-device-width: $column-breakpoint) {
+        &:not(:last-child)::after {
+          content: none;
         }
+
+        padding-bottom: 0.6rem;
       }
     }
 
@@ -107,6 +124,19 @@ nav {
         position: absolute;
         top: 100%; // Places this below the bottom of the nav
         padding-top: 1rem;
+
+        // Place it on the left when in column mode
+        @media only screen and (max-device-width: $column-breakpoint) {
+          top: 0;
+          left: 100%;
+          padding-top: 0;
+
+          // Other small positioning modifications
+          line-height: 1.2;
+          li {
+            margin-bottom: 0.4rem;
+          }
+        }
 
         padding-left: 1rem;
         line-height: 1.6;
@@ -127,6 +157,11 @@ nav {
           color: $text-color;
           font-weight: 400;
           text-decoration: none;
+
+          // Decrease font size in column mode to better communicate hierarchy
+          @media only screen and (max-device-width: $column-breakpoint) {
+            font-size: 1.2rem;
+          }
         }
       }
 
