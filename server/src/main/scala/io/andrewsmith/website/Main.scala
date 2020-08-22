@@ -1,7 +1,6 @@
 package io.andrewsmith.website
 
 import scala.concurrent.ExecutionContext.global
-
 import cats.effect._
 import fs2.concurrent.Topic
 import io.andrewsmith.website.services._
@@ -10,7 +9,7 @@ import org.http4s.HttpApp
 import org.http4s.implicits._
 import org.http4s.server.Router
 import org.http4s.server.blaze._
-import org.http4s.server.middleware.GZip
+import org.http4s.server.middleware.{GZip, Logger, RequestLogger}
 
 object Main extends IOApp {
   override def run(args: List[String]): IO[ExitCode] = {
@@ -27,7 +26,7 @@ object Main extends IOApp {
           "/messages" -> MessagesService.routes(messageTopic)
         ).orNotFound
 
-        val appWithMiddleware = GZip(app)
+        val appWithMiddleware = RequestLogger.httpApp(logHeaders = true, logBody = true)(GZip(app))
 
         val httpStream = BlazeServerBuilder[IO](global)
           .bindHttp(8000, "0.0.0.0")
