@@ -9,9 +9,15 @@ import org.http4s.HttpApp
 import org.http4s.implicits._
 import org.http4s.server.Router
 import org.http4s.server.blaze._
-import org.http4s.server.middleware.{GZip, Logger, RequestLogger}
+import org.http4s.server.middleware.{GZip, RequestLogger}
 
 object Main extends IOApp {
+  def router(bogoStateTopic: Topic[IO, Seq[Int]], messageTopic: Topic[IO, String]): HttpApp[IO] = Router(
+    "/" -> StaticService.routes,
+    "/bogosort" -> BogosortService.routes(bogoStateTopic),
+    "/messages" -> MessagesService.routes(messageTopic)
+  ).orNotFound
+
   override def run(args: List[String]): IO[ExitCode] = {
     for {
       bogoStateTopic <- Topic[IO, Seq[Int]]((10 to 1).toVector)
@@ -20,12 +26,7 @@ object Main extends IOApp {
       exitCode <- {
         val bogoStream = BogoStream.bogoStream.through(bogoStateTopic.publish)
 
-        val app: HttpApp[IO] = Router(
-          "/" -> StaticService.routes,
-          "/bogosort" -> BogosortService.routes(bogoStateTopic),
-          "/messages" -> MessagesService.routes(messageTopic)
-        ).orNotFound
-
+        val app: HttpApp[IO] = router(bogoStateTopic, messageTopic)
         val appWithMiddleware = RequestLogger.httpApp(logHeaders = true, logBody = true)(GZip(app))
 
         val httpStream = BlazeServerBuilder[IO](global)

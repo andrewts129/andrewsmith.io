@@ -29,6 +29,8 @@ lazy val server = (project in file("server"))
       "org.xerial" % "sqlite-jdbc" % "3.32.3",
       "com.amazonaws" % "aws-java-sdk-s3" % "1.11.831",
       "org.flywaydb" % "flyway-core" % "6.5.3",
+      "org.specs2" %% "specs2-core" % "4.10.5" % "test",
+      "org.specs2" %% "specs2-mock" % "4.10.5" % "test"
     )
   ).enablePlugins(FlywayPlugin)
 
