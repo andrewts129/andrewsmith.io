@@ -14,13 +14,12 @@ import org.http4s.headers.`Content-Type`
 import scala.concurrent.ExecutionContext
 
 object StaticService {
-  implicit val cs: ContextShift[IO] = IO.contextShift(ExecutionContext.global)
   private val blockingPool = Executors.newFixedThreadPool(4)
   private val blocker = Blocker.liftExecutorService(blockingPool)
 
   private val acceptedExtensions = Set("js", "css", "map", "html", "png", "ico", "txt")
 
-  val routes: HttpRoutes[IO] = HttpRoutes.of[IO] {
+  def routes(implicit cs: ContextShift[IO]): HttpRoutes[IO] = HttpRoutes.of[IO] {
     case GET -> Root / "AndrewSmithResume.pdf" => Ok(downloadResume(), `Content-Type`(MediaType.application.pdf))
     case request @ GET -> Root => static("index.html", blocker, request)
     case request @ GET -> Root / file => extractExtension(file) match {
@@ -29,7 +28,7 @@ object StaticService {
     }
   }
 
-  private def static(file: String, blocker: Blocker, request: Request[IO]): IO[Response[IO]] =
+  private def static(file: String, blocker: Blocker, request: Request[IO])(implicit cs: ContextShift[IO]): IO[Response[IO]] =
     StaticFile.fromResource(s"/$file", blocker, Some(request)).getOrElseF(NotFound())
 
   private def extractExtension(file: String): Option[String] = file.lastIndexOf('.') match {
