@@ -28,6 +28,7 @@ lazy val server = (project in file("server"))
       "org.tpolecat" %% "doobie-core" % "0.10.0",
       "org.xerial" % "sqlite-jdbc" % "3.34.0",
       "org.flywaydb" % "flyway-core" % "7.5.3",
+      "io.andrewsmith" %% "markovs" % "0.1-SNAPSHOT"
     )
   ).enablePlugins(FlywayPlugin)
 
