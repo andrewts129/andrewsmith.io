@@ -14,5 +14,9 @@ body {
         font-weight: 450;
         font-size: 24px;
         width: 40rem;
+
+        span {
+            opacity: 0;
+        }
     }
 }
