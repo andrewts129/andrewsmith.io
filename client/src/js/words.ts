@@ -8,14 +8,15 @@ namespace Words {
             characterBuffer.push(...characters, ' ') // Put a space between this sentence and the next
         };
 
-        let output = '';
-        const wordsContainer = document.getElementById('wordsContainer');
+        let visibleOutput = '';
+        const visibleContainer = document.getElementById('visibleCharContainer');
+        const invisibleContainer = document.getElementById('invisibleCharContainer');
 
         const isWhitespace = (s: String) => s.trim() === '';
         const writeNextCharacter = (): void => {
             if (characterBuffer.length > 0) {
-                output += characterBuffer.shift();
-                wordsContainer.innerText = output;
+                visibleOutput += characterBuffer.shift();
+                visibleContainer.innerText = visibleOutput;
 
                 let restOfWordPlaceholderText = '';
                 for (const character of characterBuffer) {
@@ -27,9 +28,7 @@ namespace Words {
                     }
                 }
 
-                const restOfWordPlaceholder = document.createElement('span');
-                restOfWordPlaceholder.innerText = restOfWordPlaceholderText;
-                wordsContainer.appendChild(restOfWordPlaceholder);
+                invisibleContainer.innerText = restOfWordPlaceholderText;
             }
         };
 
