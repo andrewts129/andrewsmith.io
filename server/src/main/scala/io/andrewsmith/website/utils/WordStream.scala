@@ -9,6 +9,6 @@ import scala.concurrent.duration._
 
 object WordStream {
   def wordStream(schemaPath: Path)(implicit timer: Timer[IO]): Stream[IO, String] = {
-    Model.load(schemaPath).flatMap(Model.generateText).repeat.metered(1.second)
+    Model.load(schemaPath).flatMap(Model.generateText).repeat.metered(3.seconds)
   }
 }
