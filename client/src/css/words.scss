@@ -15,8 +15,8 @@ body {
         font-size: 24px;
         width: 40rem;
 
-        #invisibleCharContainer {
-            opacity: 0;
-        }
+        #textInvisible {
+            visibility: hidden;
+        }    
     }
 }

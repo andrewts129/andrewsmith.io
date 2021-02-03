@@ -1,35 +1,32 @@
 namespace Words {
     const main = (): void => {
-        const characterBuffer: Array<String> = [];
+        const characterBuffer: Array<string> = [];
 
         const eventSource = new EventSource('/words/stream');
         eventSource.onmessage = (event) => {
-            const characters = Array.from(event.data as String);
+            const characters = Array.from(event.data as string);
             characterBuffer.push(...characters, ' ') // Put a space between this sentence and the next
         };
 
-        let visibleOutput = '';
-        const visibleContainer = document.getElementById('visibleCharContainer');
-        const invisibleContainer = document.getElementById('invisibleCharContainer');
+        const textVisibleContainer = document.getElementById('text');
+        let textVisible = '';
 
-        const isWhitespace = (s: String) => s.trim() === '';
+        const textInvisibleContainer = document.getElementById('textInvisible');
+        let textInvisible = '';
+
         const writeNextCharacter = (): void => {
-            if (characterBuffer.length > 0) {
-                visibleOutput += characterBuffer.shift();
-                visibleContainer.innerText = visibleOutput;
-
-                let restOfWordPlaceholderText = '';
-                for (const character of characterBuffer) {
-                    const x = isWhitespace(character)
-                    if (x) {
-                        break;
-                    } else {
-                        restOfWordPlaceholderText += character;
-                    }
-                }
-
-                invisibleContainer.innerText = restOfWordPlaceholderText;
+            while (characterBuffer.length > 0 && textInvisible.length < 50) {
+                textInvisible += characterBuffer.shift();
             }
+
+            if (textInvisible.length > 0) {
+                const characterToDraw = textInvisible.charAt(0);
+                textInvisible = textInvisible.slice(1);
+                textVisible += characterToDraw;
+            }
+
+            textVisibleContainer.firstChild.nodeValue = textVisible;
+            textInvisibleContainer.innerText = textInvisible;
         };
 
         writeNextCharacter();
