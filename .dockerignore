@@ -12,3 +12,4 @@ Dockerfile
 **/node_modules/
 **/*.db
 **/*.sqlite
+server/static/

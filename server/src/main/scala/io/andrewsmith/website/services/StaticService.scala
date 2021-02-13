@@ -1,7 +1,8 @@
 package io.andrewsmith.website.services
 
-import java.util.concurrent.Executors
+import cats.data.OptionT
 
+import java.util.concurrent.Executors
 import cats.effect.{Blocker, ContextShift, IO}
 import com.amazonaws.auth.EnvironmentVariableCredentialsProvider
 import com.amazonaws.services.s3.model.S3Object
@@ -11,7 +12,7 @@ import org.http4s.{HttpRoutes, MediaType, Request, Response, StaticFile}
 import org.http4s.dsl.io._
 import org.http4s.headers.`Content-Type`
 
-import scala.concurrent.ExecutionContext
+import java.io.File
 
 object StaticService {
   private val blockingPool = Executors.newFixedThreadPool(4)
@@ -28,8 +29,21 @@ object StaticService {
     }
   }
 
-  private def static(file: String, blocker: Blocker, request: Request[IO])(implicit cs: ContextShift[IO]): IO[Response[IO]] =
-    StaticFile.fromResource(s"/$file", blocker, Some(request)).getOrElseF(NotFound())
+  private def static(file: String, blocker: Blocker, request: Request[IO])(implicit cs: ContextShift[IO]): IO[Response[IO]] = {
+    lazy val fromFile = staticFromFile(file, blocker, request)
+    lazy val fromResource = staticFromResource(file, blocker, request)
+
+    fromFile.getOrElseF(fromResource.getOrElseF(NotFound()))
+  }
+
+  private def staticFromFile(file: String, blocker: Blocker, request: Request[IO])(implicit cs: ContextShift[IO]): OptionT[IO, Response[IO]] = {
+    val fileDir = sys.env.getOrElse("STATIC_FILE_DIR", "./static")
+    StaticFile.fromFile(new File(s"$fileDir/$file"), blocker, Some(request))
+  }
+
+  private def staticFromResource(file: String, blocker: Blocker, request: Request[IO])(implicit cs: ContextShift[IO]): OptionT[IO, Response[IO]] = {
+    StaticFile.fromResource(s"/$file", blocker, Some(request))
+  }
 
   private def extractExtension(file: String): Option[String] = file.lastIndexOf('.') match {
     case -1 => None

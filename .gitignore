@@ -7,6 +7,7 @@ node_modules/
 .bsp/
 .idea/
 **/.vscode/
+server/static
 # Created by https://www.gitignore.io/api/sbt,linux,scala,intellij
 # Edit at https://www.gitignore.io/?templates=sbt,linux,scala,intellij
 
