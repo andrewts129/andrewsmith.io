@@ -1,9 +1,9 @@
-val http4sVersion = "0.21.6"
+val http4sVersion = "0.21.18"
 
 lazy val commonSettings = {
   organization := "io.andrewsmith"
   version := "1.2"
-  scalaVersion := "2.13.3"
+  scalaVersion := "2.13.4"
 }
 
 lazy val client = (project in file("client"))
@@ -25,10 +25,10 @@ lazy val server = (project in file("server"))
       "org.http4s" %% "http4s-circe" % http4sVersion,
       "io.circe" %% "circe-generic" % "0.13.0",
       "ch.qos.logback" % "logback-classic" % "1.2.3",
-      "org.tpolecat" %% "doobie-core" % "0.9.0",
-      "org.xerial" % "sqlite-jdbc" % "3.32.3",
-      "com.amazonaws" % "aws-java-sdk-s3" % "1.11.831",
-      "org.flywaydb" % "flyway-core" % "6.5.3",
+      "org.tpolecat" %% "doobie-core" % "0.10.0",
+      "org.xerial" % "sqlite-jdbc" % "3.34.0",
+      "com.amazonaws" % "aws-java-sdk-s3" % "1.11.953",
+      "org.flywaydb" % "flyway-core" % "7.5.3",
     )
   ).enablePlugins(FlywayPlugin)
 
