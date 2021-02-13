@@ -1,6 +1,6 @@
-FROM mozilla/sbt AS packager
+FROM mozilla/sbt:11.0.8_1.3.13 AS packager
 
-RUN apt-get update && apt-get -y install curl gnupg && curl -sL https://deb.nodesource.com/setup_12.x  | bash - && apt-get -y install nodejs
+RUN apt-get update && apt-get -y install curl gnupg && curl -sL https://deb.nodesource.com/setup_14.x  | bash - && apt-get -y install nodejs
 
 COPY . /app
 WORKDIR /app
@@ -8,7 +8,7 @@ WORKDIR /app
 RUN cd client && npm install && npm run build
 RUN sbt assembly
 
-FROM adoptopenjdk/openjdk11:jre-11.0.7_10-alpine
+FROM adoptopenjdk/openjdk11:jre-11.0.10_9-alpine
 
 COPY --from=packager /app/server/target/scala-2.13/website-server-assembly-0.1.0-SNAPSHOT.jar /app.jar
 
