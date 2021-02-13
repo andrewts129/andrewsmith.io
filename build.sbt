@@ -27,7 +27,6 @@ lazy val server = (project in file("server"))
       "ch.qos.logback" % "logback-classic" % "1.2.3",
       "org.tpolecat" %% "doobie-core" % "0.10.0",
       "org.xerial" % "sqlite-jdbc" % "3.34.0",
-      "com.amazonaws" % "aws-java-sdk-s3" % "1.11.953",
       "org.flywaydb" % "flyway-core" % "7.5.3",
     )
   ).enablePlugins(FlywayPlugin)

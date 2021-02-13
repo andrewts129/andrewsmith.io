@@ -4,13 +4,8 @@ import cats.data.OptionT
 
 import java.util.concurrent.Executors
 import cats.effect.{Blocker, ContextShift, IO}
-import com.amazonaws.auth.EnvironmentVariableCredentialsProvider
-import com.amazonaws.services.s3.model.S3Object
-import com.amazonaws.services.s3.{AmazonS3, AmazonS3ClientBuilder}
-import com.amazonaws.util.IOUtils
-import org.http4s.{HttpRoutes, MediaType, Request, Response, StaticFile}
+import org.http4s.{HttpRoutes, Request, Response, StaticFile}
 import org.http4s.dsl.io._
-import org.http4s.headers.`Content-Type`
 
 import java.io.File
 
@@ -18,10 +13,9 @@ object StaticService {
   private val blockingPool = Executors.newFixedThreadPool(4)
   private val blocker = Blocker.liftExecutorService(blockingPool)
 
-  private val acceptedExtensions = Set("js", "css", "map", "html", "png", "ico", "txt")
+  private val acceptedExtensions = Set("js", "css", "map", "html", "png", "ico", "txt", "pdf")
 
   def routes(implicit cs: ContextShift[IO]): HttpRoutes[IO] = HttpRoutes.of[IO] {
-    case GET -> Root / "AndrewSmithResume.pdf" => Ok(downloadResume(), `Content-Type`(MediaType.application.pdf))
     case request @ GET -> Root => static("index.html", blocker, request)
     case request @ GET -> Root / file => extractExtension(file) match {
       case Some(ext) => if (acceptedExtensions(ext)) static(file, blocker, request) else NotFound()
@@ -48,17 +42,5 @@ object StaticService {
   private def extractExtension(file: String): Option[String] = file.lastIndexOf('.') match {
     case -1 => None
     case i => Some(file.substring(i + 1))
-  }
-
-  // TODO do I really need AWS here? This is stupid
-  private def downloadResume(): Array[Byte] = {
-    val client: AmazonS3 = AmazonS3ClientBuilder
-      .standard()
-      .withRegion("us-east-1")
-      .withCredentials(new EnvironmentVariableCredentialsProvider())
-      .build()
-
-    val resumeObject: S3Object = client.getObject("andrewsmithresume", "resume_b0.pdf")
-    IOUtils.toByteArray(resumeObject.getObjectContent)
   }
 }
