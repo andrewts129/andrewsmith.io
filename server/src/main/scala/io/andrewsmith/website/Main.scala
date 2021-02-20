@@ -11,8 +11,6 @@ import org.http4s.server.Router
 import org.http4s.server.blaze._
 import org.http4s.server.middleware.{GZip, RequestLogger}
 
-import java.nio.file.Path
-
 object Main extends IOApp {
   override def run(args: List[String]): IO[ExitCode] = {
     for {
@@ -22,7 +20,7 @@ object Main extends IOApp {
 
       exitCode <- {
         val bogoStream = BogoStream.bogoStream.through(bogoStateTopic.publish)
-        val wordStream = WordStream.wordStream(Path.of("default.schema")).through(wordsTopic.publish)
+        val wordStream = WordStream.wordStream.through(wordsTopic.publish)
 
         val app: HttpApp[IO] = Router(
           "/" -> StaticService.routes,
