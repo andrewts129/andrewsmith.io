@@ -16,17 +16,15 @@ object Main extends IOApp {
     for {
       bogoStateTopic <- Topic[IO, Seq[Int]]((10 to 1).toVector)
       messageTopic <- Topic[IO, String]("")
-      wordsTopic <- Topic[IO, String]("")
 
       exitCode <- {
         val bogoStream = BogoStream.bogoStream.through(bogoStateTopic.publish)
-        val wordStream = WordStream.wordStream.through(wordsTopic.publish)
 
         val app: HttpApp[IO] = Router(
           "/" -> StaticService.routes,
           "/bogosort" -> BogosortService.routes(bogoStateTopic),
           "/messages" -> MessagesService.routes(messageTopic),
-          "/words" -> WordsService.routes(wordsTopic)
+          "/words" -> WordsService.routes
         ).orNotFound
 
         val appWithMiddleware = RequestLogger.httpApp(logHeaders = true, logBody = true)(GZip(app))
@@ -38,7 +36,6 @@ object Main extends IOApp {
 
         httpStream
           .merge(bogoStream)
-          .merge(wordStream)
           .compile
           .drain
           .as(ExitCode.Success)

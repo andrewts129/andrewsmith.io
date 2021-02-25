@@ -1,15 +1,16 @@
 package io.andrewsmith.website.services
 
-import cats.effect.IO
-import fs2.concurrent.Topic
-import io.andrewsmith.website.utils.BogoStream
+import cats.effect.{IO, Timer}
+import io.andrewsmith.website.utils.WordStream.wordStream
 import org.http4s.dsl.io._
 import org.http4s.{HttpRoutes, ServerSentEvent}
 
+import scala.concurrent.duration.DurationInt
+
 object WordsService {
-  def routes(wordsTopic: Topic[IO, String]): HttpRoutes[IO] = HttpRoutes.of[IO] {
+  def routes(implicit timer: Timer[IO]): HttpRoutes[IO] = HttpRoutes.of[IO] {
     case GET -> Root / "stream" => Ok(
-      wordsTopic.subscribe(10).map(ServerSentEvent(_))
+      wordStream.metered(3.seconds).map(ServerSentEvent(_))
     )
   }
 }
