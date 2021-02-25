@@ -5,6 +5,8 @@
 **/dist/
 node_modules/
 .bsp/
+**/*.schema
+
 .idea/
 **/.vscode/
 server/static
