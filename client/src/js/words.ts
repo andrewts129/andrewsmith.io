@@ -1,32 +1,49 @@
 namespace Words {
     const main = (): void => {
-        const characterBuffer: Array<string> = [];
+        const paragraphsBuffer: Array<string> = [];
 
         const eventSource = new EventSource('/words/stream');
         eventSource.onmessage = (event) => {
-            const characters = Array.from(event.data as string);
-            characterBuffer.push(...characters, ' ') // Put a space between this sentence and the next
+            paragraphsBuffer.push(event.data as string)
         };
 
-        const textVisibleContainer = document.getElementById('text');
-        let textVisible = '';
+        const textContainer = document.getElementById('textContainer');
 
-        const textInvisibleContainer = document.getElementById('textInvisible');
-        let textInvisible = '';
+        const textActiveVisibleContainer = document.getElementById('activeText');
+        let textActiveVisible = '';
+
+        const textActiveInvisibleContainer = document.getElementById('textInvisible');
+        let textActiveInvisible = '';
+
+        const saveActiveText = (): void => {
+            const newTextContainer = document.createElement('p')
+            newTextContainer.innerText = textActiveVisible;
+            textActiveVisible = '';
+            textActiveVisibleContainer.firstChild.nodeValue = '';
+
+            textContainer.insertBefore(newTextContainer, textActiveVisibleContainer);
+        }
+
+        let drawnFirstCharacter = false;
 
         const writeNextCharacter = (): void => {
-            while (characterBuffer.length > 0 && textInvisible.length < 50) {
-                textInvisible += characterBuffer.shift();
+            if (paragraphsBuffer.length > 0 && textActiveInvisible.length == 0) {
+                if (drawnFirstCharacter) {
+                    saveActiveText();
+                }
+                
+                textActiveInvisible = paragraphsBuffer.shift();
             }
 
-            if (textInvisible.length > 0) {
-                const characterToDraw = textInvisible.charAt(0);
-                textInvisible = textInvisible.slice(1);
-                textVisible += characterToDraw;
+            if (textActiveInvisible.length > 0) {
+                const characterToDraw = textActiveInvisible.charAt(0);
+                textActiveInvisible = textActiveInvisible.slice(1);
+                textActiveVisible += characterToDraw;
+                drawnFirstCharacter = true;
             }
 
-            textVisibleContainer.firstChild.nodeValue = textVisible;
-            textInvisibleContainer.innerText = textInvisible;
+            textActiveVisibleContainer.firstChild.nodeValue = textActiveVisible;
+            textActiveInvisibleContainer.innerText = textActiveInvisible;
         };
 
         writeNextCharacter();
