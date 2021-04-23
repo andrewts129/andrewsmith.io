@@ -13,4 +13,3 @@ Dockerfile
 **/*.db
 **/*.sqlite
 server/static/
-**/*.schema

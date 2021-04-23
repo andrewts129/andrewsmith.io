@@ -28,9 +28,7 @@ lazy val server = (project in file("server"))
       "org.tpolecat" %% "doobie-core" % "0.10.0",
       "org.xerial" % "sqlite-jdbc" % "3.34.0",
       "org.flywaydb" % "flyway-core" % "7.5.3",
-      "com.github.andrewts129" % "markovs" % "master-SNAPSHOT"
-    ),
-    resolvers += "jitpack" at "https://jitpack.io"
+    )
   ).enablePlugins(FlywayPlugin)
 
 // loads the server project at sbt startup
