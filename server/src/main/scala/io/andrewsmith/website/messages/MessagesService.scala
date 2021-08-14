@@ -1,11 +1,11 @@
-package io.andrewsmith.website.services
+package io.andrewsmith.website.messages
 
-import cats.effect.IO
+import cats.effect.{ContextShift, IO}
 import fs2.concurrent.Topic
 import io.circe.generic.auto._
-import org.http4s.{HttpRoutes, ServerSentEvent, UrlForm}
 import org.http4s.circe.CirceEntityCodec._
 import org.http4s.dsl.io._
+import org.http4s.{HttpRoutes, ServerSentEvent, UrlForm}
 
 object MessagesService {
   def routes(messageTopic: Topic[IO, String]): HttpRoutes[IO] = HttpRoutes.of[IO] {
@@ -19,5 +19,9 @@ object MessagesService {
         val body = formData.get("Body").iterator.next()
         Ok(messageTopic.publish1(body))
       }
+  }
+
+  def topic(implicit cs: ContextShift[IO]): IO[Topic[IO, String]] = {
+    Topic[IO, String]("")
   }
 }

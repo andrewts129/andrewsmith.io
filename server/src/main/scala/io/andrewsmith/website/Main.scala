@@ -6,6 +6,7 @@ import doobie.util.transactor.Transactor
 import fs2.concurrent.Topic
 import io.andrewsmith.website.bogosort.services.{BogoStream, BogosortService}
 import io.andrewsmith.website.db.Database
+import io.andrewsmith.website.messages.MessagesService
 import io.andrewsmith.website.services._
 import org.http4s.HttpApp
 import org.http4s.implicits._
@@ -19,7 +20,7 @@ object Main extends IOApp {
   override def run(args: List[String]): IO[ExitCode] = {
     for {
       bogoStateTopic <- BogosortService.topic
-      messageTopic <- Topic[IO, String]("")
+      messageTopic <- MessagesService.topic
 
       exitCode <- {
         val app: HttpApp[IO] = Router(
