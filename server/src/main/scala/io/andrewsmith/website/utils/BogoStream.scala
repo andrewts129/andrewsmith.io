@@ -1,6 +1,7 @@
 package io.andrewsmith.website.utils
 
 import cats.effect.{IO, Timer}
+import doobie.util.transactor.Transactor
 import fs2.Stream
 import io.andrewsmith.website.db.BogoStat
 
@@ -8,13 +9,17 @@ import scala.concurrent.duration._
 import scala.util.Random
 
 object BogoStream {
-  def bogoStream(implicit timer: Timer[IO]): Stream[IO, Seq[Int]] = Stream.unfoldLoop(initArray)(
-    array => (array, Some(nextState(array)))
-  ).evalTap(
-    array => if (isSorted(array)) BogoStat.IncrementNumCompletions else IO()
-  ).metered(1.second)
+  def bogoStream(implicit transactor: Transactor[IO], timer: Timer[IO]): Stream[IO, Seq[Int]] = {
+    Stream.unfoldLoop(initArray)(
+      array => (array, Some(nextState(array)))
+    ).evalTap(
+      array => if (isSorted(array)) BogoStat.incrementNumCompletions else IO()
+    ).metered(1.second)
+  }
 
-  val numCompletionsStream: Stream[IO, Int] = Stream.repeatEval(BogoStat.numCompletions)
+  def numCompletionsStream(implicit transactor: Transactor[IO]): Stream[IO, Int] = {
+    Stream.repeatEval(BogoStat.numCompletions)
+  }
 
   private def nextState(a: Seq[Int]): Seq[Int] = {
     if (isSorted(a)) initArray else randomSwap(a)

@@ -2,16 +2,20 @@ package io.andrewsmith.website
 
 import scala.concurrent.ExecutionContext.global
 import cats.effect._
+import doobie.util.transactor.Transactor
 import fs2.concurrent.Topic
+import io.andrewsmith.website.db.Database
 import io.andrewsmith.website.services._
 import io.andrewsmith.website.utils.BogoStream
 import org.http4s.HttpApp
 import org.http4s.implicits._
 import org.http4s.server.Router
 import org.http4s.server.blaze._
-import org.http4s.server.middleware.{GZip, Logger, RequestLogger}
+import org.http4s.server.middleware.{GZip, RequestLogger}
 
 object Main extends IOApp {
+  implicit val transactor: Transactor[IO] = Database.transactor
+
   override def run(args: List[String]): IO[ExitCode] = {
     for {
       bogoStateTopic <- Topic[IO, Seq[Int]]((10 to 1).toVector)
