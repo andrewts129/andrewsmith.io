@@ -28,7 +28,8 @@ lazy val server = (project in file("server"))
       "org.tpolecat" %% "doobie-core" % "0.10.0",
       "org.xerial" % "sqlite-jdbc" % "3.34.0",
       "org.flywaydb" % "flyway-core" % "7.5.3",
-    )
+    ),
+    addCompilerPlugin("com.olegpy" %% "better-monadic-for" % "0.3.1")
   ).enablePlugins(FlywayPlugin)
 
 // loads the server project at sbt startup

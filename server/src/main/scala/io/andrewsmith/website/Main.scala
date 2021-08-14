@@ -13,10 +13,10 @@ import org.http4s.server.blaze._
 import org.http4s.server.middleware.{GZip, RequestLogger}
 
 object Main extends IOApp {
-  implicit val transactor: Transactor[IO] = Database.transactor
-
   override def run(args: List[String]): IO[ExitCode] = {
     for {
+      implicit0(transactor: Transactor[IO]) <- Database.connect
+
       bogosortApp <- BogosortApp.init
       messagesApp <- MessagesApp.init
 
