@@ -3,11 +3,9 @@ package io.andrewsmith.website
 import scala.concurrent.ExecutionContext.global
 import cats.effect._
 import doobie.util.transactor.Transactor
-import fs2.concurrent.Topic
 import io.andrewsmith.website.bogosort.services.{BogoStream, BogosortService}
-import io.andrewsmith.website.db.Database
+import io.andrewsmith.website.core.{Database, StaticService}
 import io.andrewsmith.website.messages.MessagesService
-import io.andrewsmith.website.services._
 import org.http4s.HttpApp
 import org.http4s.implicits._
 import org.http4s.server.Router

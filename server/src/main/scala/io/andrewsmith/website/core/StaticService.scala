@@ -1,13 +1,12 @@
-package io.andrewsmith.website.services
+package io.andrewsmith.website.core
 
 import cats.data.OptionT
-
-import java.util.concurrent.Executors
 import cats.effect.{Blocker, ContextShift, IO}
-import org.http4s.{HttpRoutes, Request, Response, StaticFile}
 import org.http4s.dsl.io._
+import org.http4s.{HttpRoutes, Request, Response, StaticFile}
 
 import java.io.File
+import java.util.concurrent.Executors
 
 object StaticService {
   private val blockingPool = Executors.newFixedThreadPool(4)

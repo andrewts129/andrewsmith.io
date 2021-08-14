@@ -1,4 +1,4 @@
-package io.andrewsmith.website.db
+package io.andrewsmith.website.core
 
 import cats.effect.{ContextShift, IO}
 import doobie.Transactor
