@@ -1,6 +1,6 @@
-package io.andrewsmith.website.messages
+package io.andrewsmith.website.messages.services
 
-import cats.effect.{ContextShift, IO}
+import cats.effect.IO
 import fs2.concurrent.Topic
 import io.circe.generic.auto._
 import org.http4s.circe.CirceEntityCodec._
@@ -19,9 +19,5 @@ object MessagesService {
         val body = formData.get("Body").iterator.next()
         Ok(messageTopic.publish1(body))
       }
-  }
-
-  def topic(implicit cs: ContextShift[IO]): IO[Topic[IO, String]] = {
-    Topic[IO, String]("")
   }
 }

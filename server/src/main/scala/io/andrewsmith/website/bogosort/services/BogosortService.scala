@@ -1,6 +1,6 @@
 package io.andrewsmith.website.bogosort.services
 
-import cats.effect.{ContextShift, IO}
+import cats.effect.IO
 import doobie.util.transactor.Transactor
 import fs2.concurrent.Topic
 import org.http4s.dsl.io._
@@ -13,9 +13,5 @@ object BogosortService {
         .zipWith(BogoStream.numCompletionsStream)((state, numCompletions) =>
           ServerSentEvent(s"${state.mkString(",")};$numCompletions")
     ))
-  }
-
-  def topic(implicit cs: ContextShift[IO]): IO[Topic[IO, Seq[Int]]] = {
-    Topic[IO, Seq[Int]]((10 to 1).toVector)
   }
 }

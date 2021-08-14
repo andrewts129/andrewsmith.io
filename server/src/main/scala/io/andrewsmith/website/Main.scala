@@ -3,9 +3,9 @@ package io.andrewsmith.website
 import scala.concurrent.ExecutionContext.global
 import cats.effect._
 import doobie.util.transactor.Transactor
-import io.andrewsmith.website.bogosort.services.{BogoStream, BogosortService}
+import io.andrewsmith.website.bogosort.BogosortApp
 import io.andrewsmith.website.core.{Database, StaticService}
-import io.andrewsmith.website.messages.MessagesService
+import io.andrewsmith.website.messages.MessagesApp
 import org.http4s.HttpApp
 import org.http4s.implicits._
 import org.http4s.server.Router
@@ -17,14 +17,14 @@ object Main extends IOApp {
 
   override def run(args: List[String]): IO[ExitCode] = {
     for {
-      bogoStateTopic <- BogosortService.topic
-      messageTopic <- MessagesService.topic
+      bogosortApp <- BogosortApp.init
+      messagesApp <- MessagesApp.init
 
       exitCode <- {
         val app: HttpApp[IO] = Router(
           "/" -> StaticService.routes,
-          "/bogosort" -> BogosortService.routes(bogoStateTopic),
-          "/messages" -> MessagesService.routes(messageTopic)
+          "/bogosort" -> bogosortApp.routes,
+          "/messages" -> messagesApp.routes
         ).orNotFound
 
         val appWithMiddleware = RequestLogger.httpApp(logHeaders = true, logBody = true)(GZip(app))
@@ -34,10 +34,8 @@ object Main extends IOApp {
           .withHttpApp(appWithMiddleware)
           .serve
 
-        val bogoStream = BogoStream.bogoStream.through(bogoStateTopic.publish)
-
         httpStream
-          .merge(bogoStream)
+          .merge(bogosortApp.backgroundStream)
           .compile
           .drain
           .as(ExitCode.Success)
