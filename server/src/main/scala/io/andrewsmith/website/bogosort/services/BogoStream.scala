@@ -1,9 +1,9 @@
-package io.andrewsmith.website.utils
+package io.andrewsmith.website.bogosort.services
 
 import cats.effect.{IO, Timer}
 import doobie.util.transactor.Transactor
 import fs2.Stream
-import io.andrewsmith.website.db.BogoStat
+import io.andrewsmith.website.bogosort.models.BogoStat
 
 import scala.concurrent.duration._
 import scala.util.Random

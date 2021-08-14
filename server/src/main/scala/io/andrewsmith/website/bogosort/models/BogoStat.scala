@@ -1,4 +1,4 @@
-package io.andrewsmith.website.db
+package io.andrewsmith.website.bogosort.models
 
 import cats.effect.IO
 import doobie.implicits._
