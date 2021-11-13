@@ -3,10 +3,9 @@ const rename = require("gulp-rename");
 
 const ts = require("gulp-typescript");
 const tsProject = ts.createProject("tsconfig.json");
-const terser = require('gulp-terser');
+const terser = require("gulp-terser");
 
-const sass = require("gulp-sass");
-sass.compiler = require("node-sass");
+const sass = require("gulp-sass")(require("sass"));
 
 const ejs = require("gulp-ejs");
 
