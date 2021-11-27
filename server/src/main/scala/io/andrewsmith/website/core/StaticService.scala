@@ -2,10 +2,9 @@ package io.andrewsmith.website.core
 
 import cats.data.OptionT
 import cats.effect.IO
+import fs2.io.file.Path
 import org.http4s.dsl.io._
 import org.http4s.{HttpRoutes, Request, Response, StaticFile}
-
-import java.io.File
 
 object StaticService {
   private val acceptedExtensions = Set("js", "css", "map", "html", "png", "ico", "txt", "pdf")
@@ -27,7 +26,7 @@ object StaticService {
 
   private def staticFromFile(file: String, request: Request[IO]): OptionT[IO, Response[IO]] = {
     val fileDir = sys.env.getOrElse("STATIC_FILE_DIR", "./static")
-    StaticFile.fromFile(new File(s"$fileDir/$file"), Some(request))
+    StaticFile.fromPath(Path(s"$fileDir/$file"), Some(request))
   }
 
   private def staticFromResource(file: String, request: Request[IO]): OptionT[IO, Response[IO]] = {
