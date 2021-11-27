@@ -2,6 +2,7 @@ package io.andrewsmith.website.core
 
 import cats.data.OptionT
 import cats.effect.IO
+import cats.implicits._
 import fs2.io.file.Path
 import org.http4s.dsl.io._
 import org.http4s.{HttpRoutes, Request, Response, StaticFile}
@@ -26,15 +27,15 @@ object StaticService {
 
   private def staticFromFile(file: String, request: Request[IO]): OptionT[IO, Response[IO]] = {
     val fileDir = sys.env.getOrElse("STATIC_FILE_DIR", "./static")
-    StaticFile.fromPath(Path(s"$fileDir/$file"), Some(request))
+    StaticFile.fromPath(Path(s"$fileDir/$file"), request.some)
   }
 
   private def staticFromResource(file: String, request: Request[IO]): OptionT[IO, Response[IO]] = {
-    StaticFile.fromResource(s"/$file", Some(request))
+    StaticFile.fromResource(s"/$file", request.some)
   }
 
   private def extractExtension(file: String): Option[String] = file.lastIndexOf('.') match {
     case -1 => None
-    case i => Some(file.substring(i + 1))
+    case i => file.substring(i + 1).some
   }
 }

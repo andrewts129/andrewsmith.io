@@ -1,6 +1,7 @@
 package io.andrewsmith.website.bogosort.services
 
 import cats.effect.IO
+import cats.implicits._
 import doobie.util.transactor.Transactor
 import fs2.Stream
 import io.andrewsmith.website.bogosort.models.BogoStat
@@ -11,7 +12,7 @@ import scala.util.Random
 object BogoStream {
   def bogoStream(implicit transactor: Transactor[IO]): Stream[IO, Seq[Int]] = {
     Stream.unfoldLoop(initArray)(
-      array => (array, Some(nextState(array)))
+      array => (array, nextState(array).some)
     ).evalTap(
       array => if (isSorted(array)) BogoStat.incrementNumCompletions else IO()
     ).metered(1.second)
