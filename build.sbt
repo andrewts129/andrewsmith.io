@@ -1,4 +1,4 @@
-val http4sVersion = "0.21.18"
+val http4sVersion = "0.23.6"
 
 lazy val commonSettings = {
   organization := "io.andrewsmith"
@@ -23,9 +23,9 @@ lazy val server = (project in file("server"))
       "org.http4s" %% "http4s-blaze-server" % http4sVersion,
       "org.http4s" %% "http4s-blaze-client" % http4sVersion,
       "org.http4s" %% "http4s-circe" % http4sVersion,
-      "io.circe" %% "circe-generic" % "0.13.0",
-      "ch.qos.logback" % "logback-classic" % "1.2.6",
-      "org.tpolecat" %% "doobie-core" % "0.10.0",
+      "io.circe" %% "circe-generic" % "0.14.1",
+      "ch.qos.logback" % "logback-classic" % "1.2.7",
+      "org.tpolecat" %% "doobie-core" % "1.0.0-RC1",
       "org.xerial" % "sqlite-jdbc" % "3.36.0.3",
       "org.flywaydb" % "flyway-core" % "8.0.4",
     ),

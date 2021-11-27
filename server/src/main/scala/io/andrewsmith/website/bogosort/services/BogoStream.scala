@@ -1,6 +1,6 @@
 package io.andrewsmith.website.bogosort.services
 
-import cats.effect.{IO, Timer}
+import cats.effect.IO
 import doobie.util.transactor.Transactor
 import fs2.Stream
 import io.andrewsmith.website.bogosort.models.BogoStat
@@ -9,7 +9,7 @@ import scala.concurrent.duration._
 import scala.util.Random
 
 object BogoStream {
-  def bogoStream(implicit transactor: Transactor[IO], timer: Timer[IO]): Stream[IO, Seq[Int]] = {
+  def bogoStream(implicit transactor: Transactor[IO]): Stream[IO, Seq[Int]] = {
     Stream.unfoldLoop(initArray)(
       array => (array, Some(nextState(array)))
     ).evalTap(

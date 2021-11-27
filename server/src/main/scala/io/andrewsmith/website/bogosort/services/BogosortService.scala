@@ -1,6 +1,7 @@
 package io.andrewsmith.website.bogosort.services
 
 import cats.effect.IO
+import cats.implicits._
 import doobie.util.transactor.Transactor
 import fs2.concurrent.Topic
 import org.http4s.dsl.io._
@@ -11,7 +12,7 @@ object BogosortService {
     case GET -> Root / "state" => Ok(
       bogoStateTopic.subscribe(1)
         .zipWith(BogoStream.numCompletionsStream)((state, numCompletions) =>
-          ServerSentEvent(s"${state.mkString(",")};$numCompletions")
+          ServerSentEvent(s"${state.mkString(",")};$numCompletions".some)
     ))
   }
 }

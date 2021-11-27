@@ -1,17 +1,17 @@
 package io.andrewsmith.website.messages
 
-import cats.effect.{ContextShift, IO}
+import cats.effect.IO
 import fs2.concurrent.Topic
 import io.andrewsmith.website.messages.services.MessagesService
 import org.http4s.HttpRoutes
 
 object MessagesApp {
-  def init(implicit cs: ContextShift[IO]): IO[MessagesApp] = {
+  def init: IO[MessagesApp] = {
     messageTopic.map(new MessagesApp(_))
   }
 
-  private def messageTopic(implicit cs: ContextShift[IO]): IO[Topic[IO, String]] = {
-    Topic[IO, String]("")
+  private def messageTopic: IO[Topic[IO, String]] = {
+    Topic[IO, String]
   }
 }
 
