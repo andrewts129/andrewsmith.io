@@ -3,7 +3,7 @@ val http4sVersion = "0.23.12"
 lazy val commonSettings = {
   organization := "io.andrewsmith"
   version := "1.2"
-  scalaVersion := "2.13.10"
+  scalaVersion := "2.13.15"
 }
 
 lazy val client = (project in file("client"))
